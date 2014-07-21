@@ -1,10 +1,8 @@
 Crm::Application.routes.draw do
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
-
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
-
+  get 'login', to: 'sessions#new', as: 'login'
+  get 'logout', to: 'sessions#destroy', as: 'logout'
+  post 'sessions', to: 'sessions#create'
+  delete 'sessions', to: 'sessions#destroy'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
@@ -53,4 +51,5 @@ Crm::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+  root 'dashboard#index', as: 'dashboard'
 end
