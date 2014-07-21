@@ -11,7 +11,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140721185844) do
+ActiveRecord::Schema.define(version: 20140721204706) do
+
+  create_table "deals", force: true do |t|
+    t.integer  "employer_id"
+    t.integer  "renter_id"
+    t.integer  "agent_id"
+    t.integer  "apartment_id"
+    t.integer  "user_id"
+    t.integer  "price"
+    t.integer  "deposit"
+    t.boolean  "communal"
+    t.integer  "lease_term"
+    t.integer  "commission"
+    t.datetime "date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "deals", ["agent_id"], name: "index_deals_on_agent_id", using: :btree
+  add_index "deals", ["apartment_id"], name: "index_deals_on_apartment_id", using: :btree
+  add_index "deals", ["employer_id"], name: "index_deals_on_employer_id", using: :btree
+  add_index "deals", ["renter_id"], name: "index_deals_on_renter_id", using: :btree
+  add_index "deals", ["user_id"], name: "index_deals_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"
