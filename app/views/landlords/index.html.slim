@@ -1,0 +1,19 @@
+h1 Listing landlords
+
+table
+  thead
+    tr
+      th
+      th
+      th
+
+  tbody
+    - @landlords.each do |landlord|
+      tr
+        td = link_to 'Show', landlord
+        td = link_to 'Edit', edit_landlord_path(landlord)
+        td = link_to 'Destroy', landlord, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Landlord', new_landlord_path

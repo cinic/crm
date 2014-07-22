@@ -4,6 +4,8 @@ Crm::Application.routes.draw do
   post 'sessions', to: 'sessions#create'
   delete 'sessions', to: 'sessions#destroy'
   
+  resources :leads
+  resources :landlords
   resources :deals
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

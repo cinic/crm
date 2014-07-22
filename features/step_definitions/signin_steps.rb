@@ -1,30 +1,27 @@
-Given(/^a user visits the signin page$/) do
+Допустим(/^пользователь на странице входа$/) do
   visit login_path
 end
-
-When(/^they submit invalid signin information$/) do
+Допустим(/^пользователь имеет аккаунт$/) do
+  @user = User.create(name: 'Test Test', email: 'test@test.com', password: 'password')
+end
+Если(/^он отправляет невалидную информацию$/) do
   click_button "Войти"
 end
 
-Then(/^they should see an error message$/) do
+То(/^он видит сообщение об ошибке$/) do
   expect(page).to have_selector('div.alert')
 end
 
-Given(/^the user has an account$/) do
-  #user = FactoryGirl.create(:user)
-  @user = User.create(name: 'Alexander Andreev', email: 'cinic.rus@gmail.com', password: 'password')
-end
-
-When(/^the user submits valid signin information$/) do
+Если(/^пользователь отправляет валидную информацию$/) do
   fill_in "Email",    with: @user.email
   fill_in "Password", with: @user.password
   click_button "Войти"
 end
 
-Then(/^they should see dashboard page$/) do
+То(/^он видит страницу Дашбоард$/) do
   expect(page).to have_title("Приборная панель")
 end
 
-Then(/^they should see a signout link$/) do
+То(/^он видит ссылку Выход$/) do
   expect(page).to have_link('', :href => '/logout')
 end

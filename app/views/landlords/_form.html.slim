@@ -1,0 +1,9 @@
+= form_for @landlord do |f|
+  - if @landlord.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@landlord.errors.count, "error")} prohibited this landlord from being saved:"
+      ul
+        - @landlord.errors.full_messages.each do |message|
+          li = message
+
+  .actions = f.submit 'Save'
