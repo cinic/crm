@@ -3,6 +3,8 @@ Crm::Application.routes.draw do
   get 'logout', to: 'sessions#destroy', as: 'logout'
   post 'sessions', to: 'sessions#create'
   delete 'sessions', to: 'sessions#destroy'
+  
+  resources :deals
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
