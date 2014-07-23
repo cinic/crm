@@ -8,20 +8,18 @@ class SessionsController < ApplicationController
     
     if user && User.authenticate(params[:email], params[:password])
       session[:user_id] = user.id
-      redirect_back_or dashboard_url, notice: "Logged in!"
+      redirect_back_or dashboard_url
     else
-      flash.now.alert = "Неправильный email или пароль."
-      render 'new'
-      #redirect_to admin_login_url, alert: "Email or password is invalid"
+      redirect_to login_url, alert: "Неправильный email или пароль."
     end
   end
 
   def destroy
     session[:user_id] = nil
-    redirect_to login_url, notice: "Logged out!"
+    redirect_to login_url
   end
-  def redirect_back_or(default, notice)
-    redirect_to(session[:return_to] || default, notice: notice)
+  def redirect_back_or(default)
+    redirect_to(session[:return_to] || default)
     session.delete(:return_to)
   end
 end
