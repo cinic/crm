@@ -69,6 +69,6 @@ class LandlordsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def landlord_params
-      params[:landlord]
+      params.require(:landlord).permit(:name,:mobile)
     end
 end

@@ -5,5 +5,11 @@
       ul
         - @landlord.errors.full_messages.each do |message|
           li = message
+  p
+    = f.label :name
+    = f.text_field :name
 
-  .actions = f.submit 'Save'
+  p
+    = f.label :mobile
+    = f.text_field :mobile
+  .actions = f.submit 'Сохранить'

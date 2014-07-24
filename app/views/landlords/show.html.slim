@@ -1,6 +1,9 @@
+- content_for :title, "Наймодатель #{@landlord.id}"
+- content_for :page_title, "Наймодатель #{@landlord.id}"
+
 p#notice = notice
 
 
-= link_to 'Edit', edit_landlord_path(@landlord)
+= link_to 'Редактировать', edit_landlord_path(@landlord)
 '|
-= link_to 'Back', landlords_path
+= link_to 'Назад', landlords_path

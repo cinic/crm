@@ -1,8 +1,9 @@
-h1 Editing landlord
+- content_for :title, "Редактирование наймодателя"
+- content_for :page_title, "Редактирование наймодателя #{@landlord.id}"
 
 == render 'form'
 
-= link_to 'Show', @landlord
+= link_to 'Подробнее', @landlord
 '|
-= link_to 'Back', landlords_path
+= link_to 'Назад', landlords_path
 

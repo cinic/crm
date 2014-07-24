@@ -1,4 +1,5 @@
-h1 Listing landlords
+- content_for :title, "Наймодатели"
+- content_for :page_title, "Список наймодателей"
 
 table
   thead
@@ -10,10 +11,10 @@ table
   tbody
     - @landlords.each do |landlord|
       tr
-        td = link_to 'Show', landlord
-        td = link_to 'Edit', edit_landlord_path(landlord)
-        td = link_to 'Destroy', landlord, data: {:confirm => 'Are you sure?'}, :method => :delete
+        td = link_to 'Подробнее', landlord
+        td = link_to 'Редактировать', edit_landlord_path(landlord)
+        td = link_to 'Удалить', landlord, data: {:confirm => 'Are you sure?'}, :method => :delete
 
 br
 
-= link_to 'New Landlord', new_landlord_path
+= link_to 'Создать наймодателя', new_landlord_path

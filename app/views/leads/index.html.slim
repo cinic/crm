@@ -1,19 +1,25 @@
-h1 Listing leads
+- content_for :title, "Заявки"
+- content_for :page_title, "Список заявок"
 
 table
   thead
     tr
-      th
-      th
-      th
+      th ID
+      th Имя Фамилия
+      th Мобильный
+      th Действия
 
   tbody
     - @leads.each do |lead|
       tr
-        td = link_to 'Show', lead
-        td = link_to 'Edit', edit_lead_path(lead)
-        td = link_to 'Destroy', lead, data: {:confirm => 'Are you sure?'}, :method => :delete
+        td = lead.id
+        td = lead.name
+        td = lead.mobile
+        td
+          = link_to 'Подробнее', lead
+          = link_to 'Редактировать', edit_lead_path(lead)
+          = link_to 'Удалить', lead, data: {:confirm => 'Are you sure?'}, :method => :delete
 
 br
 
-= link_to 'New Lead', new_lead_path
+= link_to 'Создать', new_lead_path

@@ -1,5 +1,8 @@
-Допустим(/^пользователь на странице добавления заявки$/) do
+Допустим(/^пользователь залогинен$/) do
   signin_user
+end
+
+Допустим(/^он на странице создания заявки$/) do
   visit new_lead_url
 end
 
@@ -7,14 +10,16 @@ end
   click_button 'Сохранить'
 end
 
-То(/^он должен видеть сообщение (.*)$/) do |message|
-  expect(page).to have_content(message)
+То(/^он снова видит страницу добавления заявки с тайтлом "(.*)"$/) do |arg1|
+  expect(page).to have_title(arg1)
 end
 
 Если(/^пользователь отправляет валидную информацию о заявке$/) do
-  pending # express the regexp above with the code you wish you had
+  fill_in "Name",    with: "test test test"
+  fill_in "Mobile", with: "+79111234567"
+  click_button "Сохранить"
 end
 
-То(/^он видит сообщение об успешно добавленой заявке$/) do
-  pending # express the regexp above with the code you wish you had
+То(/^он видит страницу "(.*)" с идентификатором$/) do |arg1|
+  expect(page).to have_title(arg1)
 end
