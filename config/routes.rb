@@ -7,6 +7,7 @@ Crm::Application.routes.draw do
   resources :leads
   resources :landlords
   resources :deals
+  resources :apartments
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

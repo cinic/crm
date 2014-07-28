@@ -1,0 +1,8 @@
+- content_for :title, "Объект #{@apartment.id}"
+- content_for :page_title, "Объект #{@apartment.id}"
+p#notice = notice
+
+
+= link_to 'Edit', edit_apartment_path(@apartment)
+'|
+= link_to 'Back', apartments_path

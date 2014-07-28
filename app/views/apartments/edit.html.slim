@@ -1,0 +1,9 @@
+- content_for :title, "Редактирование объекта #{@apartment.id}"
+- content_for :page_title, "Редактирование объекта #{@apartment.id}"
+
+== render 'form'
+
+= link_to 'Посмотреть', @apartment
+'|
+= link_to 'Назад', apartments_path
+

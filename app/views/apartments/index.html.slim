@@ -1,0 +1,50 @@
+- content_for :title, "Объекты"
+- content_for :page_title, "Список объектов"
+
+.table-wrapper
+  table.table.table-hover
+    thead
+      tr
+        th.span2 ID
+        th.span3
+          span.line
+          |Адрес
+        th.span2
+          span.line
+          |Комнат
+        th.span3
+          span.line
+          |Площадь
+        th.span3
+          span.line
+          |Этаж
+        th.span3
+          span.line
+          |Цена
+        th.span3
+          span.line
+          |Депозит
+        th.span2
+          span.line
+          |Действия
+
+    tbody
+      - @apartments.each do |apartment|
+        tr
+          td = link_to apartment.id, apartment
+          td
+            address = apartment.address
+            p = "м. #{apartment.metro}"
+          td = apartment.rooms
+          td = apartment.apartment_size
+          td = "#{apartment.floor} из  #{apartment.floors}"
+          td = apartment.price
+          td = apartment.deposit
+          td
+            ul.actions
+              li = link_to 'Редактировать', edit_apartment_path(apartment)
+              li = link_to 'Удалить', apartment, data: {:confirm => 'Вы уверены?'}, :method => :delete
+
+br
+
+= link_to 'Создать', new_apartment_path, class: 'btn-flat primary'

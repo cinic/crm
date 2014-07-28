@@ -2,7 +2,11 @@
 - content_for :page_title, "Заявка #{@lead.id}"
 
 p#notice = notice
-
+p 
+  b = @lead.name
+p
+  |М. 
+  = @lead.mobile
 
 = link_to 'Редактировать', edit_lead_path(@lead)
 '|

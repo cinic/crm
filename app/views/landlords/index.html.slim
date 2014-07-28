@@ -1,20 +1,34 @@
 - content_for :title, "Наймодатели"
 - content_for :page_title, "Список наймодателей"
-
-table
-  thead
-    tr
-      th
-      th
-      th
-
-  tbody
-    - @landlords.each do |landlord|
+.table-wrapper
+  table.table.table-hover
+    thead
       tr
-        td = link_to 'Подробнее', landlord
-        td = link_to 'Редактировать', edit_landlord_path(landlord)
-        td = link_to 'Удалить', landlord, data: {:confirm => 'Are you sure?'}, :method => :delete
+        th.span2 ID
+        th.span3
+          span.line
+          |Имя Фамилия
+        th.span3
+          span.line
+          |Мобильный
+        th.span3
+          span.line
+          |Статус
+        th.span2
+          span.line
+          |Действия
+    tbody
+      - @landlords.each do |landlord|
+        tr
+          td = link_to landlord.id, landlord
+          td = landlord.name
+          td = landlord.mobile
+          td
+          td
+            ul.actions
+              li = link_to 'Редактировать', edit_landlord_path(landlord)
+              li = link_to 'Удалить', landlord, data: {:confirm => 'Are you sure?'}, :method => :delete
 
 br
 
-= link_to 'Создать наймодателя', new_landlord_path
+= link_to 'Создать наймодателя', new_landlord_path, class: "btn-flat primary"

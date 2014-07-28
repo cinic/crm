@@ -11,7 +11,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140722200438) do
+ActiveRecord::Schema.define(version: 20140728115546) do
+
+  create_table "apartments", force: true do |t|
+    t.string   "metro"
+    t.string   "address"
+    t.integer  "rooms"
+    t.boolean  "only_room"
+    t.boolean  "adjacent_rooms"
+    t.float    "apartment_size"
+    t.float    "kitchen_size"
+    t.string   "rooms_size"
+    t.float    "balcony_size"
+    t.boolean  "balcony"
+    t.boolean  "balcony_glazed"
+    t.boolean  "repairing"
+    t.integer  "floor"
+    t.integer  "floors"
+    t.boolean  "furnished"
+    t.boolean  "kitchen_furnished"
+    t.boolean  "phone"
+    t.boolean  "tv"
+    t.boolean  "fridge"
+    t.boolean  "washer"
+    t.boolean  "animals"
+    t.boolean  "kids"
+    t.boolean  "bathroom_with_toilet"
+    t.integer  "deposit"
+    t.boolean  "deposit_divide"
+    t.string   "near"
+    t.string   "when_see"
+    t.string   "when_placed"
+    t.text     "comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "price"
+  end
 
   create_table "deals", force: true do |t|
     t.integer  "agent_id"
@@ -41,6 +76,7 @@ ActiveRecord::Schema.define(version: 20140722200438) do
     t.string   "passport"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "from_lead"
   end
 
   add_index "landlords", ["name"], name: "index_landlords_on_name", using: :btree

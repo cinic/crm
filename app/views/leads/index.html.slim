@@ -1,25 +1,35 @@
 - content_for :title, "Заявки"
 - content_for :page_title, "Список заявок"
-
-table
-  thead
-    tr
-      th ID
-      th Имя Фамилия
-      th Мобильный
-      th Действия
-
-  tbody
-    - @leads.each do |lead|
+.table-wrapper
+  table.table.table-hover
+    thead
       tr
-        td = lead.id
-        td = lead.name
-        td = lead.mobile
-        td
-          = link_to 'Подробнее', lead
-          = link_to 'Редактировать', edit_lead_path(lead)
-          = link_to 'Удалить', lead, data: {:confirm => 'Are you sure?'}, :method => :delete
+        th.span2 ID
+        th.span3
+          span.line
+          |Имя Фамилия
+        th.span3
+          span.line
+          |Мобильный
+        th.span3
+          span.line
+          |Статус
+        th.span2
+          span.line
+          |Действия
 
-br
+    tbody
+      - @leads.each do |lead|
+        tr
+          td = link_to lead.id, lead
+          td = lead.name
+          td = lead.mobile
+          td
+          td
+            ul.actions
+              li = link_to 'Редактировать', edit_lead_path(lead)
+              li = link_to 'Удалить', lead, data: {:confirm => 'Вы уверены?'}, :method => :delete
+              /li = link_to content_tag(:i,'',class: 'fa fa-pencil-square-o'), edit_lead_path(lead)
+              /li = link_to content_tag(:i,'',class: 'fa fa-trash-o'), lead, data: {:confirm => 'Are you sure?'}, :method => :delete
 
-= link_to 'Создать', new_lead_path
+= link_to 'Создать', new_lead_path, class: 'btn-flat primary'
