@@ -1,5 +1,6 @@
 class LeadsController < ApplicationController
   before_action :set_lead, only: [:show, :edit, :edit_realtor, :new_landlord_lead, :update, :destroy]
+  before_action :set_lead_landlord, only: [:new_apartment_lead]
 
   # GET /leads
   # GET /leads.json
@@ -37,6 +38,21 @@ class LeadsController < ApplicationController
       else
         format.html { render action: 'new' }
         format.json { render json: landlord.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # GET /leads/1/new_apartment_lead
+  def new_apartment_lead
+    @apartment = @lead.apartments.build({address: @lead.address, metro: @lead.metro, landlord_id: @landlord.id})
+
+    respond_to do |format|
+      if @apartment.save
+        format.html { redirect_to @landlord, notice: 'Apartment was successfully created and linked.' }
+        format.json { render action: 'show', status: :created, location: @landlord }
+      else
+        format.html { render action: 'new' }
+        format.json { render json: @landlord.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -86,6 +102,11 @@ class LeadsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_lead
       @lead = Lead.find(params[:id])
+    end
+
+    def set_lead_landlord
+      @lead = Lead.find(params[:id])
+      @landlord = @lead.landlord if @lead.landlord_id?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

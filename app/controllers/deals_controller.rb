@@ -16,6 +16,7 @@ class DealsController < ApplicationController
   def new
     @deal = Deal.new
     @landlords = Landlord.all
+    @tenants = Tenant.all
     @realtors = User.realtors
     @apartments = Apartment.all
   end
@@ -72,6 +73,6 @@ class DealsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def deal_params
-      params[:deal]
+      params.require(:deal).permit!
     end
 end

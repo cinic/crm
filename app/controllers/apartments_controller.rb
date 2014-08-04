@@ -15,10 +15,12 @@ class ApartmentsController < ApplicationController
   # GET /apartments/new
   def new
     @apartment = Apartment.new
+    @landlords = Landlord.all
   end
 
   # GET /apartments/1/edit
   def edit
+    @landlords = Landlord.all
   end
 
   # POST /apartments

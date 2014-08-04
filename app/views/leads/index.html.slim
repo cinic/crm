@@ -28,8 +28,11 @@
           td = lead.name
           td = lead.mobile
           td
-            span.label.label-info = ::LEAD_STATUSES[lead.status][0]
-            = link_to 'Перенести в наймодатели', new_landlord_lead_path(lead)
+            - if lead.landlord_id == nil
+              span.label.label-info = ::LEAD_STATUSES[lead.status][0]
+              = link_to 'Перенести в наймодатели', new_landlord_lead_path(lead)
+            - else
+              = link_to 'Перенесена в наймодатели', lead.landlord
           td
             = lead.user_id == nil ? (link_to('Назначить риелтора', edit_realtor_lead_path(lead)) if user_can_manage?) : lead.user.name
           td

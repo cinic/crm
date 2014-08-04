@@ -13,6 +13,7 @@ html
     section.content
       .container-fluid
         #pad-wrapper class="#{yield(:page_class)}"
-          header.row-fluid.header
-            h1 = yield(:page_title)
+          - unless yield(:page_title).blank?
+            .row-fluid.header
+              h1 = yield(:page_title)
           = yield

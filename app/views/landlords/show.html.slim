@@ -1,9 +1,84 @@
 - content_for :title, "Наймодатель #{@landlord.id}"
-- content_for :page_title, "Наймодатель #{@landlord.id}"
-
+- content_for :page_class, "user-profile"
 p#notice = notice
+.row-fluid.header
+  .span8
+    span.avatar.img-circle
+      span.fa.fa-user style="width:88px;height:88px;font-size:80px;text-align:center;"
+    h3.name = @landlord.name
+    span.area = @landlord.mobile
+.row-fluid.profile
+  .span9.bio
+    .profile-box
+      .span12.section
+        h6 Резюме от риелтора
+        p There are many variations of passages of Lorem Ipsum available but the majority have humour suffered alteration in believable some formhumour , by injected humour, or randomised words which don't look even slightly believable.
+      h6 Связаные заявки
+      table.table.table-hover
+        thead
+          tr
+            th.span2 ID заявки
+            th.span3
+              span.line
+              |Дата
+            th.span3
+              span.line
+              |Адрес
+            th.span3
+              span.line
+              |Сумма
+        tbody
+          - @landlord.leads.each do |lead|
+            tr
+              td = link_to "##{lead.id}", lead
+              td = lead.created_at
+              td
+                = lead.address
+                br
+                = "м. #{lead.metro}"
+                br
+                = link_to 'Привязать к наймодателю', new_apartment_lead_path
+              td Сумма в месяц
+      h6 Связаные объекты
+      table.table.table-hover
+        thead
+          tr
+            th.span2 ID объекта
+            th.span3
+              span.line
+              |Адрес
+            th.span2
+              span.line
+              |Комнат
+            th.span2
+              span.line
+              |Этаж
+            th.span3
+              span.line
+              |Сумма
+        tbody
+          - @landlord.apartments.each do |apartment|
+            tr
+              td = link_to "##{apartment.id}", apartment
+              td
+                = apartment.address
+                br
+                = "м. #{apartment.metro}"
+              td = apartment.rooms 
+              td = "#{apartment.floor} из #{apartment.floors}"
+              td Сумма в месяц
+      span12.section.comment
+        h6 Добавить заметку
+        p Добавте заметку о ходе работ с данным пользователем
+        textarea
+        .span12
+          = submit_tag 'Отправить', class: 'btn-flat primary'
+  .span3.address.pull-right
+    h6 Адрес
+    img src="//api-maps.yandex.ru/services/constructor/1.0/static/?sid=9sBNZXUQBqwpQvOUSPRiqykRBgHYtv01&amp;width=204&amp;height=204" alt=""
+    ul
+      - @landlord.leads.each do |lead|
+        li
+          = lead.address
 
-
-= link_to 'Редактировать', edit_landlord_path(@landlord)
-'|
 = link_to 'Назад', landlords_path

@@ -5,94 +5,97 @@
       ul
         - @apartment.errors.full_messages.each do |message|
           li = message
-  div.form-row
+  .form-row
+    = f.label :landlord_id, 'Наймодатель'
+    = f.select(:landlord_id, @landlords.map { |landlord| [landlord.name, landlord.id] })
+  .form-row
     = f.label :metro, "Метро"
     = f.text_field :metro, class: 'form-input'
-  div.form-row
+  .form-row
     = f.label :address, "Адрес"
     = f.text_field :address, class: 'form-input'
-  div.form-row
+  .form-row
     = f.label :rooms, "Количество комнат"
     = f.text_field :rooms, class: 'form-input'
-  div.form-row.form-inline
+  .form-row.form-inline
     span.checkbox = f.check_box :adjacent_rooms, class: 'form-input'
     = f.label :adjacent_rooms, "Комнаты смежные?"
-  div.form-row.form-inline
+  .form-row.form-inline
     span.checkbox = f.check_box :bathroom_with_toilet, class: 'form-input'
     = f.label :bathroom_with_toilet, "Санузел совмещён?"
-  div.form-row.form-inline
+  .form-row.form-inline
     span.checkbox = f.check_box :only_room, class: 'form-input'
     = f.label :only_room, "Только комната"
-  div.form-row
+  .form-row
     = f.label :apartment_size, "Площадь квартиры"
     = f.text_field :apartment_size, class: 'form-input'
-  div.form-row
+  .form-row
     = f.label :rooms_size, "Площадь комнат"
     = f.text_field :rooms_size, class: 'form-input'
-  div.form-row
+  .form-row
     = f.label :kitchen_size, "Площадь кухни"
     = f.text_field :kitchen_size, class: 'form-input'
-  div.form-row.form-inline
+  .form-row.form-inline
     span.checkbox = f.check_box :balcony, class: 'form-input'
     = f.label :balcony, "Есть ли балкон?"
-  div.form-row
+  .form-row
     = f.label :balcony_size, "Площадь балкона"
     = f.text_field :balcony_size, class: 'form-input'
-  div.form-row.form-inline
+  .form-row.form-inline
     span.checkbox = f.check_box :balcony_glazed, class: 'form-input'
     = f.label :balcony_glazed, "Балкон застеклён?"
-  div.form-row.form-inline
+  .form-row.form-inline
     span.checkbox = f.check_box :repairing, class: 'form-input'
     = f.label :repairing, "Был ли ремонт?"
-  div.form-row
+  .form-row
     = f.label :floor, "Этаж"
     = f.text_field :floor, class: 'form-input'  
-  div.form-row
+  .form-row
     = f.label :floors, "Всего этажей?"
     = f.text_field :floors, class: 'form-input'
-  div.form-row.form-inline
+  .form-row.form-inline
     span.checkbox = f.check_box :furnished, class: 'form-input'
     = f.label :furnished, "Квартира мебелирована?"
-  div.form-row.form-inline
+  .form-row.form-inline
     span.checkbox = f.check_box :kitchen_furnished, class: 'form-input'
     = f.label :kitchen_furnished, "Кухня мебелирована?"
-  div.form-row.form-inline
+  .form-row.form-inline
     span.checkbox = f.check_box :phone, class: 'form-input'
     = f.label :phone, "Телефон"
-  div.form-row.form-inline
+  .form-row.form-inline
     span.checkbox = f.check_box :tv, class: 'form-input'
     = f.label :tv, "Телевизор"
-  div.form-row.form-inline
+  .form-row.form-inline
     span.checkbox = f.check_box :fridge, class: 'form-input'
     = f.label :fridge, "Холодильник"
-  div.form-row.form-inline
+  .form-row.form-inline
     span.checkbox = f.check_box :washer, class: 'form-input'
     = f.label :washer, "Стиралка"
-  div.form-row.form-inline
+  .form-row.form-inline
     span.checkbox = f.check_box :animals, class: 'form-input'
     = f.label :animals, "Можно с животными?"
-  div.form-row.form-inline
+  .form-row.form-inline
     span.checkbox = f.check_box :kids, class: 'form-input'
     = f.label :kids, "Можно с детьми?"
-  div.form-row
+  .form-row
     = f.label :near, "Что есть поблизости?"
     = f.text_field :near, class: 'form-input'
-  div.form-row
+  .form-row
     = f.label :when_see, "Когда можно смотреть?"
     = f.text_field :when_see, class: 'form-input'
-  div.form-row
+  .form-row
     = f.label :when_placed, "Когда можно въезжать?"
     = f.text_field :when_placed, class: 'form-input'
-  div.form-row
+  .form-row
     = f.label :deposit, "Размер депозита"
     = f.text_field :deposit, class: 'form-input'
-  div.form-row.form-inline
+  .form-row.form-inline
     span.checkbox = f.check_box :deposit_divide, class: 'form-input'
     = f.label :deposit_divide, "Депозит разбивается?"
-  div.form-row
+  .form-row
     = f.label :price, "Цена"
     = f.text_field :price, class: 'form-input'
-  div.form-row
+  .form-row
     = f.label :comment, "Комментарий"
     = f.text_area :comment, class: 'form-input'
 

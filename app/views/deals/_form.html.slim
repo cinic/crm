@@ -6,13 +6,32 @@
         - @deal.errors.full_messages.each do |message|
           li = message
   .form-row
-    = f.label :landlord_id, 'Наймодатель'
-    = f.select(:landlord_id, @landlords.map { |landlord| [landlord.name, landlord.id] })
-  .form-row  
     = f.label :apartment_id, 'Объект'
     = f.select(:apartment_id, @apartments.map { |apartment| [apartment.address, apartment.id] })
+  .form-row
+    = f.label :landlord_id, 'Наймодатель'
+    = f.select(:landlord_id, @landlords.map { |landlord| [landlord.name, landlord.id] })
+  .form-row
+    = f.label :tenant_id, 'Наниматель'
+    = f.select(:tenant_id, @tenants.map { |tenant| [tenant.name, tenant.id] })
   .form-row  
     = f.label :user_id, 'Риелтор'
     = f.select(:user_id, @realtors.map { |realtor| [realtor.name, realtor.id] })
+  .form-row  
+    = f.label :price, 'Цена'
+    = f.text_field :price
+  .form-row  
+    = f.label :deposit, 'Депозит'
+    = f.text_field :deposit
+  .form-row.form-inline
+    span.checkbox = f.check_box :communal, class: 'form-input'
+    = f.label :communal, "Коммуналка включена?"
+  .form-row  
+    = f.label :lease_term, 'Срок аренды'
+    = f.text_field :lease_term
+  .form-row  
+    = f.label :commission, 'Комиссия'
+    = f.text_field :commission
+  
 
   .actions = f.submit 'Сохранить', class: "btn-flat success"
