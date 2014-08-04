@@ -1,8 +1,9 @@
-h1 Editing deal
+- content_for :title, "Редактирование сделки #{@deal.id}"
+- content_for :page_title, "Редактирование сделки #{@deal.id}"
 
 == render 'form'
 
-= link_to 'Show', @deal
+= link_to 'Посмотреть', @deal
 '|
-= link_to 'Back', deals_path
+= link_to 'Назад', deals_path
 

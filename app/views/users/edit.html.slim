@@ -1,0 +1,9 @@
+- content_for :title, "Редактирование пользователя #{@tenant.id}"
+- content_for :page_title, "Редактирование пользователя #{@tenant.id}"
+
+== render 'form'
+
+= link_to 'Посмотреть', @user
+'|
+= link_to 'Назад', users_path
+

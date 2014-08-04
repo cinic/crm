@@ -1,0 +1,8 @@
+- content_for :title, "Пользователь #{@user.id}"
+- content_for :page_title, "Пользователь #{@user.id}"
+p#notice = notice
+
+
+= link_to 'Редактировать', edit_user_path(@user)
+'|
+= link_to 'Назад', users_path

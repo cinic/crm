@@ -15,8 +15,10 @@ end
 end
 
 Если(/^пользователь отправляет валидную информацию о заявке$/) do
-  fill_in "Name",    with: "test test test"
-  fill_in "Mobile", with: "+79111234567"
+  fill_in "ФИО",    with: "test test test"
+  fill_in "Мобильный", with: "79111234567"
+  fill_in "Метро", with: "ВДНХ"
+  fill_in "Адрес", with: "ул. Софьи Ковалевской д.37, к.1"
   click_button "Сохранить"
 end
 

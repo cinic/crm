@@ -1,6 +1,5 @@
-class Landlord < ActiveRecord::Base
+class Landlord < Client
   has_many :leads
-
-  validates_presence_of :name
-  validates_presence_of :mobile
+  has_many :deals
+  has_many :apartments
 end

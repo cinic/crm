@@ -1,0 +1,24 @@
+= form_for @user do |f|
+  - if @user.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
+      ul
+        - @user.errors.full_messages.each do |message|
+          li = message
+
+  .form-row
+    = f.label :role, 'Тип пользователя'
+    = f.select(:role, USER_TYPES)
+  .form-row
+    = f.label :name, 'ФИО'
+    = f.text_field :name
+  .form-row
+    = f.label :email, 'Email'
+    = f.text_field :email
+  .form-row
+    = f.label :password, 'Пароль'
+    = f.text_field :password
+  .form-row
+    = f.label :mobile, 'Мобильный'
+    = f.text_field :mobile
+  .actions = f.submit 'Сохранить', class: "btn-flat success"

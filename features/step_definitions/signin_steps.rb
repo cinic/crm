@@ -1,5 +1,5 @@
 Допустим(/^пользователь имеет аккаунт$/) do
-  @user = User.create(name: 'Test Test', email: 'test@test.com', password: 'password')
+  @user = User.create(name: 'Test Test', email: 'test@test.com', password: 'password', role: 0)
 end
 
 Допустим(/^он на странице входа$/) do

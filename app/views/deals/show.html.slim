@@ -1,6 +1,8 @@
+- content_for :title, "Сделка #{@apartment.id}"
+- content_for :page_title, "Сделка #{@apartment.id}"
 p#notice = notice
 
 
-= link_to 'Edit', edit_deal_path(@deal)
+= link_to 'Редактировать', edit_deal_path(@deal)
 '|
-= link_to 'Back', deals_path
+= link_to 'Назад', deals_path

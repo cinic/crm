@@ -1,0 +1,9 @@
+- content_for :title, "Редактирование нанимателя"
+- content_for :page_title, "Редактирование нанимателя #{@tenant.id}"
+
+== render 'form'
+
+= link_to 'Подробнее', @tenant
+'|
+= link_to 'Назад', tenants_path
+

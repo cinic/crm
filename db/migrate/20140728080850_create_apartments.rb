@@ -2,7 +2,7 @@ class CreateApartments < ActiveRecord::Migration
   def change
     create_table :apartments do |t|
       t.string :metro
-      t.string :address
+      t.string :address, null: false
       t.integer :rooms
       t.boolean :only_room
       t.boolean :adjacent_rooms
@@ -30,6 +30,8 @@ class CreateApartments < ActiveRecord::Migration
       t.string :when_see
       t.string :when_placed
       t.text :comment
+      t.references :landlord, index: true
+      t.references :user, index: true
 
       t.timestamps
     end

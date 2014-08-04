@@ -1,12 +1,12 @@
 class CreateDeals < ActiveRecord::Migration
   def change
     create_table :deals do |t|
-      t.references :employer, index: true
-      t.references :renter, index: true
+      t.references :landlord, null: false, index: true
+      t.references :tenant, null: false, index: true
       t.references :agent, index: true
-      t.references :apartment, index: true
-      t.references :user, index: true
-      t.integer :price
+      t.references :apartment, null: false, index: true
+      t.references :user, null: false, index: true
+      t.integer :price, null: false
       t.integer :deposit
       t.boolean :communal
       t.integer :lease_term

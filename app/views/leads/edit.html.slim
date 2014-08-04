@@ -1,8 +1,9 @@
-h1 Editing lead
+- content_for :title, "Редактирование заявки #{@lead.id}"
+- content_for :page_title, "Редактирование заявки #{@lead.id}"
 
 == render 'form'
 
-= link_to 'Show', @lead
+= link_to 'Посмотреть', @lead
 '|
-= link_to 'Back', leads_path
+= link_to 'Назад', leads_path
 

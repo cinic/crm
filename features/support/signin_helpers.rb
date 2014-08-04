@@ -1,6 +1,6 @@
 module SigninHelpers
   def signin_user
-    @current_user = User.create(name: 'Test Test', email: 'test@test.com', password: 'password')
+    @current_user = User.create(name: 'Test Test', email: 'test@test.com', password: 'password', role: 0)
 
     visit login_path
 

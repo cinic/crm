@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_filter :authorize
-  helper_method :current_user, :logged_in?
+  helper_method :current_user, :logged_in?, :user_can_manage?, :user_can_admin?
   private
 
     def current_user
@@ -17,6 +17,14 @@ class ApplicationController < ActionController::Base
 
     def logged_in?
       current_user != nil
+    end
+
+    def user_can_manage?
+      current_user.role <= 1
+    end
+
+    def user_can_admin?
+      current_user.role == 0
     end
 
     def store_location

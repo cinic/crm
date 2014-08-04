@@ -15,6 +15,9 @@ class DealsController < ApplicationController
   # GET /deals/new
   def new
     @deal = Deal.new
+    @landlords = Landlord.all
+    @realtors = User.realtors
+    @apartments = Apartment.all
   end
 
   # GET /deals/1/edit

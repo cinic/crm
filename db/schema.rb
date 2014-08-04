@@ -11,11 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140728115546) do
+ActiveRecord::Schema.define(version: 20140803190030) do
 
   create_table "apartments", force: true do |t|
     t.string   "metro"
-    t.string   "address"
+    t.string   "address",              null: false
     t.integer  "rooms"
     t.boolean  "only_room"
     t.boolean  "adjacent_rooms"
@@ -43,16 +43,34 @@ ActiveRecord::Schema.define(version: 20140728115546) do
     t.string   "when_see"
     t.string   "when_placed"
     t.text     "comment"
+    t.integer  "landlord_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "price"
   end
 
+  add_index "apartments", ["landlord_id"], name: "index_apartments_on_landlord_id", using: :btree
+  add_index "apartments", ["user_id"], name: "index_apartments_on_user_id", using: :btree
+
+  create_table "clients", force: true do |t|
+    t.string   "name",                  null: false
+    t.string   "passport"
+    t.string   "mobile",     limit: 11, null: false
+    t.string   "type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "clients", ["mobile"], name: "index_clients_on_mobile", using: :btree
+
   create_table "deals", force: true do |t|
+    t.integer  "landlord_id",  null: false
+    t.integer  "tenant_id",    null: false
     t.integer  "agent_id"
-    t.integer  "apartment_id"
-    t.integer  "user_id"
-    t.integer  "price"
+    t.integer  "apartment_id", null: false
+    t.integer  "user_id",      null: false
+    t.integer  "price",        null: false
     t.integer  "deposit"
     t.boolean  "communal"
     t.integer  "lease_term"
@@ -60,8 +78,6 @@ ActiveRecord::Schema.define(version: 20140728115546) do
     t.datetime "date"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "landlord_id"
-    t.integer  "tenant_id"
   end
 
   add_index "deals", ["agent_id"], name: "index_deals_on_agent_id", using: :btree
@@ -70,37 +86,31 @@ ActiveRecord::Schema.define(version: 20140728115546) do
   add_index "deals", ["tenant_id"], name: "index_deals_on_tenant_id", using: :btree
   add_index "deals", ["user_id"], name: "index_deals_on_user_id", using: :btree
 
-  create_table "landlords", force: true do |t|
-    t.string   "name"
-    t.string   "mobile"
-    t.string   "passport"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "from_lead"
-  end
-
-  add_index "landlords", ["name"], name: "index_landlords_on_name", using: :btree
-
   create_table "leads", force: true do |t|
-    t.string   "name"
-    t.string   "mobile"
-    t.integer  "apartment_id"
+    t.string   "name",                  null: false
+    t.string   "mobile",                null: false
+    t.string   "metro"
+    t.string   "address"
+    t.integer  "status",      limit: 1
+    t.integer  "user_id"
+    t.integer  "landlord_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "landlord_id"
   end
 
-  add_index "leads", ["apartment_id"], name: "index_leads_on_apartment_id", using: :btree
   add_index "leads", ["landlord_id"], name: "index_leads_on_landlord_id", using: :btree
+  add_index "leads", ["mobile"], name: "index_leads_on_mobile", using: :btree
   add_index "leads", ["name"], name: "index_leads_on_name", using: :btree
+  add_index "leads", ["user_id"], name: "index_leads_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "name"
-    t.string   "email"
-    t.string   "password_salt"
-    t.string   "password_hash"
-    t.integer  "role"
-    t.datetime "last_login"
+    t.string   "name",            null: false
+    t.string   "email",           null: false
+    t.string   "password_salt",   null: false
+    t.string   "password_hash",   null: false
+    t.integer  "role",            null: false
+    t.datetime "last_sign_in_at"
+    t.string   "last_sign_in_ip"
     t.string   "mobile"
     t.datetime "created_at"
     t.datetime "updated_at"

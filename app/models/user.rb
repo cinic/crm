@@ -7,6 +7,9 @@ class User < ActiveRecord::Base
   validates_presence_of :email
   validates_uniqueness_of :email
 
+  scope :realtors, -> { where(role: 2) }
+  scope :managers, -> { where(role: 1) }
+  scope :admins, -> { where(role: 0) }
 
   def self.authenticate(email, password)
     user = User.where({email: email}).first

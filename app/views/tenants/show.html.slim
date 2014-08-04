@@ -1,0 +1,8 @@
+- content_for :title, "Наниматель #{@tenant.id}"
+- content_for :page_title, "Наниматель #{@tenant.id}"
+p#notice = notice
+
+
+= link_to 'Редактировать', edit_tenant_path(@tenant)
+'|
+= link_to 'Назад', tenants_path

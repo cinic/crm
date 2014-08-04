@@ -1,0 +1,32 @@
+- content_for :title, "Наниматели"
+- content_for :page_title, "Список нанимателей"
+.table-wrapper
+  table.table.table-hover
+    thead
+      tr
+        th.span2 ID
+        th.span3
+          span.line
+          |Фамилия Имя Отчество
+        th.span3
+          span.line
+          |Мобильный
+        th.span3
+          span.line
+          |Статус
+        th.span2
+          span.line
+          |Действия
+    tbody
+      - @tenants.each do |tenant|
+        tr
+          td = link_to tenant.id, tenant
+          td = tenant.name
+          td = tenant.mobile
+          td
+          td
+            ul.actions
+              li = link_to 'Редактировать', edit_tenant_path(tenant)
+              li = link_to 'Удалить', tenant, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+= link_to 'Создать нанимателя', new_tenant_path, class: "btn-flat primary"

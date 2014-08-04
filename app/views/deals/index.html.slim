@@ -1,19 +1,46 @@
-h1 Listing deals
+- content_for :title, "Сделки"
+- content_for :page_title, "Список сделок"
 
-table
-  thead
-    tr
-      th
-      th
-      th
-
-  tbody
-    - @deals.each do |deal|
+.table-wrapper
+  table.table.table-hover
+    thead
       tr
-        td = link_to 'Show', deal
-        td = link_to 'Edit', edit_deal_path(deal)
-        td = link_to 'Destroy', deal, data: {:confirm => 'Are you sure?'}, :method => :delete
+        th.span2 ID
+        th.span3
+          span.line
+          |Объект
+        th.span2
+          span.line
+          |Наймодатель
+        th.span3
+          span.line
+          |Риелтор
+        th.span3
+          span.line
+          |Цена
+        th.span3
+          span.line
+          |Комиссия
+        th.span3
+          span.line
+          |Агент
+        th.span2
+          span.line
+          |Действия
 
-br
+    tbody
+      - @deals.each do |deal|
+        tr
+          td = link_to deal.id, deal
+          td = deal.apartment.id
+          td = deal.landlord.id
+          td = deal.user.id
+          td = deal.price
+          td = deal.commission
+          td = deal.agent
+          td
+            ul.actions
+              li = link_to 'Редактировать', edit_deal_path(deal)
+              li = link_to 'Удалить', deal, data: {:confirm => 'Вы уверены?'}, :method => :delete
 
-= link_to 'New Deal', new_deal_path
+= link_to 'Создать сделку', new_deal_path, class: 'btn-flat primary'

@@ -5,5 +5,14 @@
       ul
         - @deal.errors.full_messages.each do |message|
           li = message
+  .form-row
+    = f.label :landlord_id, 'Наймодатель'
+    = f.select(:landlord_id, @landlords.map { |landlord| [landlord.name, landlord.id] })
+  .form-row  
+    = f.label :apartment_id, 'Объект'
+    = f.select(:apartment_id, @apartments.map { |apartment| [apartment.address, apartment.id] })
+  .form-row  
+    = f.label :user_id, 'Риелтор'
+    = f.select(:user_id, @realtors.map { |realtor| [realtor.name, realtor.id] })
 
-  .actions = f.submit 'Сохранить', class: "btn btn-success"
+  .actions = f.submit 'Сохранить', class: "btn-flat success"

@@ -4,8 +4,12 @@ Crm::Application.routes.draw do
   post 'sessions', to: 'sessions#create'
   delete 'sessions', to: 'sessions#destroy'
   
+  resources :users
   resources :leads
+  get 'leads/:id/edit_realtor', to: 'leads#edit_realtor', as: 'edit_realtor_lead'
+  get 'leads/:id/new_landlord_lead', to: 'leads#new_landlord_lead',as: 'new_landlord_lead'
   resources :landlords
+  resources :tenants
   resources :deals
   resources :apartments
   # Example of regular route:

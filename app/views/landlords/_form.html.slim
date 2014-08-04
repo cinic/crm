@@ -5,11 +5,11 @@
       ul
         - @landlord.errors.full_messages.each do |message|
           li = message
-  p
-    = f.label :name
+  .form-row
+    = f.label :name, 'ФИО'
     = f.text_field :name
 
-  p
-    = f.label :mobile
+  .form-row
+    = f.label :mobile, 'Мобильный'
     = f.text_field :mobile
   .actions = f.submit 'Сохранить', class: "btn-flat success"
