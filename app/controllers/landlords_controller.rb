@@ -24,6 +24,10 @@ class LandlordsController < ApplicationController
   def new_landlord_wizard
   end
 
+  def new_without_lead
+    @landlord = Landlord.new
+  end
+
   def wizard_step_2
     @apartment = @landlord.apartments.new
   end
@@ -64,6 +68,18 @@ class LandlordsController < ApplicationController
     end
   end
 
+  def save_wizard_step_0
+    @landlord = Landlord.new(landlord_params)
+    respond_to do |format|
+      if @landlord.save(landlord_params)
+        format.html { redirect_to landlord_wizard_step_2_path(@landlord), notice: 'Landlord was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'new_without_lead' }
+        format.json { render json: @landlord.errors, status: :unprocessable_entity }
+      end
+    end
+  end
   def save_wizard_step_1
     respond_to do |format|
       if @landlord.update(landlord_params)

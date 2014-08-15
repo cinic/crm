@@ -9,8 +9,6 @@ class AddDetailsToApartments < ActiveRecord::Migration
     add_column :apartments, :urban_transport_to_metro, :string
     add_column :apartments, :taxi_bus_to_metro, :string
     add_column :apartments, :suburban_transport_to_metro, :string
-    change_column :apartments, :balcony, :string
-    change_column :apartments, :repairing, :string
     add_column :apartments, :rent_before, :boolean
     add_column :apartments, :dishwasher, :boolean
     add_column :apartments, :stove, :string
@@ -18,7 +16,6 @@ class AddDetailsToApartments < ActiveRecord::Migration
     add_column :apartments, :water_meters, :boolean
     add_column :apartments, :registered_people, :string
     add_column :apartments, :registered_infants, :boolean
-    change_column :apartments, :kitchen_furnished, :string
     add_column :apartments, :bed_2, :boolean
     add_column :apartments, :bed_1, :boolean
     add_column :apartments, :bed_0, :boolean
@@ -39,5 +36,6 @@ class AddDetailsToApartments < ActiveRecord::Migration
     add_column :apartments, :how_long_rent, :string
     add_column :apartments, :experience_with_realtors, :string
     add_column :apartments, :other_realtors, :string
+    add_column :apartments, :conditioner, :boolean
   end
 end

@@ -10,13 +10,13 @@ class CreateApartments < ActiveRecord::Migration
       t.float :kitchen_size
       t.string :rooms_size
       t.float :balcony_size
-      t.boolean :balcony
+      t.string :balcony
       t.boolean :balcony_glazed
-      t.boolean :repairing
+      t.string :repairing
       t.integer :floor
       t.integer :floors
       t.boolean :furnished
-      t.boolean :kitchen_furnished
+      t.string :kitchen_furnished
       t.boolean :phone
       t.boolean :tv
       t.boolean :fridge

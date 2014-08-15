@@ -1,0 +1,25 @@
+= form_for @landlord, url: landlord_wizard_without_lead_path do |f|
+  - if @landlord.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@landlord.errors.count, "error")} prohibited this apartment from being saved:"
+      ul
+        - @landlord.errors.full_messages.each do |message|
+          li = message
+  .form-row
+    = f.label :name, 'ФИО'
+    = f.text_field :name
+
+  .form-row
+    = f.label :mobile, 'Мобильный'
+    = f.text_field :mobile
+  .form-row
+    = f.label :alternate_phone, 'Альтернативный телефон'
+    = f.text_field :alternate_phone
+  .form-row
+    = f.label :email, 'Email'
+    = f.email_field :email
+  .form-row
+    = f.label :object_relation, 'Отношение к объекту'
+    = f.select(:object_relation, ['Единственный собственник','Собственник, в долевой собственности','Представитель собственника'])
+
+  .actions = f.submit 'Далее', class: 'btn-flat success'
