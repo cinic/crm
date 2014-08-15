@@ -1,0 +1,19 @@
+h1 Listing wizard_landlords
+
+table
+  thead
+    tr
+      th
+      th
+      th
+
+  tbody
+    - @wizard_landlords.each do |wizard_landlord|
+      tr
+        td = link_to 'Show', wizard_landlord
+        td = link_to 'Edit', edit_wizard_landlord_path(wizard_landlord)
+        td = link_to 'Destroy', wizard_landlord, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Wizard landlord', new_wizard_landlord_path

@@ -1,5 +1,5 @@
 class LandlordsController < ApplicationController
-  before_action :set_landlord, only: [:show, :edit, :update, :destroy]
+  before_action :set_landlord, only: [:show, :edit, :update, :destroy, :new_landlord_wizard, :wizard_step_2, :wizard_step_3, :save_wizard_step_1, :save_wizard_step_2, :save_wizard_step_3]
 
   # GET /landlords
   # GET /landlords.json
@@ -19,6 +19,19 @@ class LandlordsController < ApplicationController
 
   # GET /landlords/1/edit
   def edit
+  end
+
+  def new_landlord_wizard
+  end
+
+  def wizard_step_2
+    @apartment = @landlord.apartments.new
+  end
+  def wizard_step_3
+    @apartment = @landlord.apartments.last
+  end
+
+  def wizard_step_4
   end
 
   # POST /landlords
@@ -51,6 +64,41 @@ class LandlordsController < ApplicationController
     end
   end
 
+  def save_wizard_step_1
+    respond_to do |format|
+      if @landlord.update(landlord_params)
+        format.html { redirect_to landlord_wizard_step_2_path, notice: 'Landlord was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'new_landlord_wizard' }
+        format.json { render json: @landlord.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  def save_wizard_step_2
+    @apartment = @landlord.apartments.new(apartment_params)
+    respond_to do |format|
+      if @apartment.save
+        format.html { redirect_to landlord_wizard_step_3_path, notice: 'Landlord was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'wizard_step_2' }
+        format.json { render json: @apartment.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  def save_wizard_step_3
+    respond_to do |format|
+      if @landlord.apartments.last.update(apartment_params)
+        format.html { redirect_to landlord_wizard_step_4_path, notice: 'Landlord was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'wizard_step_3' }
+        format.json { render json: @landlord.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # DELETE /landlords/1
   # DELETE /landlords/1.json
   def destroy
@@ -69,6 +117,9 @@ class LandlordsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def landlord_params
-      params.require(:landlord).permit(:name,:mobile,:passport)
+      params.require(:landlord).permit!
+    end
+    def apartment_params
+      params.require(:apartment).permit!
     end
 end

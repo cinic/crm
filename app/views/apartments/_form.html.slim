@@ -38,12 +38,6 @@
   .form-row.form-inline
     span.checkbox = f.check_box :balcony, class: 'form-input'
     = f.label :balcony, "Есть ли балкон?"
-  .form-row
-    = f.label :balcony_size, "Площадь балкона"
-    = f.text_field :balcony_size, class: 'form-input'
-  .form-row.form-inline
-    span.checkbox = f.check_box :balcony_glazed, class: 'form-input'
-    = f.label :balcony_glazed, "Балкон застеклён?"
   .form-row.form-inline
     span.checkbox = f.check_box :repairing, class: 'form-input'
     = f.label :repairing, "Был ли ремонт?"
@@ -53,9 +47,6 @@
   .form-row
     = f.label :floors, "Всего этажей?"
     = f.text_field :floors, class: 'form-input'
-  .form-row.form-inline
-    span.checkbox = f.check_box :furnished, class: 'form-input'
-    = f.label :furnished, "Квартира мебелирована?"
   .form-row.form-inline
     span.checkbox = f.check_box :kitchen_furnished, class: 'form-input'
     = f.label :kitchen_furnished, "Кухня мебелирована?"
@@ -77,15 +68,6 @@
   .form-row.form-inline
     span.checkbox = f.check_box :kids, class: 'form-input'
     = f.label :kids, "Можно с детьми?"
-  .form-row
-    = f.label :near, "Что есть поблизости?"
-    = f.text_field :near, class: 'form-input'
-  .form-row
-    = f.label :when_see, "Когда можно смотреть?"
-    = f.text_field :when_see, class: 'form-input'
-  .form-row
-    = f.label :when_placed, "Когда можно въезжать?"
-    = f.text_field :when_placed, class: 'form-input'
   .form-row
     = f.label :deposit, "Размер депозита"
     = f.text_field :deposit, class: 'form-input'

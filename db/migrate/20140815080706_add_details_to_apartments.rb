@@ -1,0 +1,43 @@
+class AddDetailsToApartments < ActiveRecord::Migration
+  def change
+    add_column :apartments, :made_from, :string
+    add_column :apartments, :dressing_room, :boolean
+    add_column :apartments, :tile_in_toilet, :boolean
+    add_column :apartments, :living_area_size, :string
+    add_column :apartments, :walk_to_metro, :string
+    add_column :apartments, :drive_to_metro, :string
+    add_column :apartments, :urban_transport_to_metro, :string
+    add_column :apartments, :taxi_bus_to_metro, :string
+    add_column :apartments, :suburban_transport_to_metro, :string
+    change_column :apartments, :balcony, :string
+    change_column :apartments, :repairing, :string
+    add_column :apartments, :rent_before, :boolean
+    add_column :apartments, :dishwasher, :boolean
+    add_column :apartments, :stove, :string
+    add_column :apartments, :internet, :string
+    add_column :apartments, :water_meters, :boolean
+    add_column :apartments, :registered_people, :string
+    add_column :apartments, :registered_infants, :boolean
+    change_column :apartments, :kitchen_furnished, :string
+    add_column :apartments, :bed_2, :boolean
+    add_column :apartments, :bed_1, :boolean
+    add_column :apartments, :bed_0, :boolean
+    add_column :apartments, :sliding_wardrobe, :boolean
+    add_column :apartments, :wardrobe, :boolean
+    add_column :apartments, :chest, :boolean
+    add_column :apartments, :sofa, :boolean
+    add_column :apartments, :photo, :string
+    add_column :apartments, :photo_when, :string
+    add_column :apartments, :near_supermarket, :boolean
+    add_column :apartments, :near_park, :boolean
+    add_column :apartments, :near_school, :boolean
+    add_column :apartments, :near_hospital, :boolean
+    add_column :apartments, :near_kindergarten, :boolean
+    add_column :apartments, :pre_pay, :string
+    add_column :apartments, :wishes, :string
+    add_column :apartments, :how_long_wait, :string
+    add_column :apartments, :how_long_rent, :string
+    add_column :apartments, :experience_with_realtors, :string
+    add_column :apartments, :other_realtors, :string
+  end
+end

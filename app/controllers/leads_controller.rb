@@ -33,7 +33,7 @@ class LeadsController < ApplicationController
 
     respond_to do |format|
       if @lead.save
-        format.html { redirect_to landlord, notice: 'Landlord was successfully created.' }
+        format.html { redirect_to new_landlord_wizard_path(landlord), notice: 'Landlord was successfully created.' }
         format.json { render action: 'show', status: :created, location: landlord }
       else
         format.html { render action: 'new' }

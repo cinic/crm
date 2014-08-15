@@ -1,0 +1,2 @@
+module WizardLandlordsHelper
+end

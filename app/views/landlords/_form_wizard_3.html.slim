@@ -1,0 +1,47 @@
+= form_for @apartment, url: landlord_wizard_step_3_path do |a|
+  - if @apartment.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@apartment.errors.count, "error")} prohibited this apartment from being saved:"
+      ul
+        - @apartment.errors.full_messages.each do |message|
+          li = message
+  .form-row
+    = a.label :price, "Какую сумму планируете выручать от найма квартиры?"
+    = a.text_field :price, class: 'form-input'
+  .form-row
+    = a.label :pre_pay, "Размер предоплаты, месяцев"
+    = a.select(:pre_pay, ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'])
+  .form-row
+    = a.label :deposit, "Размер депозита в %"
+    = a.text_field :deposit, class: 'form-input'
+  .form-row.form-inline
+    span.checkbox = a.check_box :deposit_divide, class: 'form-input'
+    = a.label :deposit_divide, "Депозит разбивается?"
+
+  .form-row
+    = a.label :wishes, "Пожелания к нанимателям"
+    = a.text_field :wishes, class: 'form-input'
+  .form-row.form-inline
+    span.checkbox = a.check_box :animals, class: 'form-input'
+    = a.label :animals, "Можно с животными?"
+  .form-row.form-inline
+    span.checkbox = a.check_box :kids, class: 'form-input'
+    = a.label :kids, "Можно с детьми?"
+  .form-row
+    = a.label :how_long_wait, "Как долго вы готовы ждать-выбирать клиентов?"
+    = a.select(:how_long_wait, ['Мне важно сдать быстро', 'Мне важно чтобы были хорошие люди и я готов их подождать неделю-другую'])
+  .form-row
+    = a.label :how_long_rent, "На какой срок вы планируете сдавать квартиру?"
+    = a.select(:how_long_rent, ['Несколько месяцев', 'До года', 'Длительный'])
+  .form-row.form-inline
+    span.checkbox = a.check_box :experience_with_realtors, class: 'form-input'
+    = a.label :experience_with_realtors, "Имеете ли вы опыт работы с риелторами?"
+  .form-row.form-inline
+    span.checkbox = a.check_box :other_realtors, class: 'form-input'
+    = a.label :other_realtors, "Обращались ли вы по вопросу аренды этой квартиры к другим риелторам?"
+  
+  .form-row
+    = a.label :comment, "Комментарий"
+    = a.text_area :comment, class: 'form-input'
+
+  .actions = a.submit 'Сохранить', class: 'btn-flat success'

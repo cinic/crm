@@ -11,25 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140803190030) do
+ActiveRecord::Schema.define(version: 20140815114652) do
 
   create_table "apartments", force: true do |t|
     t.string   "metro"
-    t.string   "address",              null: false
+    t.string   "address",                     null: false
     t.integer  "rooms"
     t.boolean  "only_room"
     t.boolean  "adjacent_rooms"
     t.float    "apartment_size"
     t.float    "kitchen_size"
     t.string   "rooms_size"
-    t.float    "balcony_size"
-    t.boolean  "balcony"
-    t.boolean  "balcony_glazed"
-    t.boolean  "repairing"
+    t.string   "balcony"
+    t.string   "repairing"
     t.integer  "floor"
     t.integer  "floors"
-    t.boolean  "furnished"
-    t.boolean  "kitchen_furnished"
+    t.string   "kitchen_furnished"
     t.boolean  "phone"
     t.boolean  "tv"
     t.boolean  "fridge"
@@ -39,27 +36,64 @@ ActiveRecord::Schema.define(version: 20140803190030) do
     t.boolean  "bathroom_with_toilet"
     t.integer  "deposit"
     t.boolean  "deposit_divide"
-    t.string   "near"
-    t.string   "when_see"
-    t.string   "when_placed"
     t.text     "comment"
     t.integer  "landlord_id"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "price"
+    t.string   "made_from"
+    t.boolean  "dressing_room"
+    t.boolean  "tile_in_toilet"
+    t.string   "living_area_size"
+    t.string   "walk_to_metro"
+    t.string   "drive_to_metro"
+    t.string   "urban_transport_to_metro"
+    t.string   "taxi_bus_to_metro"
+    t.string   "suburban_transport_to_metro"
+    t.boolean  "rent_before"
+    t.boolean  "dishwasher"
+    t.string   "stove"
+    t.string   "internet"
+    t.boolean  "water_meters"
+    t.string   "registered_people"
+    t.boolean  "registered_infants"
+    t.boolean  "bed_2"
+    t.boolean  "bed_1"
+    t.boolean  "bed_0"
+    t.boolean  "sliding_wardrobe"
+    t.boolean  "wardrobe"
+    t.boolean  "chest"
+    t.boolean  "sofa"
+    t.string   "photo"
+    t.string   "photo_when"
+    t.boolean  "near_supermarket"
+    t.boolean  "near_park"
+    t.boolean  "near_school"
+    t.boolean  "near_hospital"
+    t.boolean  "near_kindergarten"
+    t.string   "pre_pay"
+    t.string   "wishes"
+    t.string   "how_long_wait"
+    t.string   "how_long_rent"
+    t.string   "experience_with_realtors"
+    t.string   "other_realtors"
+    t.boolean  "conditioner"
   end
 
   add_index "apartments", ["landlord_id"], name: "index_apartments_on_landlord_id", using: :btree
   add_index "apartments", ["user_id"], name: "index_apartments_on_user_id", using: :btree
 
   create_table "clients", force: true do |t|
-    t.string   "name",                  null: false
+    t.string   "name",                       null: false
     t.string   "passport"
-    t.string   "mobile",     limit: 11, null: false
+    t.string   "mobile",          limit: 11, null: false
     t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "alternate_phone"
+    t.string   "email"
+    t.string   "object_relation"
   end
 
   add_index "clients", ["mobile"], name: "index_clients_on_mobile", using: :btree
