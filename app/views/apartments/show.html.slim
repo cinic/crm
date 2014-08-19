@@ -2,6 +2,8 @@
 - content_for :page_title, "Объект #{@apartment.id}"
 p#notice = notice
 
+= image_tag @apartment.photo.url(:medium)
+br
 
 = link_to 'Edit', edit_apartment_path(@apartment)
 '|

@@ -1,5 +1,6 @@
 class ApartmentsController < ApplicationController
   before_action :set_apartment, only: [:show, :edit, :update, :destroy]
+  before_action :set_landlords, only: [:new, :edit, :update]
 
   # GET /apartments
   # GET /apartments.json
@@ -15,12 +16,10 @@ class ApartmentsController < ApplicationController
   # GET /apartments/new
   def new
     @apartment = Apartment.new
-    @landlords = Landlord.all
   end
 
   # GET /apartments/1/edit
   def edit
-    @landlords = Landlord.all
   end
 
   # POST /apartments
@@ -67,6 +66,10 @@ class ApartmentsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_apartment
       @apartment = Apartment.find(params[:id])
+    end
+
+    def set_landlords
+      @landlords = Landlord.all
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

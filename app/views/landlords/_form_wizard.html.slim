@@ -7,17 +7,17 @@
           li = message
   .form-row
     = f.label :name, 'ФИО'
-    = f.text_field :name
+    = f.text_field :name, placeholder: 'Иванов Иван Иванович'
 
   .form-row
     = f.label :mobile, 'Мобильный'
-    = f.text_field :mobile
+    = f.text_field :mobile, placeholder: '+7 (911) 300-40-50'
   .form-row
     = f.label :alternate_phone, 'Альтернативный телефон'
-    = f.text_field :alternate_phone
+    = f.text_field :alternate_phone, placeholder: '+7 (495) 240-00-00'
   .form-row
     = f.label :email, 'Email'
-    = f.email_field :email
+    = f.email_field :email, placeholder: 'example@mail.ru'
   .form-row
     = f.label :object_relation, 'Отношение к объекту'
     = f.select(:object_relation, ['Единственный собственник','Собственник, в долевой собственности','Представитель собственника'])

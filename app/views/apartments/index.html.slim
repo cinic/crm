@@ -42,6 +42,7 @@
           td = apartment.deposit
           td
             ul.actions
+              li = link_to 'Посмотреть', apartment
               li = link_to 'Редактировать', edit_apartment_path(apartment)
               li = link_to 'Удалить', apartment, data: {:confirm => 'Вы уверены?'}, :method => :delete
 

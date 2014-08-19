@@ -80,5 +80,8 @@
   .form-row
     = f.label :comment, "Комментарий"
     = f.text_area :comment, class: 'form-input'
+  .field
+    = f.label :photo, "Фотография"
+    =f.file_field :photo
 
   .actions = f.submit 'Сохранить', class: 'btn-flat success'

@@ -20,7 +20,7 @@
 
   .form-row
     = a.label :wishes, "Пожелания к нанимателям"
-    = a.text_field :wishes, class: 'form-input'
+    = a.text_area :wishes, class: 'form-input'
   .form-row.form-inline
     span.checkbox = a.check_box :animals, class: 'form-input'
     = a.label :animals, "Можно с животными?"

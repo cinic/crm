@@ -69,6 +69,6 @@ class WizardLandlordsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def wizard_landlord_params
-      params[:wizard_landlord]
+      params.require(:wizard_landlord).permit!
     end
 end

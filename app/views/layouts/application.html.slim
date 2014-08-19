@@ -5,7 +5,11 @@ html
       = (yield(:title) + " | " unless yield(:title).blank?).to_s + "CRM"
     meta name="viewport" content="width=device-width, initial-scale=1.0"
     = stylesheet_link_tag    "application", media: "all"
+    /= stylesheet_link_tag "https://dadata.ru/static/css/suggestions-4.4.css"
     = javascript_include_tag "application"
+    /[if lt IE 10]
+      = javascript_include_tag "http://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.1/jquery.xdomainrequest.min.js"
+    = javascript_include_tag "https://dadata.ru/static/js/jquery.suggestions-4.4.min.js"
     = csrf_meta_tags
   body
     = render "shared/header"

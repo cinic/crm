@@ -10,53 +10,43 @@
     = a.label :rooms, "Количество комнат"
     = a.select(:rooms, ['1','2','3','4','5','6+'])
   .form-row.form-inline
-    span.checkbox = a.check_box :adjacent_rooms, class: 'form-input'
+    span.checkbox = a.check_box :adjacent_rooms
     = a.label :adjacent_rooms, "Комнаты смежные?"
   .form-row
     = a.label :made_from, "Тип дома"
     = a.select(:made_from, ['Панель','Кирпич','Монолит'])
   .form-row.form-inline
-    span.checkbox = a.check_box :bathroom_with_toilet, class: 'form-input'
+    span.checkbox = a.check_box :bathroom_with_toilet
     = a.label :bathroom_with_toilet, "Санузел совмещён?"
   .form-row.form-inline
-    span.checkbox = a.check_box :tile_in_toilet, class: 'form-input'
+    span.checkbox = a.check_box :tile_in_toilet
     = a.label :tile_in_toilet, "Санузел в плитке?"
   .form-row.form-inline
-    span.checkbox = a.check_box :dressing_room, class: 'form-input'
+    span.checkbox = a.check_box :dressing_room
     = a.label :dressing_room, "Гардеробная комната?"
   .form-row
     = a.label :apartment_size, "Площадь квартиры, м.кв."
-    = a.text_field :apartment_size, class: 'form-input'
+    = a.text_field :apartment_size
   .form-row
     = a.label :kitchen_size, "Площадь кухни, м.кв."
-    = a.text_field :kitchen_size, class: 'form-input'
+    = a.text_field :kitchen_size
   .form-row
     = a.label :rooms_size, "Площадь комнат, м.кв."
-    = a.text_field :rooms_size, placeholder: '20, 18, 6', class: 'form-input'
+    = a.text_field :rooms_size, placeholder: '20, 18, 6'
   .form-row
     = a.label :living_area_size, "Площадь жилая, м.кв."
-    = a.text_field :living_area_size, class: 'form-input'
+    = a.text_field :living_area_size
   .form-row
     = a.label :address, "Адрес"
-    = a.text_field :address, placeholder: 'Город, Улица, Номер дома', class: 'form-input'
+    = a.text_field :address, placeholder: 'Город, Улица, Номер дома'
   .form-row
     = a.label :metro, "Ближайшее метро"
-    = a.text_field :metro, class: 'form-input'
+    = a.text_field :metro
   .form-row
-    = a.label :walk_to_metro, "Пешком до метро"
-    = a.text_field :walk_to_metro, class: 'form-input'
-  .form-row
-    = a.label :drive_to_metro, "На машине до метро"
-    = a.text_field :drive_to_metro, class: 'form-input'
-  .form-row
-    = a.label :urban_transport_to_metro, "Наземным городским транспортом до метро"
-    = a.text_field :urban_transport_to_metro, class: 'form-input'
-  .form-row
-    = a.label :taxi_bus_to_metro, "Маршруткой до метро"
-    = a.text_field :taxi_bus_to_metro, class: 'form-input'
-  .form-row
-    = a.label :suburban_transport_to_metro, "Пригородным транспортом до метро"
-    = a.text_field :suburban_transport_to_metro, class: 'form-input'
+    = a.label :time_to_metro, "До метро"
+    = a.text_field :time_to_metro
+    |&nbsp;
+    = a.select( :transport_to_metro, [['Пешком', 'walk'], ['На машине', 'car'], ['Наземным городским транспортом', 'urban_transport'], ['На маршрутке', 'taxi_bus'], ['Пригородным транспортом', 'suburban_transport']] )
   .form-row
     = a.label :repairing, "Состояние квартиры"
     = a.select(:repairing, ['Обычный ремонт', 'Требует ремонта', 'Косметический ремонт', 'Евроремонт', 'Под евро'])
@@ -65,47 +55,47 @@
     = a.select(:balcony, ['Нет', 'Есть открытый', 'Есть застеклённый', 'Лоджия'])
   .form-row
     = a.label :floor, "Этаж квартиры?"
-    = a.text_field :floor, class: 'form-input'  
+    = a.text_field :floor  
   .form-row
     = a.label :floors, "Всего этажей в доме?"
-    = a.text_field :floors, class: 'form-input'
+    = a.text_field :floors
   .form-row.form-inline
-    span.checkbox = a.check_box :rent_before, class: 'form-input'
+    span.checkbox = a.check_box :rent_before
     = a.label :rent_before, "Ранее сдавали квартиру?"
   
   .form-row.form-inline
-    span.checkbox = a.check_box :tv, class: 'form-input'
+    span.checkbox = a.check_box :tv
     = a.label :tv, "Телевизор"
   .form-row.form-inline
-    span.checkbox = a.check_box :washer, class: 'form-input'
+    span.checkbox = a.check_box :washer
     = a.label :washer, "Стиральная машина"
   .form-row.form-inline
-    span.checkbox = a.check_box :dishwasher, class: 'form-input'
+    span.checkbox = a.check_box :dishwasher
     = a.label :dishwasher, "Посудомоечная машина"
   .form-row
     = a.label :stove, "Плита?"
     = a.select(:stove, ['Газовая', 'Электрическая'])
   .form-row.form-inline
-    span.checkbox = a.check_box :fridge, class: 'form-input'
+    span.checkbox = a.check_box :fridge
     = a.label :fridge, "Холодильник"
   .form-row.form-inline
-    span.checkbox = a.check_box :conditioner, class: 'form-input'
+    span.checkbox = a.check_box :conditioner
     = a.label :conditioner, "Кондиционер"
 
   .form-row
     = a.label :internet, "Интернет?"
     = a.select(:internet, ['Нет', 'Проведен проводной, нужно заключить договор', 'Проведен проводной, работает', 'Вай фай есть, заключайте договор', 'Вай фай работает'])
   .form-row.form-inline
-    span.checkbox = a.check_box :phone, class: 'form-input'
+    span.checkbox = a.check_box :phone
     = a.label :phone, "Линия МГТС / Городская?"
   .form-row.form-inline
-    span.checkbox = a.check_box :water_meters, class: 'form-input'
+    span.checkbox = a.check_box :water_meters
     = a.label :water_meters, "Счётчики воды?"
   .form-row
     = a.label :registered_people, "Сколько людей зарегистрировано в квартире?"
     = a.select(:registered_people, ['1', '2', '3', '4', '5', '6'])
   .form-row.form-inline
-    span.checkbox = a.check_box :registered_infants, class: 'form-input'
+    span.checkbox = a.check_box :registered_infants
     = a.label :registered_infants, "Несовершеннолетние зарегистрированы?"
 
   .form-row
@@ -114,25 +104,25 @@
     
   h3  Мебель в комнатах
   .form-row.form-inline
-    span.checkbox = a.check_box :bed_2, class: 'form-input'
+    span.checkbox = a.check_box :bed_2
     = a.label :bed_2, "Кровать двухспальная"
   .form-row.form-inline
-    span.checkbox = a.check_box :bed_1, class: 'form-input'
+    span.checkbox = a.check_box :bed_1
     = a.label :bed_1, "Кровать односпальная"
   .form-row.form-inline
-    span.checkbox = a.check_box :bed_0, class: 'form-input'
+    span.checkbox = a.check_box :bed_0
     = a.label :bed_0, "Кровать детская"
   .form-row.form-inline
-    span.checkbox = a.check_box :sliding_wardrobe, class: 'form-input'
+    span.checkbox = a.check_box :sliding_wardrobe
     = a.label :sliding_wardrobe, "Шкаф-купе"
   .form-row.form-inline
-    span.checkbox = a.check_box :wardrobe, class: 'form-input'
+    span.checkbox = a.check_box :wardrobe
     = a.label :wardrobe, "Наборные шкафы"
   .form-row.form-inline
-    span.checkbox = a.check_box :chest, class: 'form-input'
+    span.checkbox = a.check_box :chest
     = a.label :chest, "Комод"
   .form-row.form-inline
-    span.checkbox = a.check_box :sofa, class: 'form-input'
+    span.checkbox = a.check_box :sofa
     = a.label :sofa, "Диван"
   
   .form-row
@@ -140,23 +130,23 @@
     = a.select(:photo, ['Нет', 'Отправить адрес в смс', 'Отправить тестовое письмо на почту'])
   .form-row
     = a.label :photo_when, "Когда сможем сделать фото?"
-    = a.text_field :photo_when, class: 'form-input'
+    = a.text_field :photo_when
 
   h3 Какая инфраструктура есть поблизости?
   .form-row.form-inline
-    span.checkbox = a.check_box :near_supermarket, class: 'form-input'
+    span.checkbox = a.check_box :near_supermarket
     = a.label :near_supermarket, "Крупные продуктовые магазины"
   .form-row.form-inline
-    span.checkbox = a.check_box :near_park, class: 'form-input'
+    span.checkbox = a.check_box :near_park
     = a.label :near_park, "Парки"
   .form-row.form-inline
-    span.checkbox = a.check_box :near_school, class: 'form-input'
+    span.checkbox = a.check_box :near_school
     = a.label :near_school, "Школа"
   .form-row.form-inline
-    span.checkbox = a.check_box :near_hospital, class: 'form-input'
+    span.checkbox = a.check_box :near_hospital
     = a.label :near_hospital, "Поликлиника"
   .form-row.form-inline
-    span.checkbox = a.check_box :near_kindergarten, class: 'form-input'
+    span.checkbox = a.check_box :near_kindergarten
     = a.label :near_kindergarten, "Детский сад"
 
   .actions = a.submit 'Далее', class: 'btn-flat success'

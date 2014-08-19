@@ -21,11 +21,12 @@
       - @landlords.each do |landlord|
         tr
           td = link_to landlord.id, landlord
-          td = landlord.name
+          td = link_to landlord.name, landlord
           td = landlord.mobile
           td
           td
             ul.actions
+              li = link_to 'Посмотреть', landlord
               li = link_to 'Редактировать', edit_landlord_path(landlord)
               li = link_to 'Удалить', landlord, data: {:confirm => 'Are you sure?'}, :method => :delete
 

@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_filter :authorize
   helper_method :current_user, :logged_in?, :user_can_manage?, :user_can_admin?
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+
   private
 
     def current_user
@@ -29,5 +31,9 @@ class ApplicationController < ActionController::Base
 
     def store_location
       session[:return_to] = request.fullpath unless request.fullpath == '/login' || request.fullpath == '/sessions' || request.fullpath == '/logout'
+    end
+
+    def record_not_found
+      render text: "404 Not Found", status: 404
     end
 end
