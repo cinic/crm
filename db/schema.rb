@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140819232148) do
+ActiveRecord::Schema.define(version: 20140820002425) do
 
   create_table "apartments", force: true do |t|
     t.string   "metro"
@@ -60,7 +60,6 @@ ActiveRecord::Schema.define(version: 20140819232148) do
     t.boolean  "wardrobe"
     t.boolean  "chest"
     t.boolean  "sofa"
-    t.string   "photo"
     t.string   "photo_when"
     t.boolean  "near_supermarket"
     t.boolean  "near_park"
@@ -80,6 +79,7 @@ ActiveRecord::Schema.define(version: 20140819232148) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.string   "photo_need"
   end
 
   add_index "apartments", ["landlord_id"], name: "index_apartments_on_landlord_id", using: :btree

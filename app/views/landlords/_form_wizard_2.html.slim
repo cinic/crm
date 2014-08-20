@@ -126,8 +126,8 @@
     = a.label :sofa, "Диван"
   
   .form-row
-    = a.label :photo, "Прислать фотографии?"
-    = a.select(:photo, ['Нет', 'Отправить адрес в смс', 'Отправить тестовое письмо на почту'])
+    = a.label :photo_need, "Прислать фотографии?"
+    = a.select(:photo_need, ['Нет', 'Отправить адрес в смс', 'Отправить тестовое письмо на почту'])
   .form-row
     = a.label :photo_when, "Когда сможем сделать фото?"
     = a.text_field :photo_when
