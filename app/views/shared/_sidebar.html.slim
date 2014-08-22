@@ -1,4 +1,83 @@
-sidebar#sidebar-nav
+#sidebar-clear.main-sidebar.fix-scroll
+  .current-user
+    a.name href="#" 
+      = image_tag "avatars/1.jpg", class: "avatar"
+      span
+        = current_user.name
+        i.fa.fa-chevron-down
+    ul.menu
+      li
+        a href=user_path(current_user) Свойства
+      li
+        a href=logout_path  Выход
+  .menu-section
+    h3 General
+    ul
+      li.option
+        a.active href="/"
+          i.ion-android-earth
+          span Дашбоард
+      li.option
+        a data-toggle="sidebar" href="#" 
+          i.ion-person-stalker
+          span Лиды и Клиенты
+          i.fa.fa-chevron-down
+        ul.submenu
+          li
+            a href=leads_path  Заявки
+          li
+            a href=landlords_path  Наймодатели
+          li
+            a href=tenants_path  Наниматели
+          li
+            a href=apartments_path  Объекты
+          li
+            a href=deals_path  Сделки
+      li.option
+        a data-toggle="sidebar" href="#" 
+          i.ion-stats-bars
+          span Отчёты
+          i.fa.fa-chevron-down
+        ul.submenu
+          li
+            a href="#"  Объекты
+          li
+            a href="#"  Сделки
+  - if user_can_admin?
+    .menu-section
+      h3 Admin
+      ul
+        li.option
+          a data-toggle="sidebar" href="#" 
+            i.ion-person
+            span Пользователи
+            i.fa.fa-chevron-down
+          ul.submenu
+            li
+              a href=users_path  Список
+            li
+              a href=new_user_path  Создать
+
+  .bottom-menu.hidden-sm
+    ul
+      li
+        a href="#" 
+          i.ion-help
+      li
+        a href="#" 
+          i.ion-archive
+          span.flag
+        ul.menu
+          li
+            a href="#"  5 unread messages
+          li
+            a href="#"  12 tasks completed
+          /! <li><a href="#">3 features added</a></li
+      li
+        a href=logout_path
+          i.ion-log-out
+
+/sidebar#sidebar-nav
   ul#dashboard-menu
     = li_with_link_to_unles_current_with_class raw('<i class="fa fa-tachometer"></i><span>Дашбоард</span>'), "active", dashboard_path
     = li_with_link_to_unles_current_with_class raw('<i class="fa fa-book"></i><span>Заявки</span>'), "active", leads_path

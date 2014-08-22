@@ -1,47 +1,104 @@
 - content_for :title, "Заявки"
-- content_for :page_title, "Список заявок"
-.table-wrapper
-  table.table.table-hover
-    thead
-      tr
-        th.span2 ID
-        th.span3
-          span.line
-          |Имя Фамилия
-        th.span3
-          span.line
-          |Мобильный
-        th.span3
-          span.line
-          |Статус
-        th.span3
-          span.line
-          |Риелтор
-        th.span2
-          span.line
-          |Действия
+- content_for :page_title, "Заявки"
+- content_for :body_id, "users"
 
-    tbody
+.menubar.fixed
+  .sidebar-toggler.visible-xs
+    i.ion-navicon
+  .page-title
+    == yield(:page_title)
+  form.search.hidden-xs
+    i.fa.fa-search
+    input name="q" placeholder="(Search customers), clients..." type="text"
+    input type="submit"
+  a.new-user.btn.btn-success.pull-right href=new_lead_path 
+    span Новая заявка
+.content-wrapper
+  .row.page-controls
+    .col-md-12.filters
+      .links
+        label Filter users:
+        a href="#"  All users (243)
+        a.active href="#"  Active (3)
+        a href="#"  Suspended (8)
+        a href="#"  Prospects
+      .show-options
+        .dropdown
+          a.button data-toggle="dropdown" href="#" 
+            span
+              | Sort by
+              i.fa.fa-unsorted
+          ul.dropdown-menu aria-labelledby="dLabel" role="menu" 
+            li
+              a href="#"  Name
+            li
+              a href="#"  Signed up
+            li
+              a href="#"  Last seen
+            li
+              a href="#"  Browser
+            li
+              a href="#"  Country
+        a.grid-view.active data-grid=".users-list" href="#" 
+          i.fa.fa-th-list
+        a.grid-view data-grid=".users-grid" href="#" 
+          i.fa.fa-th
+
+  .row.users-list
+    .col-md-12
+      .row.headers
+        .col-sm-2.header.select-users
+          input type="checkbox"
+          .dropdown.bulk-actions
+            a data-toggle="dropdown" href="#" 
+              | Bulk actions
+              span.total-checked
+              i.fa.fa-chevron-down
+            ul.dropdown-menu aria-labelledby="dLabel" role="menu" 
+              li
+                a href="#"  Add tags
+              li
+                a href="#"  Delete users
+              li
+                a href="#"  Edit customers
+              li
+                a href="#"  Manage permissions
+        .col-sm-4.header.hidden-xs
+          label
+            a href="#"  Имя
+        .col-sm-2.header.hidden-xs
+          label
+            a href="#"  Мобильный
+        .col-sm-3.header.hidden-xs
+          label.text-right
+            a href="#"  Зарегистрирован
+        .col-sm-1.header.hidden-xs
+          label
+            a href="#"  Действия
       - @leads.each do |lead|
-        tr
-          td = link_to lead.id, lead
-          td = lead.name
-          td = lead.mobile
-          td
-            - if lead.landlord_id == nil
-              span.label.label-info = ::LEAD_STATUSES[lead.status][0]
-              = link_to 'Перенести в наймодатели', new_landlord_lead_path(lead)
-            - else
-              = link_to 'Перенесена в наймодатели', lead.landlord
-          td
-            = lead.user_id == nil ? (link_to('Назначить риелтора', edit_realtor_lead_path(lead)) if user_can_manage?) : lead.user.name
-          td
-            ul.actions
-              - if user_can_manage?
-                li = link_to 'Редактировать', edit_lead_path(lead)
-              - if user_can_admin?
-                li = link_to 'Удалить', lead, data: {:confirm => 'Вы уверены?'}, :method => :delete
-              /li = link_to content_tag(:i,'',class: 'fa fa-pencil-square-o'), edit_lead_path(lead)
-              /li = link_to content_tag(:i,'',class: 'fa fa-trash-o'), lead, data: {:confirm => 'Are you sure?'}, :method => :delete
-
-= link_to 'Создать заявку', new_lead_path, class: 'btn-flat primary'
+        .row.user
+          .col-sm-2.avatar
+            .total-spent
+              input name="select-user" type="checkbox"
+              - if lead.landlord_id.nil?
+                span.label.label-info = ::LEAD_STATUSES[lead.status][0]
+              - else
+                span.label.label-info = ::LEAD_STATUSES[lead.status][0]
+          .col-sm-4
+            a.name href=lead_path(lead)  =lead.name
+          .col-sm-2
+            .email =lead.mobile
+          .col-sm-3
+            .created-at
+              = lead.created_at
+          .col-sm-1
+            .created-at
+              ul
+                - if lead.landlord_id.nil?
+                  li
+                    = link_to 'Перенести в наймодатели', new_landlord_lead_path(lead)
+                - if user_can_manage?
+                  li = link_to 'Назначить риелтора', edit_realtor_lead_path(lead) if lead.user.nil?
+                  li = link_to 'Редактировать', edit_lead_path(lead)
+                - if user_can_admin?
+                  li = link_to 'Удалить', lead, data: {:confirm => 'Вы уверены?'}, :method => :delete

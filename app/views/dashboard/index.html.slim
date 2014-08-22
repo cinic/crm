@@ -1,4 +1,23 @@
 - content_for :title, "Дашбоард"
 - content_for :page_title, "Дашбоард"
+- content_for :body_id, "dashboard"
+
+.menubar
+  .sidebar-toggler.visible-xs
+    i.ion-navicon
+  .page-title
+    | Дашбоард
+  .period-select.hidden-xs
+    form.input-daterange
+      .input-group.input-group-sm
+        span.input-group-addon
+          i.fa.fa-calendar-o
+        input.form-control.datepicker name="start" placeholder="02/27/2014" type="text"
+      p.pull-left to
+      .input-group.input-group-sm
+        span.input-group-addon
+          i.fa.fa-calendar-o
+        input.form-control.datepicker name="end" placeholder="02/27/2014" type="text"
+
 
 = link_to 'Позвонить по заявке владельца квартиры', landlord_wizard_without_lead_path, class: "btn-flat primary"

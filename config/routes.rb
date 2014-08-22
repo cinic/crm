@@ -5,10 +5,10 @@ Crm::Application.routes.draw do
   delete 'sessions', to: 'sessions#destroy'
   
   resources :users
-  resources :leads
   get 'leads/:id/edit_realtor', to: 'leads#edit_realtor', as: 'edit_realtor_lead'
   get 'leads/:id/new_landlord_lead', to: 'leads#new_landlord_lead', as: 'new_landlord_lead'
   get 'leads/:id/new_apartment_lead', to: 'leads#new_apartment_lead', as: 'new_apartment_lead'
+  resources :leads
   
   get 'landlords/wizard', to: 'landlords#new_without_lead', as: 'landlord_wizard_without_lead'
   post 'landlords/wizard', to: 'landlords#save_wizard_step_0'

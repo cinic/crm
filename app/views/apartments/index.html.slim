@@ -1,49 +1,50 @@
 - content_for :title, "Объекты"
-- content_for :page_title, "Список объектов"
+- content_for :page_title, "Объекты"
+- content_for :body_id, "datatables"
 
-.table-wrapper
-  table.table.table-hover
+.menubar
+  .sidebar-toggler.visible-xs
+    i.ion-navicon
+  .page-title
+    == yield(:page_title)
+.content-wrapper
+  table#orders-datatable
     thead
       tr
-        th.span2 ID
-        th.span3
-          span.line
-          |Адрес
-        th.span2
-          span.line
-          |Комнат
-        th.span3
-          span.line
-          |Площадь
-        th.span3
-          span.line
-          |Этаж
-        th.span3
-          span.line
-          |Цена
-        th.span3
-          span.line
-          |Депозит
-        th.span2
-          span.line
-          |Действия
-
+        th colspan="1" rowspan="1" tabindex="0" Статус
+        th colspan="1" rowspan="1" tabindex="0" Комнат
+        th colspan="1" rowspan="1" tabindex="0" Адрес
+        th colspan="1" rowspan="1" tabindex="0" Метро
+        th colspan="1" rowspan="1" tabindex="0" Этаж
+        th colspan="1" rowspan="1" tabindex="0" Площадь
+        th colspan="1" rowspan="1" tabindex="0" Наймодатель
+        th colspan="1" rowspan="1" tabindex="0" Цена
+        th colspan="1" rowspan="1" tabindex="0" Депозит
+    tfoot
+      tr
+        th colspan="1" rowspan="1"  Статус
+        th colspan="1" rowspan="1"  Комнат
+        th colspan="1" rowspan="1"  Адрес
+        th colspan="1" rowspan="1"  Метро
+        th colspan="1" rowspan="1"  Этаж
+        th colspan="1" rowspan="1"  Площадь
+        th colspan="1" rowspan="1"  Наймодатель
+        th colspan="1" rowspan="1"  Цена
+        th colspan="1" rowspan="1"  Депозит
     tbody
       - @apartments.each do |apartment|
         tr
-          td = link_to apartment.id, apartment
           td
-            address = apartment.address
-            p = "м. #{apartment.metro}"
+            span.label.label-success new
           td = apartment.rooms
-          td = apartment.apartment_size
+          td
+            address
+              = link_to apartment.address, apartment
+          td = apartment.metro
           td = "#{apartment.floor} из #{apartment.floors}"
+          td = apartment.apartment_size
+          td = apartment.landlord.name
           td = apartment.price
           td = apartment.deposit
-          td
-            ul.actions
-              li = link_to 'Посмотреть', apartment
-              li = link_to 'Редактировать', edit_apartment_path(apartment)
-              li = link_to 'Удалить', apartment, data: {:confirm => 'Вы уверены?'}, :method => :delete
 
 = link_to 'Создать объект', new_apartment_path, class: 'btn-flat primary'

@@ -1,33 +1,92 @@
 - content_for :title, "Наймодатели"
 - content_for :page_title, "Список наймодателей"
-.table-wrapper
-  table.table.table-hover
-    thead
-      tr
-        th.span2 ID
-        th.span3
-          span.line
-          |Имя Фамилия
-        th.span3
-          span.line
-          |Мобильный
-        th.span3
-          span.line
-          |Статус
-        th.span2
-          span.line
-          |Действия
-    tbody
-      - @landlords.each do |landlord|
-        tr
-          td = link_to landlord.id, landlord
-          td = link_to landlord.name, landlord
-          td = landlord.mobile
-          td
-          td
-            ul.actions
-              li = link_to 'Посмотреть', landlord
-              li = link_to 'Редактировать', edit_landlord_path(landlord)
-              li = link_to 'Удалить', landlord, data: {:confirm => 'Are you sure?'}, :method => :delete
+- content_for :body_id, "users"
 
-= link_to 'Создать наймодателя', new_landlord_path, class: "btn-flat primary"
+.menubar.fixed
+  .sidebar-toggler.visible-xs
+    i.ion-navicon
+  .page-title
+    | Наймодатели
+  form.search.hidden-xs
+    i.fa.fa-search
+    input name="q" placeholder="(Search customers), clients..." type="text"
+    input type="submit"
+  a.new-user.btn.btn-success.pull-right href=new_landlord_path 
+    span Новый наймодатель
+.content-wrapper
+  .row.page-controls
+    .col-md-12.filters
+      .links
+        label Filter users:
+        a href="#"  All users (243)
+        a.active href="#"  Active (3)
+        a href="#"  Suspended (8)
+        a href="#"  Prospects
+      .show-options
+        .dropdown
+          a.button data-toggle="dropdown" href="#" 
+            span
+              | Sort by
+              i.fa.fa-unsorted
+          ul.dropdown-menu aria-labelledby="dLabel" role="menu" 
+            li
+              a href="#"  Name
+            li
+              a href="#"  Signed up
+            li
+              a href="#"  Last seen
+            li
+              a href="#"  Browser
+            li
+              a href="#"  Country
+        a.grid-view.active data-grid=".users-list" href="#" 
+          i.fa.fa-th-list
+        a.grid-view data-grid=".users-grid" href="#" 
+          i.fa.fa-th
+
+  .row.users-list
+    .col-md-12
+      .row.headers
+        .col-sm-2.header.select-users
+          input type="checkbox"
+          .dropdown.bulk-actions
+            a data-toggle="dropdown" href="#" 
+              | Bulk actions
+              span.total-checked
+              i.fa.fa-chevron-down
+            ul.dropdown-menu aria-labelledby="dLabel" role="menu" 
+              li
+                a href="#"  Add tags
+              li
+                a href="#"  Delete users
+              li
+                a href="#"  Edit customers
+              li
+                a href="#"  Manage permissions
+        .col-sm-4.header.hidden-xs
+          label
+            a href="#"  Имя
+        .col-sm-2.header.hidden-xs
+          label
+            a href="#"  Мобильный
+        .col-sm-1.header.hidden-xs
+          label
+            a href="#"  Статус
+        .col-sm-3.header.hidden-xs
+          label.text-right
+            a href="#"  Зарегистрирован
+      - @landlords.each do |landlord|
+        .row.user
+          .col-sm-2.avatar
+            input name="select-user" type="checkbox"
+            = image_tag "avatars/2.jpg"
+          .col-sm-4
+            a.name href=landlord_path(landlord)  =landlord.name
+          .col-sm-2
+            .email =landlord.mobile
+          .col-sm-1
+            .total-spent
+              | new
+          .col-sm-3
+            .created-at
+              = landlord.created_at
