@@ -19,6 +19,7 @@ Crm::Application.routes.draw do
   get 'landlords/:id/wizard_step_3', to: 'landlords#wizard_step_3', as: 'landlord_wizard_step_3'
   patch 'landlords/:id/wizard_step_3', to: 'landlords#save_wizard_step_3'
   get 'landlords/:id/wizard_step_4', to: 'landlords#wizard_step_4', as: 'landlord_wizard_step_4'
+  patch 'landlords/:id/wizard_step_4', to: 'landlords#save_wizard_step_4'
   resources :landlords
   resources :tenants
   resources :deals

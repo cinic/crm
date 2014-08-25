@@ -11,11 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140820002425) do
+ActiveRecord::Schema.define(version: 20140825043046) do
 
   create_table "apartments", force: true do |t|
     t.string   "metro"
-    t.string   "address",                  null: false
+    t.string   "address",                                  null: false
     t.integer  "rooms"
     t.boolean  "only_room"
     t.boolean  "adjacent_rooms"
@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(version: 20140820002425) do
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
     t.string   "photo_need"
+    t.string   "status",                   default: "new"
   end
 
   add_index "apartments", ["landlord_id"], name: "index_apartments_on_landlord_id", using: :btree

@@ -1,7 +1,22 @@
-- content_for :title, "Новый опросник: предложения"
-- content_for :page_title, "Новый опросник: Информация для сделки"
-
-
-h3 Заключить агентский договор
-h3 Заключить договор сопровождения найма
-h3 заключить договор доверительного управления
+- content_for :title, "Опросник: назначить риелтора"
+- content_for :page_title, "Назначить риелтора"
+- content_for :body_id, "wizard"
+.content-wrapper
+  .header
+    .sidebar-toggler.visible-xs
+      i.ion-navicon
+    .steps.clearfix
+      .step.active
+        | О наймодателе
+        span
+      .step.active
+        | Об объекте
+        span
+      .step.active
+        | О сделке
+        span
+      .step.active
+        | Финиш
+        span
+  .form-wizard
+    == render 'form_wizard_4'

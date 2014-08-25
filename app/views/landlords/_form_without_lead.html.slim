@@ -1,25 +1,31 @@
-= form_for @landlord, url: landlord_wizard_without_lead_path do |f|
+= form_for @landlord, url: landlord_wizard_without_lead_path, html: { class: 'form-horizontal' } do |f|
   - if @landlord.errors.any?
     #error_explanation
       h2 = "#{pluralize(@landlord.errors.count, "error")} prohibited this apartment from being saved:"
       ul
         - @landlord.errors.full_messages.each do |message|
           li = message
-  .form-row
-    = f.label :name, 'ФИО'
-    = f.text_field :name, placeholder: 'Иванов Иван Иванович'
+  .form-group
+    = f.label :name, 'ФИО', class: 'col-sm-2 col-md-2 control-label'
+    .col-sm-10.col-md-8
+      = f.text_field :name, placeholder: 'Иванов Иван Иванович', class: 'form-control'
+  .form-group
+    = f.label :mobile, 'Мобильный', class: 'col-sm-2 col-md-2 control-label'
+    .col-sm-10.col-md-8
+      = f.text_field :mobile, placeholder: '+7 (911) 300-40-50', class: 'form-control'
+  .form-group
+    = f.label :alternate_phone, 'Альтернативный телефон', class: 'col-sm-2 col-md-2 control-label'
+    .col-sm-10.col-md-8
+      = f.text_field :alternate_phone, placeholder: '+7 (495) 240-00-00', class: 'form-control'
+  .form-group
+    = f.label :email, 'Email', class: 'col-sm-2 col-md-2 control-label'
+    .col-sm-10.col-md-8
+      = f.email_field :email, placeholder: 'example@mail.ru', class: 'form-control'
+  .form-group
+    = f.label :object_relation, 'Отношение к объекту', class: 'col-sm-2 col-md-2 control-label'
+    .col-sm-10.col-md-8
+      = f.select(:object_relation, ['Единственный собственник','Собственник, в долевой собственности','Представитель собственника'], { }, { class: 'form-control', "data-smart-select" => "" })
 
-  .form-row
-    = f.label :mobile, 'Мобильный'
-    = f.text_field :mobile, placeholder: '+7 (911) 300-40-50'
-  .form-row
-    = f.label :alternate_phone, 'Альтернативный телефон'
-    = f.text_field :alternate_phone, placeholder: '+7 (495) 240-00-00'
-  .form-row
-    = f.label :email, 'Email'
-    = f.email_field :email, placeholder: 'example@mail.ru'
-  .form-row
-    = f.label :object_relation, 'Отношение к объекту'
-    = f.select(:object_relation, ['Единственный собственник','Собственник, в долевой собственности','Представитель собственника'])
-
-  .actions = f.submit 'Далее', class: 'btn-flat success'
+  .form-group.form-actions
+    .col-sm-offset-2.col-sm-10
+      = f.submit 'Далее', class: 'btn btn-success'

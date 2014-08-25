@@ -1,4 +1,4 @@
-= form_for @apartment, url: landlord_wizard_step_2_path do |a|
+= form_for @apartment, url: landlord_wizard_step_2_path, html: { class: 'form-horizontal' } do |a|
   - if @apartment.errors.any?
     #error_explanation
       h2 = "#{pluralize(@apartment.errors.count, "error")} prohibited this apartment from being saved:"
@@ -6,147 +6,198 @@
         - @apartment.errors.full_messages.each do |message|
           li = message
 
-  .form-row
+  .form-group
     = a.label :rooms, "Количество комнат"
-    = a.select(:rooms, ['1','2','3','4','5','6+'])
-  .form-row.form-inline
-    span.checkbox = a.check_box :adjacent_rooms
-    = a.label :adjacent_rooms, "Комнаты смежные?"
-  .form-row
+    = a.select(:rooms, ['1','2','3','4','5','6+'], { }, { class: 'form-control', "data-smart-select" => "" })
+  .form-group
+    .checkbox
+      = a.label :adjacent_rooms do
+        = a.check_box :adjacent_rooms
+        | Комнаты смежные?
+  .form-group
     = a.label :made_from, "Тип дома"
-    = a.select(:made_from, ['Панель','Кирпич','Монолит'])
-  .form-row.form-inline
-    span.checkbox = a.check_box :bathroom_with_toilet
-    = a.label :bathroom_with_toilet, "Санузел совмещён?"
-  .form-row.form-inline
-    span.checkbox = a.check_box :tile_in_toilet
-    = a.label :tile_in_toilet, "Санузел в плитке?"
-  .form-row.form-inline
-    span.checkbox = a.check_box :dressing_room
-    = a.label :dressing_room, "Гардеробная комната?"
-  .form-row
+    = a.select(:made_from, ['Панель','Кирпич','Монолит'], { }, { class: 'form-control', "data-smart-select" => "" })
+  .form-group
+    .checkbox
+      = a.label :bathroom_with_toilet do
+        = a.check_box :bathroom_with_toilet
+        | Санузел совмещён?
+  .form-group
+    .checkbox
+      = a.label :tile_in_toilet do
+        = a.check_box :tile_in_toilet
+        | Санузел в плитке?
+  .form-group
+    .checkbox
+      = a.label :dressing_room do
+        = a.check_box :dressing_room
+        | Гардеробная комната?
+  .form-group
     = a.label :apartment_size, "Площадь квартиры, м.кв."
-    = a.text_field :apartment_size
-  .form-row
+    = a.text_field :apartment_size, class: 'form-control'
+  .form-group
     = a.label :kitchen_size, "Площадь кухни, м.кв."
-    = a.text_field :kitchen_size
-  .form-row
+    = a.text_field :kitchen_size, class: 'form-control'
+  .form-group
     = a.label :rooms_size, "Площадь комнат, м.кв."
-    = a.text_field :rooms_size, placeholder: '20, 18, 6'
-  .form-row
+    = a.text_field :rooms_size, placeholder: '20, 18, 6', class: 'form-control'
+  .form-group
     = a.label :living_area_size, "Площадь жилая, м.кв."
-    = a.text_field :living_area_size
-  .form-row
+    = a.text_field :living_area_size, class: 'form-control'
+  .form-group
     = a.label :address, "Адрес"
-    = a.text_field :address, placeholder: 'Город, Улица, Номер дома'
-  .form-row
+    = a.text_field :address, placeholder: 'Город, Улица, Номер дома', class: 'form-control'
+  .form-group
     = a.label :metro, "Ближайшее метро"
-    = a.text_field :metro
-  .form-row
+    = a.text_field :metro, class: 'form-control'
+  .form-group
     = a.label :time_to_metro, "До метро"
-    = a.text_field :time_to_metro
+    = a.text_field :time_to_metro, class: 'form-control'
     |&nbsp;
-    = a.select( :transport_to_metro, [['Пешком', 'walk'], ['На машине', 'car'], ['Наземным городским транспортом', 'urban_transport'], ['На маршрутке', 'taxi_bus'], ['Пригородным транспортом', 'suburban_transport']] )
-  .form-row
+    = a.select( :transport_to_metro, [['Пешком', 'walk'], ['На машине', 'car'], ['Наземным городским транспортом', 'urban_transport'], ['На маршрутке', 'taxi_bus'], ['Пригородным транспортом', 'suburban_transport']], { }, { class: 'form-control', "data-smart-select" => "" } )
+  .form-group
     = a.label :repairing, "Состояние квартиры"
-    = a.select(:repairing, ['Обычный ремонт', 'Требует ремонта', 'Косметический ремонт', 'Евроремонт', 'Под евро'])
-  .form-row
+    = a.select(:repairing, ['Обычный ремонт', 'Требует ремонта', 'Косметический ремонт', 'Евроремонт', 'Под евро'], { }, { class: 'form-control', "data-smart-select" => "" })
+  .form-group
     = a.label :balcony, "Есть ли балкон?"
-    = a.select(:balcony, ['Нет', 'Есть открытый', 'Есть застеклённый', 'Лоджия'])
-  .form-row
+    = a.select(:balcony, ['Нет', 'Есть открытый', 'Есть застеклённый', 'Лоджия'], { }, { class: 'form-control', "data-smart-select" => "" })
+  .form-group
     = a.label :floor, "Этаж квартиры?"
-    = a.text_field :floor  
-  .form-row
+    = a.text_field :floor, class: 'form-control'
+  .form-group
     = a.label :floors, "Всего этажей в доме?"
-    = a.text_field :floors
-  .form-row.form-inline
-    span.checkbox = a.check_box :rent_before
-    = a.label :rent_before, "Ранее сдавали квартиру?"
+    = a.text_field :floors, class: 'form-control'
+  .form-group
+    .checkbox
+      = a.label :rent_before do
+        = a.check_box :rent_before
+        | Ранее сдавали квартиру?
   
-  .form-row.form-inline
-    span.checkbox = a.check_box :tv
-    = a.label :tv, "Телевизор"
-  .form-row.form-inline
-    span.checkbox = a.check_box :washer
-    = a.label :washer, "Стиральная машина"
-  .form-row.form-inline
-    span.checkbox = a.check_box :dishwasher
-    = a.label :dishwasher, "Посудомоечная машина"
-  .form-row
+  .form-group
+    .checkbox
+      = a.label :tv do
+        = a.check_box :tv
+        | Телевизор
+  .form-group
+    .checkbox
+      = a.label :washer do
+        = a.check_box :washer
+        | Стиральная машина
+  .form-group
+    .checkbox
+      = a.label :dishwasher do
+        = a.check_box :dishwasher
+        | Посудомоечная машина
+  .form-group
     = a.label :stove, "Плита?"
-    = a.select(:stove, ['Газовая', 'Электрическая'])
-  .form-row.form-inline
-    span.checkbox = a.check_box :fridge
-    = a.label :fridge, "Холодильник"
-  .form-row.form-inline
-    span.checkbox = a.check_box :conditioner
-    = a.label :conditioner, "Кондиционер"
+    = a.select(:stove, ['Газовая', 'Электрическая'], { }, { class: 'form-control', "data-smart-select" => "" })
+  .form-group
+    .checkbox
+      = a.label :fridge do
+        = a.check_box :fridge
+        | Холодильник
+  .form-group
+    .checkbox
+      = a.label :conditioner do
+        = a.check_box :conditioner
+        | Кондиционер
 
-  .form-row
+  .form-group
     = a.label :internet, "Интернет?"
-    = a.select(:internet, ['Нет', 'Проведен проводной, нужно заключить договор', 'Проведен проводной, работает', 'Вай фай есть, заключайте договор', 'Вай фай работает'])
-  .form-row.form-inline
-    span.checkbox = a.check_box :phone
-    = a.label :phone, "Линия МГТС / Городская?"
-  .form-row.form-inline
-    span.checkbox = a.check_box :water_meters
-    = a.label :water_meters, "Счётчики воды?"
-  .form-row
+    = a.select(:internet, ['Нет', 'Проведен проводной, нужно заключить договор', 'Проведен проводной, работает', 'Вай фай есть, заключайте договор', 'Вай фай работает'], { }, { class: 'form-control', "data-smart-select" => "" })
+  .form-group
+    .checkbox
+      = a.label :phone do
+        = a.check_box :phone
+        | Линия МГТС / Городская?
+  .form-group
+    .checkbox
+      = a.label :water_meters do
+        = a.check_box :water_meters
+        | Счётчики воды?
+  .form-group
     = a.label :registered_people, "Сколько людей зарегистрировано в квартире?"
-    = a.select(:registered_people, ['1', '2', '3', '4', '5', '6'])
-  .form-row.form-inline
-    span.checkbox = a.check_box :registered_infants
-    = a.label :registered_infants, "Несовершеннолетние зарегистрированы?"
+    = a.select(:registered_people, ['1', '2', '3', '4', '5', '6'], { }, { class: 'form-control', "data-smart-select" => "" })
+  .form-group
+    .checkbox
+      = a.label :registered_infants do
+        = a.check_box :registered_infants
+        | Несовершеннолетние зарегистрированы?
 
-  .form-row
+  .form-group
     = a.label :kitchen_furnished, "Мебель на кухне"
-    = a.select(:kitchen_furnished, ['Кухонный гарнитур', 'Кухонная наборная', 'Нет'])
+    = a.select(:kitchen_furnished, ['Кухонный гарнитур', 'Кухонная наборная', 'Нет'], { }, { class: 'form-control', "data-smart-select" => "" })
     
   h3  Мебель в комнатах
-  .form-row.form-inline
-    span.checkbox = a.check_box :bed_2
-    = a.label :bed_2, "Кровать двухспальная"
-  .form-row.form-inline
-    span.checkbox = a.check_box :bed_1
-    = a.label :bed_1, "Кровать односпальная"
-  .form-row.form-inline
-    span.checkbox = a.check_box :bed_0
-    = a.label :bed_0, "Кровать детская"
-  .form-row.form-inline
-    span.checkbox = a.check_box :sliding_wardrobe
-    = a.label :sliding_wardrobe, "Шкаф-купе"
-  .form-row.form-inline
-    span.checkbox = a.check_box :wardrobe
-    = a.label :wardrobe, "Наборные шкафы"
-  .form-row.form-inline
-    span.checkbox = a.check_box :chest
-    = a.label :chest, "Комод"
-  .form-row.form-inline
-    span.checkbox = a.check_box :sofa
-    = a.label :sofa, "Диван"
+  .form-group
+    .checkbox
+      = a.label :bed_2 do
+        = a.check_box :bed_2
+        | Кровать двухспальная
+  .form-group
+    .checkbox
+      = a.label :bed_1 do
+        = a.check_box :bed_1
+        | Кровать односпальная
+  .form-group
+    .checkbox
+      = a.label :bed_0 do
+        = a.check_box :bed_0
+        | Кровать детская
+  .form-group
+    .checkbox
+      = a.label :sliding_wardrobe do
+        = a.check_box :sliding_wardrobe
+        | Шкаф-купе
+  .form-group
+    .checkbox
+      = a.label :wardrobe do
+        = a.check_box :wardrobe
+        | Наборные шкафы
+  .form-group
+    .checkbox
+      = a.label :chest do
+        = a.check_box :chest
+        | Комод
+  .form-group
+    .checkbox
+      = a.label :sofa do
+        = a.check_box :sofa
+        | Диван
   
-  .form-row
+  .form-group
     = a.label :photo_need, "Прислать фотографии?"
-    = a.select(:photo_need, ['Нет', 'Отправить адрес в смс', 'Отправить тестовое письмо на почту'])
-  .form-row
+    = a.select(:photo_need, ['Нет', 'Отправить адрес в смс', 'Отправить тестовое письмо на почту'], { }, { class: 'form-control', "data-smart-select" => "" })
+  .form-group
     = a.label :photo_when, "Когда сможем сделать фото?"
-    = a.text_field :photo_when
+    = a.text_field :photo_when, class: 'form-control'
 
   h3 Какая инфраструктура есть поблизости?
-  .form-row.form-inline
-    span.checkbox = a.check_box :near_supermarket
-    = a.label :near_supermarket, "Крупные продуктовые магазины"
-  .form-row.form-inline
-    span.checkbox = a.check_box :near_park
-    = a.label :near_park, "Парки"
-  .form-row.form-inline
-    span.checkbox = a.check_box :near_school
-    = a.label :near_school, "Школа"
-  .form-row.form-inline
-    span.checkbox = a.check_box :near_hospital
-    = a.label :near_hospital, "Поликлиника"
-  .form-row.form-inline
-    span.checkbox = a.check_box :near_kindergarten
-    = a.label :near_kindergarten, "Детский сад"
+  .form-group
+    .checkbox
+      = a.label :near_supermarket do
+        = a.check_box :near_supermarket
+        | Крупные продуктовые магазины
+  .form-group
+    .checkbox
+      = a.label :near_park do
+        = a.check_box :near_park
+        | Парки
+  .form-group
+    .checkbox
+      = a.label :near_school do
+        = a.check_box :near_school
+        | Школа
+  .form-group
+    .checkbox
+      = a.label :near_hospital do
+        = a.check_box :near_hospital
+        | Поликлиника
+      
+  .form-group
+    .checkbox
+      = a.label :near_kindergarten do
+        = a.check_box :near_kindergarten
+        | Детский сад
 
-  .actions = a.submit 'Далее', class: 'btn-flat success'
+  .form-actions = a.submit 'Далее', class: 'btn btn-success'

@@ -1,4 +1,22 @@
-- content_for :title, "Новый опросник: шаг 3"
-- content_for :page_title, "Новый опросник: Информация для сделки"
-
-== render 'form_wizard_3'
+- content_for :title, "Опросник: шаг 3"
+- content_for :page_title, "О сделке"
+= content_for :body_id, "wizard"
+.content-wrapper
+  .header
+    .sidebar-toggler.visible-xs
+      i.ion-navicon
+    .steps.clearfix
+      .step.active
+        | О наймодателе
+        span
+      .step.active
+        | Об объекте
+        span
+      .step.active
+        | О сделке
+        span
+      .step
+        | Финиш
+        span
+  .form-wizard
+    == render 'form_wizard_3'
