@@ -1,10 +1,10 @@
 @font-face {
 	font-family: 'entypo';
-	src:url('entypo.eot');
-	src:url('entypo.eot?#iefix') format('embedded-opentype'),
-		url('entypo.ttf') format('truetype'),
-		url('entypo.woff') format('woff'),
-		url('entypo.svg#entypo') format('svg');
+	src: font-url('entypo.eot');
+	src: font-url('entypo.eot?#iefix') format('embedded-opentype'),
+		font-url('entypo.ttf') format('truetype'),
+		font-url('entypo.woff') format('woff'),
+		font-url('entypo.svg#entypo') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
