@@ -152,6 +152,8 @@
         .value = "#{@apartment.price} руб."
         | Стоимость
     #map.map
+    #photos.photos
+      = @apartment.assets.last
 
 javascript:
   ymaps.ready( mapInit );

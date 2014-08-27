@@ -39,6 +39,8 @@
             span.label.label-warning = apartment.status if apartment.status == "advertised"
             span.label.label-succes = apartment.status if apartment.status == "rented"
             span.label.label-default = apartment.status if apartment.status == "lost"
+            br
+            = link_to 'Удалить', apartment, data: {:confirm => 'Вы уверены?'}, :method => :delete
           td = apartment.rooms
           td
             address
