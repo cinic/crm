@@ -18,4 +18,5 @@
  *= require ../../../vendor/assets/stylesheets/messenger/messenger-theme-flat
  *= require_tree ../../../vendor/assets/stylesheets/.
  *= require theme
+ *= require jquery.fileupload-ui
  */

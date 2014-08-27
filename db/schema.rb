@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140825043046) do
+ActiveRecord::Schema.define(version: 20140827092219) do
 
   create_table "apartments", force: true do |t|
     t.string   "metro"
@@ -85,6 +85,18 @@ ActiveRecord::Schema.define(version: 20140825043046) do
 
   add_index "apartments", ["landlord_id"], name: "index_apartments_on_landlord_id", using: :btree
   add_index "apartments", ["user_id"], name: "index_apartments_on_user_id", using: :btree
+
+  create_table "assets", force: true do |t|
+    t.integer  "apartment_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+  end
+
+  add_index "assets", ["apartment_id"], name: "index_assets_on_apartment_id", using: :btree
 
   create_table "clients", force: true do |t|
     t.string   "name",                       null: false

@@ -16,10 +16,12 @@ class ApartmentsController < ApplicationController
   # GET /apartments/new
   def new
     @apartment = Apartment.new
+    8.times { @apartment.assets.build }
   end
 
   # GET /apartments/1/edit
   def edit
+    8.times { @apartment.assets.build }
   end
 
   # POST /apartments

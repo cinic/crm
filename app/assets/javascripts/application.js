@@ -22,6 +22,7 @@
 //= require ../../../vendor/assets/javascripts/messenger/messenger-theme-flat
 //= require ../../../vendor/assets/javascripts/moment.min
 //= require_directory ../../../vendor/assets/javascripts/.
+//= require jquery-fileupload
 
 //= require theme
 //= require_directory ./pages/.

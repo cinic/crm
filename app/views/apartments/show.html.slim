@@ -1,10 +1,185 @@
-- content_for :title, "Объект #{@apartment.id}"
-- content_for :page_title, "Объект #{@apartment.id}"
-p#notice = notice
+- content_for :title, "Объект ID: #{@apartment.id}"
+- content_for :page_title, "Объект ID: #{@apartment.id}"
+- content_for :body_id, "user-profile"
 
-= image_tag @apartment.photo.url(:large)
-br
+/p#notice = notice
+.menubar
+  .sidebar-toggler.visible-xs
+    i.ion-navicon
+  .page-title
+    = yield(:page_title)
+    small.hidden-xs style="font-weight:600;" = "#{@apartment.address}"
+  = link_to 'Редактировать', edit_apartment_path(@apartment), class: "pull-right btn btn-primary"
+.content-wrapper.clearfix
+  .profile-content
+    .tabs
+      ul
+        li
+          a.active href="#" Общая информация
+        li
+          a href="#" Реклама объекта
+    .tab-content
+      .tab.active.notes
+        .row
+          .col-sm-3.col-md-3 Кол-во комнат:
+          .col-sm-9.col-md-7 = @apartment.rooms
+        .row
+          .col-sm-3.col-md-3 Этаж:
+          .col-sm-9.col-md-7 = "#{@apartment.floor} из #{@apartment.floors}"
+        .row 
+          .col-sm-3.col-md-3 Адрес:
+          .col-sm-9.col-md-7 = @apartment.address
+        .row 
+          .col-sm-3.col-md-3 Метро:
+          .col-sm-9.col-md-7 = @apartment.metro
+        .row 
+          .col-sm-3.col-md-3 До метро:
+          .col-sm-9.col-md-7 = "#{@apartment.time_to_metro} #{@apartment.transport_to_metro}"
+        .row
+          .col-sm-3.col-md-3 Собственник:
+          .col-sm-9.col-md-7 = @apartment.landlord.name
+        .row
+          .col-sm-3.col-md-3 Риелтор:
+          .col-sm-9.col-md-7 = @apartment.user.name unless @apartment.user.nil?
+        h3 Параметры объекта
+        .row
+          .col-sm-3.col-md-3 Комнаты смежные:
+          .col-sm-9.col-md-7 = ( @apartment.adjacent_rooms ? "Да" : "Нет" )
+        .row
+          .col-sm-3.col-md-3 Тип дома:
+          .col-sm-9.col-md-7 = @apartment.made_from
+        .row
+          .col-sm-3.col-md-3 Санузел совмещён:
+          .col-sm-9.col-md-7 = @apartment.bathroom_with_toilet ? "Да" : "Нет"
+        .row
+          .col-sm-3.col-md-3 Санузел в плитке:
+          .col-sm-9.col-md-7 = @apartment.tile_in_toilet ? "Да" : "Нет"
+        .row
+          .col-sm-3.col-md-3 Гардеробная комната:
+          .col-sm-9.col-md-7 = @apartment.dressing_room ? "Да" : "Нет"
+        .row
+          .col-sm-3.col-md-3 Площадь квартиры:
+          .col-sm-9.col-md-7 = @apartment.apartment_size
+        .row
+          .col-sm-3.col-md-3 Площадь кухни:
+          .col-sm-9.col-md-7 = @apartment.kitchen_size
+        .row
+          .col-sm-3.col-md-3 Площадь комнат:
+          .col-sm-9.col-md-7 = @apartment.rooms_size
+        .row
+          .col-sm-3.col-md-3 Площадь жилая:
+          .col-sm-9.col-md-7 = @apartment.living_area_size
+        .row
+          .col-sm-3.col-md-3 Состояние квартиры:
+          .col-sm-9.col-md-7 = @apartment.repairing
+        .row
+          .col-sm-3.col-md-3 Балкон:
+          .col-sm-9.col-md-7 = @apartment.balcony
+        .row
+          .col-sm-3.col-md-3 Ранее сдавали:
+          .col-sm-9.col-md-7 = @apartment.rent_before ? "Да" : "Нет"
+        h3 Мебель и техника
+        .row
+          .col-sm-3.col-md-3 Телевизор:
+          .col-sm-9.col-md-7 = @apartment.tv ? "Да" : "Нет"
+        .row
+          .col-sm-3.col-md-3 Стиральная машина:
+          .col-sm-9.col-md-7 = @apartment.washer ? "Да" : "Нет"
+        .row
+          .col-sm-3.col-md-3 Посудомоечная машина:
+          .col-sm-9.col-md-7 = @apartment.dishwasher ? "Да" : "Нет"
+        .row
+          .col-sm-3.col-md-3 Плита:
+          .col-sm-9.col-md-7 = @apartment.stove
+        .row
+          .col-sm-3.col-md-3 Холодильник:
+          .col-sm-9.col-md-7 = @apartment.fridge ? "Да" : "Нет"
+        .row
+          .col-sm-3.col-md-3 Кондиционер:
+          .col-sm-9.col-md-7 = @apartment.conditioner ? "Да" : "Нет"
+        .row
+          .col-sm-3.col-md-3 Интернет:
+          .col-sm-9.col-md-7 = @apartment.internet
+        .row
+          .col-sm-3.col-md-3 Телефон:
+          .col-sm-9.col-md-7 = @apartment.phone ? "Да" : "Нет"
+        .row
+          .col-sm-3.col-md-3 Счётчики:
+          .col-sm-9.col-md-7 = @apartment.water_meters ? "Да" : "Нет"
+        .row
+          .col-sm-3.col-md-3 Мебель на кухне:
+          .col-sm-9.col-md-7 = @apartment.kitchen_furnished
+        h3  Мебель в комнатах
+        
+        .row
+          .col-sm-12.col-md-10
+            - if @apartment.bed_2
+              | Кровать двухспальная, &nbsp;
+            - if @apartment.bed_1
+              | Кровать односпальная, &nbsp;
+            - if @apartment.bed_0
+              | Кровать детская, &nbsp;
+            - if @apartment.sliding_wardrobe
+              | Шкаф-купе, &nbsp;
+            - if @apartment.wardrobe
+              | Наборные шкафы, &nbsp;
+            - if @apartment.chest
+              | Комод, &nbsp;
+            - if @apartment.sofa
+              | Диван, &nbsp;
+        h3  Инфраструктура поблизости
+        .row
+          .col-sm-12.col-md-10
+            - if @apartment.near_supermarket
+              | Крупные продуктовые магазины, &nbsp;
+            - if @apartment.near_park
+              | Парки, &nbsp;
+            - if @apartment.near_school
+              | Школа, &nbsp;
+            - if @apartment.near_hospital
+              | Поликлинника, &nbsp;
+            - if @apartment.near_kindergarten
+              | Детский сад, &nbsp;
 
-= link_to 'Edit', edit_apartment_path(@apartment)
-'|
-= link_to 'Back', apartments_path
+      
+  .profile-info
+    .main-details.clearfix
+      .col
+        .value
+          .label.label-info = "#{@apartment.status}"
+        | Статус
+      .col
+        .value = "#{@apartment.price} руб."
+        | Стоимость
+    #map.map
+
+javascript:
+  ymaps.ready( mapInit );
+  var myMap, myGeoObject;
+
+  function mapInit() {
+    var myGeocoder = ymaps.geocode( "#{@apartment.address}" );
+    myGeocoder.then( function (res) {
+      var coords = res.geoObjects.get(0).geometry.getCoordinates();
+      console.log(coords);
+      myMap = new ymaps.Map("map", {
+        center: coords,
+        zoom: 16,
+        controls: []
+      });
+      myGeoObject = new ymaps.GeoObject({
+        geometry: {
+          type: "Point",// тип геометрии - точка
+          coordinates: coords // координаты точки
+        }
+      });
+
+      myMap.geoObjects.add(myGeoObject);
+    });
+  }
+
+  
+
+/= link_to 'Edit', edit_apartment_path(@apartment)
+/'|
+/= link_to 'Back', apartments_path

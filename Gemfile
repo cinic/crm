@@ -27,6 +27,7 @@ gem 'turbolinks'
 
 #For imageuploads
 gem "paperclip", "~> 4.1"
+gem "jquery-fileupload-rails"
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'

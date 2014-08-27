@@ -2,11 +2,11 @@
 
 @include keyFrame(showProfileInfo) {
 	0% {
-		right: -23%;
+		left: -23%;
 	}
 
 	100% {
-		right: 0;
+		left: 0;
 	}
 }
 
