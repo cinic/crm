@@ -16,12 +16,10 @@ class ApartmentsController < ApplicationController
   # GET /apartments/new
   def new
     @apartment = Apartment.new
-    8.times { @apartment.assets.build }
   end
 
   # GET /apartments/1/edit
   def edit
-    8.times { @apartment.assets.build }
   end
 
   # POST /apartments
@@ -43,6 +41,7 @@ class ApartmentsController < ApplicationController
   # PATCH/PUT /apartments/1
   # PATCH/PUT /apartments/1.json
   def update
+
     respond_to do |format|
       if @apartment.update(apartment_params)
         format.html { redirect_to @apartment, notice: 'Apartment was successfully updated.' }
@@ -68,6 +67,7 @@ class ApartmentsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_apartment
       @apartment = Apartment.find(params[:id])
+      @apartment.assets.build if %w[new edit show].include?(action_name) 
     end
 
     def set_landlords
@@ -78,4 +78,5 @@ class ApartmentsController < ApplicationController
     def apartment_params
       params.require(:apartment).permit!
     end
+
 end

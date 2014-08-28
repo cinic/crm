@@ -7,8 +7,22 @@
           li = message
 
   .form-group
+    = a.label :address, "Адрес"
+    = a.text_field :address, placeholder: 'Город, Улица, Номер дома', class: 'form-control'
+  .form-group
     = a.label :rooms, "Количество комнат"
     = a.select(:rooms, ['1','2','3','4','5','6+'], { }, { class: 'form-control', "data-smart-select" => "" })
+  .form-group
+    = a.label :metro, "Ближайшее метро"
+    = a.text_field :metro, class: 'form-control'
+  .form-group.metro
+    .row.col-md-12
+      = a.label :time_to_metro, "До метро"
+    .row
+      .col-md-2
+        = a.text_field :time_to_metro, class: 'form-control'
+      .col-md-8
+        = a.select( :transport_to_metro, [['Пешком', 'walk'], ['На машине', 'car'], ['Наземным городским транспортом', 'urban_transport'], ['На маршрутке', 'taxi_bus'], ['Пригородным транспортом', 'suburban_transport']], { }, { class: 'form-control', "data-smart-select" => "" } )
   .form-group
     .checkbox
       = a.label :adjacent_rooms do
@@ -44,17 +58,6 @@
   .form-group
     = a.label :living_area_size, "Площадь жилая, м.кв."
     = a.text_field :living_area_size, class: 'form-control'
-  .form-group
-    = a.label :address, "Адрес"
-    = a.text_field :address, placeholder: 'Город, Улица, Номер дома', class: 'form-control'
-  .form-group
-    = a.label :metro, "Ближайшее метро"
-    = a.text_field :metro, class: 'form-control'
-  .form-group
-    = a.label :time_to_metro, "До метро"
-    = a.text_field :time_to_metro, class: 'form-control'
-    |&nbsp;
-    = a.select( :transport_to_metro, [['Пешком', 'walk'], ['На машине', 'car'], ['Наземным городским транспортом', 'urban_transport'], ['На маршрутке', 'taxi_bus'], ['Пригородным транспортом', 'suburban_transport']], { }, { class: 'form-control', "data-smart-select" => "" } )
   .form-group
     = a.label :repairing, "Состояние квартиры"
     = a.select(:repairing, ['Обычный ремонт', 'Требует ремонта', 'Косметический ремонт', 'Евроремонт', 'Под евро'], { }, { class: 'form-control', "data-smart-select" => "" })
@@ -128,7 +131,7 @@
     = a.label :kitchen_furnished, "Мебель на кухне"
     = a.select(:kitchen_furnished, ['Кухонный гарнитур', 'Кухонная наборная', 'Нет'], { }, { class: 'form-control', "data-smart-select" => "" })
     
-  h3  Мебель в комнатах
+  h3.row Мебель в комнатах
   .form-group
     .checkbox
       = a.label :bed_2 do
@@ -165,14 +168,14 @@
         = a.check_box :sofa
         | Диван
   
-  .form-group
+  /.form-group
     = a.label :photo_need, "Прислать фотографии?"
     = a.select(:photo_need, ['Нет', 'Отправить адрес в смс', 'Отправить тестовое письмо на почту'], { }, { class: 'form-control', "data-smart-select" => "" })
-  .form-group
+  /.form-group
     = a.label :photo_when, "Когда сможем сделать фото?"
     = a.text_field :photo_when, class: 'form-control'
 
-  h3 Какая инфраструктура есть поблизости?
+  h3.row Какая инфраструктура есть поблизости?
   .form-group
     .checkbox
       = a.label :near_supermarket do

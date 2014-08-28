@@ -18,31 +18,27 @@
           i.ion-android-earth
           span Дашбоард
       li.option
-        a data-toggle="sidebar" href="#" 
-          i.ion-person-stalker
-          span Лиды и Клиенты
-          i.fa.fa-chevron-down
-        ul.submenu
-          li
-            a href=leads_path  Заявки
-          li
-            a href=landlords_path  Наймодатели
-          li
-            a href=tenants_path  Наниматели
-          li
-            a href=apartments_path  Объекты
-          li
-            a href=deals_path  Сделки
+        a href=leads_path 
+          i.ion-document
+          span Заявки
       li.option
-        a data-toggle="sidebar" href="#" 
-          i.ion-stats-bars
-          span Отчёты
-          i.fa.fa-chevron-down
-        ul.submenu
-          li
-            a href="#"  Объекты
-          li
-            a href="#"  Сделки
+        a href=landlords_path 
+          i.ion-ios7-people
+          span Наймодатели
+      li.option
+        a href=tenants_path 
+          /i.ion-person-stalker
+          i.ion-ios7-people-outline
+          span Наниматели
+      li.option
+        a href=apartments_path 
+          i.ion-location
+          span Объекты
+      li.option
+        a href=deals_path 
+          i.ion-compose
+          span Сделки
+
   - if user_can_admin?
     .menu-section
       h3 Admin

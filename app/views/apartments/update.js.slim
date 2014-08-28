@@ -1,0 +1,4 @@
+- if @apartment.assets.last.new_record?
+  alert("Failed to upload painting: #{j @apartment.errors.full_messages.join(', ').html_safe} ");
+- else
+  $("#photos").append("#{j render(@apartment)}");

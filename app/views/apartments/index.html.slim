@@ -2,11 +2,13 @@
 - content_for :page_title, "Объекты"
 - content_for :body_id, "datatables"
 
-.menubar
+.menubar.fixed
   .sidebar-toggler.visible-xs
     i.ion-navicon
   .page-title
-    == yield(:page_title)
+    = yield(:page_title)
+  a.new-user.btn.btn-success.pull-right href=new_apartment_path 
+    span Новый объект
 .content-wrapper
   table#orders-datatable
     thead
@@ -17,7 +19,6 @@
         th colspan="1" rowspan="1" tabindex="0" Метро
         th colspan="1" rowspan="1" tabindex="0" Этаж
         th colspan="1" rowspan="1" tabindex="0" Площадь
-        th colspan="1" rowspan="1" tabindex="0" Наймодатель
         th colspan="1" rowspan="1" tabindex="0" Цена
         th colspan="1" rowspan="1" tabindex="0" Депозит
     tfoot
@@ -28,7 +29,6 @@
         th colspan="1" rowspan="1"  Метро
         th colspan="1" rowspan="1"  Этаж
         th colspan="1" rowspan="1"  Площадь
-        th colspan="1" rowspan="1"  Наймодатель
         th colspan="1" rowspan="1"  Цена
         th colspan="1" rowspan="1"  Депозит
     tbody
@@ -48,8 +48,5 @@
           td = apartment.metro
           td = "#{apartment.floor} из #{apartment.floors}"
           td = apartment.apartment_size
-          td = apartment.landlord.name
           td = apartment.price
           td = apartment.deposit
-
-= link_to 'Создать объект', new_apartment_path, class: 'btn-flat primary'

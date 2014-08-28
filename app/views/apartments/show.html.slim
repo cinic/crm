@@ -15,32 +15,14 @@
     .tabs
       ul
         li
-          a.active href="#" Общая информация
+          a.active href="#about-apartment" Общая информация
         li
-          a href="#" Реклама объекта
+          a href="#advertising" Реклама объекта
+        li
+          a href="#photos-apartment" Фотографии
     .tab-content
-      .tab.active.notes
-        .row
-          .col-sm-3.col-md-3 Кол-во комнат:
-          .col-sm-9.col-md-7 = @apartment.rooms
-        .row
-          .col-sm-3.col-md-3 Этаж:
-          .col-sm-9.col-md-7 = "#{@apartment.floor} из #{@apartment.floors}"
-        .row 
-          .col-sm-3.col-md-3 Адрес:
-          .col-sm-9.col-md-7 = @apartment.address
-        .row 
-          .col-sm-3.col-md-3 Метро:
-          .col-sm-9.col-md-7 = @apartment.metro
-        .row 
-          .col-sm-3.col-md-3 До метро:
-          .col-sm-9.col-md-7 = "#{@apartment.time_to_metro} #{@apartment.transport_to_metro}"
-        .row
-          .col-sm-3.col-md-3 Собственник:
-          .col-sm-9.col-md-7 = @apartment.landlord.name
-        .row
-          .col-sm-3.col-md-3 Риелтор:
-          .col-sm-9.col-md-7 = @apartment.user.name unless @apartment.user.nil?
+      #about-apartment.tab.active
+        #map.map
         h3 Параметры объекта
         .row
           .col-sm-3.col-md-3 Комнаты смежные:
@@ -140,6 +122,14 @@
               | Поликлинника, &nbsp;
             - if @apartment.near_kindergarten
               | Детский сад, &nbsp;
+      #advertising.tab.advertise
+      #photos-apartment.tab.photos.work
+        = render "photo_upload"
+        /.photo-list.row
+          -@apartment.assets.each do |photo|
+            .item.col-sm-4
+              .pic
+                = image_tag photo.image.url(:thumb)
 
       
   .profile-info
@@ -151,9 +141,43 @@
       .col
         .value = "#{@apartment.price} руб."
         | Стоимость
-    #map.map
-    #photos.photos
-      = @apartment.assets.last
+    .details
+      - if @apartment.address
+        .field
+          label Адрес
+          .value = @apartment.address
+      - if @apartment.rooms
+        .field
+          label Кол-во комнат
+          .value = @apartment.rooms
+      - if @apartment.metro
+        .field
+          label До метро
+          .value
+            = "#{@apartment.metro}"
+            br
+            = "#{@apartment.time_to_metro} #{@apartment.transport_to_metro}"
+      - if @apartment.landlord
+        .field
+          label Собственник
+          .value = @apartment.landlord.name
+        .field
+          label Телефон
+          .value = @apartment.landlord.mobile
+          .sub Мобильный
+      - if @apartment.phone
+        .field
+          label Телефон
+          .value = @apartment.phone
+          .sub Домашний
+      - if @apartment.floor
+        .field
+          label Этаж
+          .value = "#{@apartment.floor} из #{@apartment.floors}"
+      - unless @apartment.user.nil?
+        .field
+          label Риелтор
+          .value = @apartment.user.name
 
 javascript:
   ymaps.ready( mapInit );
@@ -163,7 +187,6 @@ javascript:
     var myGeocoder = ymaps.geocode( "#{@apartment.address}" );
     myGeocoder.then( function (res) {
       var coords = res.geoObjects.get(0).geometry.getCoordinates();
-      console.log(coords);
       myMap = new ymaps.Map("map", {
         center: coords,
         zoom: 16,

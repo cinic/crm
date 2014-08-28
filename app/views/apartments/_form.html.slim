@@ -1,4 +1,4 @@
-= form_for @apartment do |f|
+= form_for @apartment, html: {multipart: true, id: "upload"} do |f|
   - if @apartment.errors.any?
     #error_explanation
       h2 = "#{pluralize(@apartment.errors.count, "error")} prohibited this apartment from being saved:"
@@ -80,10 +80,26 @@
   .form-row
     = f.label :comment, "Комментарий"
     = f.text_area :comment, class: 'form-input'
-  - if @apartment.new_record?
-    = f.fields_for @apartment.assets do |asset|
-      .form-field
-        = asset.label :image, "Фото"
-        = asset.file_field :image
+  .form-field#photos.clearfix
+    = f.fields_for :assets do |asset|
+      - unless asset.object.new_record?
+        .item.pull-left
+          = image_tag asset.object.image.url(:thumb)
+          .actions
+            = asset.label '_destroy' do
+              = asset.check_box '_destroy'
+              | Удалить
+      /- if asset.object.new_record?
+        /= asset.label :image, "Фото"
+        /= asset.file_field :image
+  .form-field
+    = f.fields_for :assets do |asset|
+      - if asset.object.new_record?
+        #upload
+          #dropzone
+            .title Drop file to upload
+            .browse Browse
+            = f.file_field :image, "data-url" => "#{apartment_path(@apartment)}", :multiple => "", name: "apartment[assets_attributes[#{@apartment.asset_ids.count}][image]]"
+          ul.upload-list
 
   .actions = f.submit 'Сохранить', class: 'btn-flat success'
