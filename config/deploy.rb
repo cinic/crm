@@ -10,7 +10,7 @@ set :log_level, :debug
 set :pty, true
 
 set :linked_files, %w{config/database.yml}
-set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets public/upload}
+set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets public/upload public/assets}
 
 set :default_env, { rvm_bin_path: '~/.rvm/bin' }
 set :keep_releases, 3
@@ -63,7 +63,7 @@ namespace :deploy do
         with rails_env: fetch(:stage) do ## Set your env accordingly.
           execute :bundle, "exec rake assets:precompile" 
         end 
-        execute "rsync -av --delete -e 'ssh -p 2605' ./public/assets/ #{fetch(:user)}@#{rsync_host}:#{current_path}/public/assets/" 
+        execute "rsync -av --delete -e 'ssh -p 2605' ./public/assets/ #{fetch(:user)}@#{rsync_host}:#{shared_path}/public/assets/" 
         execute "rm -rf public/assets" 
         # execute "rm -rf tmp/cache/assets" # in case you are not seeing changes 
       end 
