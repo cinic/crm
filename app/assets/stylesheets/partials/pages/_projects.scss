@@ -139,7 +139,7 @@
 					bottom: -12px;
 					left: 49%;
 					margin-left: -18.5px;
-					background-image: url("popover-arrow.png");
+					background-image: image-url("popover-arrow.png");
 					background-size: 100% 100%;
 					@include transform(rotateX(180deg));
 				}
