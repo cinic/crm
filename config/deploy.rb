@@ -61,7 +61,7 @@ namespace :deploy do
  
       run_locally do 
         with rails_env: fetch(:stage) do ## Set your env accordingly.
-          execute :bundle, "exec rake assets:precompile" 
+          execute :bundle, "exec rake assets:precompile"
         end 
         execute "rsync -av --delete -e 'ssh -p 2605' ./public/assets/ #{fetch(:user)}@#{rsync_host}:#{shared_path}/public/assets/" 
         execute "rm -rf public/assets" 
