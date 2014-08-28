@@ -17,6 +17,8 @@ set :keep_releases, 3
 set :use_sudo, false
 set :precompile_only_if_changed, true
 
+Rake::Task["deploy:compile_assets"].clear
+
 namespace :foreman do
   desc "Export the Procfile to Ubuntu's upstart scripts"
   task :export do
@@ -51,25 +53,25 @@ end
 namespace :deploy do
       # on OS X the equivalent pid-finding command is `ps | grep '/puma' | head -n 1 | awk {'print $1'}`
       #run "(kill -s SIGUSR1 $(ps -C ruby -F | grep '/puma' | awk {'print $2'})) || #{sudo} service #{fetch(:app_name)} restart"
-
-  after :updated, "assets:precompile"
+ 
+  desc "Precompile assets locally and then rsync to web servers" 
+  task :compile_assets do 
+    on roles(:web) do 
+      rsync_host = host.to_s 
+ 
+      run_locally do 
+        with rails_env: :production do ## Set your env accordingly.
+          execute :bundle, "exec rake assets:precompile" 
+        end 
+        execute "rsync -av --delete ./public/assets/ #{fetch(:user)}@#{rsync_host}:#{shared_path}/public/assets/" 
+        execute "rm -rf public/assets" 
+        # execute "rm -rf tmp/cache/assets" # in case you are not seeing changes 
+      end 
+    end 
+  end
+  
   after :finishing, "deploy:cleanup"
   after :finishing, "foreman:export"
   after :finishing, "foreman:restart"
 end
-namespace :assets do
-  desc "Precompile assets locally and then rsync to web servers"
-  task :precompile do
-    on roles(:web) do
-      rsync_host = host.to_s # this needs to be done outside run_locally in order for host to exist
-      run_locally do
-        with rails_env: fetch(:stage) do
-          execute :bundle, "exec rake assets:precompile"
-        end
-        execute "rsync -av --delete ./public/assets/ #{fetch(:user)}@#{rsync_host}:#{shared_path}/public/assets/"
-        execute "rm -rf public/assets"
-        # execute "rm -rf tmp/cache/assets" # in case you are not seeing changes
-      end
-    end
-  end
-end
+
