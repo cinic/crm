@@ -48,6 +48,7 @@ group :development do
   gem 'capistrano-rvm'
   gem 'capistrano-bundler', '~> 1.1.2'
   gem 'capistrano-rails', '~> 1.1'
+  gem "letter_opener"
 end
 
 group :development, :test do

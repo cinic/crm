@@ -1,0 +1,11 @@
+- content_for :title, "Обновление пароля"
+- if !flash.alert.nil?
+  .alert
+    = flash.alert
+= form_for @user, :url => password_reset_path(params[:id]) do |f|
+  = render "shared/error_messages", :target => @user
+  .fields
+      = f.label :password, "Пароль"
+      = f.text_field :password, class: "form-control", placeholder: "Новый пароль"
+  .actions
+    = f.submit "Обновить пароль", class: "btn btn-primary btn-lg"

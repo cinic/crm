@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140827092219) do
+ActiveRecord::Schema.define(version: 20140831232520) do
 
   create_table "apartments", force: true do |t|
     t.string   "metro"
@@ -152,16 +152,19 @@ ActiveRecord::Schema.define(version: 20140827092219) do
   add_index "leads", ["user_id"], name: "index_leads_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "name",            null: false
-    t.string   "email",           null: false
-    t.string   "password_salt",   null: false
-    t.string   "password_hash",   null: false
-    t.integer  "role",            null: false
+    t.string   "name",                   null: false
+    t.string   "email",                  null: false
+    t.string   "password_salt",          null: false
+    t.string   "password_hash",          null: false
+    t.integer  "role",                   null: false
     t.datetime "last_sign_in_at"
     t.string   "last_sign_in_ip"
     t.string   "mobile"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "remember_token"
+    t.string   "password_reset_token"
+    t.datetime "password_reset_sent_at"
   end
 
 end

@@ -1,25 +1,28 @@
 class SessionsController < ApplicationController
+  skip_before_filter :login_required, only: [:new, :create]
   layout "application_login"
+
   def new
   end
 
   def create
-    user = User.where({email: params[:email]}).first
-    
-    if user && User.authenticate(params[:email], params[:password])
-      session[:user_id] = user.id
-      redirect_back_or dashboard_url
+    user = User.authenticate(params[:email], params[:password])
+
+    if user
+      sign_in user if params[:remember_me]
+      session_create user.id
+      
+      redirect_back_or dashboard_url, notice: "Logged in successfully."
     else
-      redirect_to login_url, alert: "Неправильный email или пароль."
+      flash.now.alert = "Неправильный email или пароль."
+      render 'new'
     end
   end
 
   def destroy
-    session[:user_id] = nil
-    redirect_to login_url
-  end
-  def redirect_back_or(default)
-    redirect_to(session[:return_to] || default)
-    session.delete(:return_to)
+    sign_out
+    session_destroy
+
+    redirect_to dashboard_url, notice: "You have been logged out."
   end
 end

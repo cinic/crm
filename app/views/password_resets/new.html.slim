@@ -1,0 +1,14 @@
+- content_for :title, "Восстановление пароля"
+- if !flash.alert.nil?
+  .alert
+    = flash.alert
+= form_tag password_resets_path, method: :post do
+  .fields
+      = label_tag :email
+      = email_field_tag :email, params[:email], class: "form-control", placeholder: "E-mail адрес"
+  .actions
+    = submit_tag "Сбросить пароль", class: "btn btn-primary btn-lg"
+
+p
+  = link_to 'Назад', login_path
+

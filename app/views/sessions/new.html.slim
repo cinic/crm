@@ -1,14 +1,20 @@
 - if !flash.alert.nil?
-  div.alert
+  .alert
     = flash.alert
 = form_tag sessions_path do
-  div.fields
+  .fields
       = label_tag :email
       = email_field_tag :email, params[:email], class: "form-control", placeholder: "E-mail адрес"
-  div.fields
+  .fields
     = label_tag :password
     = password_field_tag :password, "", class: "form-control", placeholder: "Ваш пароль"
-  div.actions
-      a.forgot href="#" Забыли пароль?
-  div.actions
+  .fields
+    .checkbox
+      = label_tag :remember_me do
+        = check_box_tag :remember_me
+        | Запомнить меня
+  
+  .actions
+      a.forgot href=new_password_reset_path Забыли пароль?
+  .actions
     = submit_tag "Войти", class: "btn btn-primary btn-lg"
