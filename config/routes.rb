@@ -4,7 +4,7 @@ Crm::Application.routes.draw do
   post 'sessions', to: 'sessions#create'
   delete 'sessions', to: 'sessions#destroy'
   resources :password_resets, only: [:new, :create, :edit, :update]
-  
+
   resources :users
   get 'leads/:id/edit_realtor', to: 'leads#edit_realtor', as: 'edit_realtor_lead'
   get 'leads/:id/new_landlord_lead', to: 'leads#new_landlord_lead', as: 'new_landlord_lead'
@@ -21,6 +21,7 @@ Crm::Application.routes.draw do
   patch 'landlords/:id/wizard_step_3', to: 'landlords#save_wizard_step_3'
   get 'landlords/:id/wizard_step_4', to: 'landlords#wizard_step_4', as: 'landlord_wizard_step_4'
   patch 'landlords/:id/wizard_step_4', to: 'landlords#save_wizard_step_4'
+  delete 'landlords', to: 'landlords#multiple_destroy', as: 'destroy_multiple_landlords'
   resources :landlords
   resources :tenants
   resources :deals

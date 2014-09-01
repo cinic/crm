@@ -4,7 +4,7 @@
 
 		// User list checkboxes
 		var $allUsers = $(".select-users input:checkbox");
-		var $checkboxes = $("[name='select-user']");
+		var $checkboxes = $("[name='select-user'],input:checkbox.select-user");
 
 		$allUsers.change(function () {
 			var checked = $allUsers.is(":checked");
@@ -18,7 +18,7 @@
 		});
 
 		$checkboxes.change(function () {
-			var anyChecked = $(".user [name='select-user']:checked");
+			var anyChecked = $(".user [name='select-user']:checked, .user input.select-user:checked");
 			toggleBulkActions(anyChecked.length, anyChecked.length);
 		});
 
@@ -26,6 +26,10 @@
 			if (shouldShow) {
 				$(".users-list .header").hide();
 				$(".users-list .header.select-users").addClass("active").find(".total-checked").html("(" + checkedCount + " total users)");
+				$("#form-delete-users").on('click', function(e){
+					e.preventDefault();
+					$("#multiple-landlords-edit").submit();
+				});
 
 			} else {
 				$(".users-list .header").show();

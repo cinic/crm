@@ -138,6 +138,16 @@ class LandlordsController < ApplicationController
     end
   end
 
+  # DELETE /landlords/1
+  # DELETE /landlords/1.json
+  def multiple_destroy
+    Landlord.destroy_all(landlord_ids_params)
+    respond_to do |format|
+      format.html { redirect_to landlords_url }
+      format.json { head :no_content }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_landlord
@@ -147,6 +157,9 @@ class LandlordsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def landlord_params
       params.require(:landlord).permit!
+    end
+    def landlord_ids_params
+      params.require(:landlord).permit(id: [])
     end
     def apartment_params
       params.require(:apartment).permit!
