@@ -23,6 +23,10 @@ class DealsController < ApplicationController
 
   # GET /deals/1/edit
   def edit
+    @landlords = Landlord.all
+    @tenants = Tenant.all
+    @realtors = User.realtors
+    @apartments = Apartment.all
   end
 
   # POST /deals
