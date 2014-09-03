@@ -9,6 +9,13 @@ ru:
         user_id: "Риелтор"
         tenant_id: "Наниматель"
         landlord_id: "Наймодатель"
+      apartment:
+        status:
+          new: "Новый"
+          confirmed: "В работе"
+          rented: "Сдан"
+          advertised: "В рекламе"
+          lost: "Утерян"
     errors:
       models:
         deal:

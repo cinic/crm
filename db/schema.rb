@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140831232520) do
+ActiveRecord::Schema.define(version: 20140903064441) do
 
   create_table "apartments", force: true do |t|
     t.string   "metro"
@@ -81,6 +81,9 @@ ActiveRecord::Schema.define(version: 20140831232520) do
     t.datetime "photo_updated_at"
     t.string   "photo_need"
     t.string   "status",                   default: "new"
+    t.string   "when_see"
+    t.string   "commission_agent"
+    t.string   "commission_client"
   end
 
   add_index "apartments", ["landlord_id"], name: "index_apartments_on_landlord_id", using: :btree

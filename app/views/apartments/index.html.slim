@@ -36,6 +36,7 @@
         tr
           td
             span.label.label-info = apartment.status if apartment.status == "new"
+            span.label.label-info = apartment.status if apartment.status == "confirmed"
             span.label.label-warning = apartment.status if apartment.status == "advertised"
             span.label.label-succes = apartment.status if apartment.status == "rented"
             span.label.label-default = apartment.status if apartment.status == "lost"

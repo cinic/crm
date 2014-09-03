@@ -1,10 +1,6 @@
 = form_for @apartment, html: {multipart: true, id: "upload"} do |f|
   - if @apartment.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@apartment.errors.count, "error")} prohibited this apartment from being saved:"
-      ul
-        - @apartment.errors.full_messages.each do |message|
-          li = message
+    = render "shared/error_messages", target: @apartment
   .form-row
     = f.label :landlord_id, 'Наймодатель'
     = f.select(:landlord_id, @landlords.map { |landlord| [landlord.name, landlord.id] })

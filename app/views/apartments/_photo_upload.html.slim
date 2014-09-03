@@ -1,10 +1,6 @@
 = form_for @apartment, html: {multipart: true, id: "fileupload"} do |f|
   - if @apartment.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@apartment.errors.count, "error")} prohibited this apartment from being saved:"
-      ul
-        - @apartment.errors.full_messages.each do |message|
-          li = message
+    = render "shared/error_messages", target: @apartment
   #photos.photo-list.row.clearfix
     = f.fields_for :assets do |asset|
       - unless asset.object.new_record?

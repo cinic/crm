@@ -1,6 +1,6 @@
 - if target.errors.any?
   #error_explanation.alert.alert-danger
-    h4 = "Нужно исправить #{target.errors.count} #{Russian::pluralize(target.errors.count, "ошибка", "ошибки", "ошибок")}"
+    h4 = "Нужно исправить #{target.errors.count} #{Russian::pluralize(target.errors.count, "ошибку", "ошибки", "ошибок")}"
     hr
     ul
       - target.errors.full_messages.each do |msg|

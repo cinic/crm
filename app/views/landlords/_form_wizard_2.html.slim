@@ -1,10 +1,6 @@
 = form_for @apartment, url: landlord_wizard_step_2_path, html: { class: 'form-horizontal' } do |a|
   - if @apartment.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@apartment.errors.count, "error")} prohibited this apartment from being saved:"
-      ul
-        - @apartment.errors.full_messages.each do |message|
-          li = message
+    = render "shared/error_messages", target: @apartment
 
   .form-group
     = a.label :address, "Адрес"

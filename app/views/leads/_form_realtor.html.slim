@@ -1,10 +1,6 @@
 = form_for @lead do |f|
   - if @lead.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@lead.errors.count, "error")} prohibited this lead from being saved:"
-      ul
-        - @lead.errors.full_messages.each do |message|
-          li = message
+    = render "shared/error_messages", target: @lead
   .form-row  
     = f.label :user_id, 'Риелтор'
     = f.select(:user_id, @realtors.map { |realtor| [realtor.name, realtor.id] })

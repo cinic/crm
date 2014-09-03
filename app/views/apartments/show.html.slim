@@ -136,7 +136,8 @@
     .main-details.clearfix
       .col
         .value
-          .label.label-info = "#{@apartment.status}"
+          = form_for @apartment, html: { class: "edit-status-in-show", method: :patch } do |f|
+            = f.select(:status, Apartment::STATUSES.map {|status| [t("activerecord.attributes.apartment.status.#{status}"), status] }, {}, {class: "form-control", "data-smart-select" => ""})
         | Статус
       .col
         .value = "#{@apartment.price} руб."

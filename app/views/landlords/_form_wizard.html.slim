@@ -1,10 +1,6 @@
 = form_for @landlord, url: new_landlord_wizard_path do |f|
   - if @landlord.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@landlord.errors.count, "error")} prohibited this apartment from being saved:"
-      ul
-        - @landlord.errors.full_messages.each do |message|
-          li = message
+    = render "shared/error_messages", target: @landlord
   .form-row
     = f.label :name, 'ФИО'
     = f.text_field :name, placeholder: 'Иванов Иван Иванович'

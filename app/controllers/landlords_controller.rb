@@ -37,7 +37,7 @@ class LandlordsController < ApplicationController
 
   def wizard_step_4
     @apartment = @landlord.apartments.last
-    @realtors = User.realtors
+    @realtors = User.all
   end
 
   # POST /landlords
