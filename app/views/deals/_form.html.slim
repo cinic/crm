@@ -1,37 +1,89 @@
-= form_for @deal do |f|
+= form_for @deal, html: { class: "form-horizontal", role: "form" } do |f|
   - if @deal.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@deal.errors.count, "error")} prohibited this deal from being saved:"
-      ul
-        - @deal.errors.full_messages.each do |message|
-          li = message
-  .form-row
-    = f.label :apartment_id, 'Объект'
-    = f.select(:apartment_id, @apartments.map { |apartment| [apartment.address, apartment.id] })
-  .form-row
-    = f.label :landlord_id, 'Наймодатель'
-    = f.select(:landlord_id, @landlords.map { |landlord| [landlord.name, landlord.id] })
-  .form-row
-    = f.label :tenant_id, 'Наниматель'
-    = f.select(:tenant_id, @tenants.map { |tenant| [tenant.name, tenant.id] })
-  .form-row  
-    = f.label :user_id, 'Риелтор'
-    = f.select(:user_id, @realtors.map { |realtor| [realtor.name, realtor.id] })
-  .form-row  
-    = f.label :price, 'Цена'
-    = f.text_field :price
-  .form-row  
-    = f.label :deposit, 'Депозит'
-    = f.text_field :deposit
-  .form-row.form-inline
-    span.checkbox = f.check_box :communal, class: 'form-input'
-    = f.label :communal, "Коммуналка включена?"
-  .form-row  
-    = f.label :lease_term, 'Срок аренды'
-    = f.text_field :lease_term
-  .form-row  
-    = f.label :commission, 'Комиссия'
-    = f.text_field :commission
-  
+    = render "shared/error_messages", target: @deal
+  .form-group
+    = f.label :apartment_id, 'Объект', class: "col-sm-2 col-md-2 control-label"
+    .col-sm-10.col-md-8
+      .has-feedback
+        i.ion-information-circled.form-control-feedback data-toggle="tooltip" title="Возможность редактировать отключена"
+        = f.select(:apartment_id, @apartments.map { |apartment| [apartment.address, apartment.id] }, {}, { class: "form-control", disabled: @deal.new_record? ? false : true, "data-smart-select" => "" })
+  .form-group
+    = f.label :landlord_id, 'Наймодатель', class: "col-sm-2 col-md-2 control-label"
+    .col-sm-10.col-md-8
+      = f.select(:landlord_id, @landlords.map { |landlord| [landlord.name, landlord.id] }, {include_blank: 'Выберите наймодателя'}, { class: "form-control", "data-smart-select" => "" })
+      - if @deal.new_record?
+        a#add-landlord-in-deal href="#" data-toggle="modal" data-target="#form-modal" Добавить наймодателя
+  .form-group
+    = f.label :tenant_id, 'Наниматель', class: "col-sm-2 col-md-2 control-label"
+    .col-sm-10.col-md-8
+      = f.select(:tenant_id, @tenants.map { |tenant| [tenant.name, tenant.id] }, {}, { class: "form-control", "data-smart-select" => "" })
+      - if @deal.new_record?
+        a#add-tenant-in-deal href="#" data-toggle="modal" data-target="#form-modal-tenant" Добавить нанимателя
+  .form-group  
+    = f.label :user_id, 'Риелтор', class: "col-sm-2 col-md-2 control-label"
+    .col-sm-10.col-md-8
+      = f.select(:user_id, @realtors.map { |realtor| [realtor.name, realtor.id] }, {}, { class: "form-control", "data-smart-select" => "" })
+  .form-group  
+    = f.label :price, 'Цена', class: "col-sm-2 col-md-2 control-label"
+    .col-sm-10.col-md-8
+      = f.text_field :price, class: "form-control"
+  .form-group  
+    = f.label :deposit, 'Депозит', class: "col-sm-2 col-md-2 control-label"
+    .col-sm-10.col-md-8
+      = f.text_field :deposit, class: "form-control"
+  .form-group
+    = f.label :lease_term, 'Срок аренды', class: "col-sm-2 col-md-2 control-label"
+    .col-sm-10.col-md-8
+      = f.text_field :lease_term, class: "form-control"
+  .form-group  
+    = f.label :commission, 'Комиссия', class: "col-sm-2 col-md-2 control-label"
+    .col-sm-10.col-md-8
+      = f.text_field :commission, class: "form-control"
+  .form-group
+    .col-sm-offset-2.col-sm-10.col-md-offset-2.col-md-10
+      .checkbox
+        = f.label :communal do
+          = f.check_box :communal
+          | Коммуналка включена?
+  .form-group.form-actions
+    .col-sm-offset-2.col-sm-10.col-md-offset-2.col-md-10 = f.submit 'Сохранить', class: "btn btn-success"
 
-  .actions = f.submit 'Сохранить', class: "btn-flat success"
+- content_for :bottom_content do
+  /! Form Modal
+  #form-modal.modal.fade tabindex="-1" role="dialog"
+    .modal-dialog
+      .modal-content
+        = form_for Landlord.new, html: {class: "create-landlord-in-deal form-in-modal", tabindex: "-1", role: "form"} do |l|
+          .modal-header
+            button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+              |&times;
+            h4 class="modal-title" id="myModalLabel" Создать нового наймодателя
+          .modal-body
+            .form-group
+              = l.label :name, "ФИО", class: "control-label"
+              = l.text_field :name, class: "form-control"
+            .form-group
+              = l.label :mobile, "Мобильный", class: "control-label"
+              = l.text_field :mobile, class: "form-control"
+          .modal-footer
+            /<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            = l.button "Создать", class: "btn btn-success"
+
+  /! Form Modal for tenant create
+  #form-modal-tenant.modal.fade tabindex="-2" role="dialog"
+    .modal-dialog
+      .modal-content
+        = form_for Tenant.new, html: {class: "create-tenant-in-deal form-in-modal", tabindex: "-2", role: "form"} do |l|
+          .modal-header
+            button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+              |&times;
+            h4 class="modal-title" id="myModalLabel" Создать нового нанимателя
+          .modal-body
+            .form-group
+              = l.label :name, "ФИО", class: "control-label"
+              = l.text_field :name, class: "form-control"
+            .form-group
+              = l.label :mobile, "Мобильный", class: "control-label"
+              = l.text_field :mobile, class: "form-control"
+          .modal-footer
+            = l.button "Создать", class: "btn btn-success"

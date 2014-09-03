@@ -28,9 +28,12 @@ gem 'slim-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 
-#For imageuploads
+# For imageuploads
 gem "paperclip", "~> 4.1"
 gem "jquery-fileupload-rails"
+
+# Поддержка русского языка для Ruby и Rails при помощи библиотеки I18n.
+gem 'russian', '~> 0.6.0'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'

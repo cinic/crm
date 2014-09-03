@@ -1,0 +1,29 @@
+ru:
+  activerecord:
+    attributes:
+      deal:
+        lease_term: "Срок аренды"
+        commission: "Комиссия"
+        price: "Цена"
+        deposit: "Депозит"
+        user_id: "Риелтор"
+        tenant_id: "Наниматель"
+        landlord_id: "Наймодатель"
+    errors:
+      models:
+        deal:
+          attributes:
+            lease_term:
+              blank: "должен быть заполнен"
+            commission:
+              blank: "должна быть заполнена"
+            price:
+              blank: "должна быть заполнена"
+            deposit:
+              blank: "должен быть заполнен"
+            user_id:
+              blank: "должен быть выбран"
+            tenant_id:
+              blank: "должен быть выбран"
+            landlord_id:
+              blank: "должен быть выбран"

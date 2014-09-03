@@ -1,6 +1,14 @@
 - content_for :title, "Новая сделка"
 - content_for :page_title, "Создать сделку"
+- content_for :body_id, "form-product"
+- content_for :body_class, "ui"
 
-== render 'form'
+.menubar
+  .sidebar-toggler.visible-xs
+    i.ion-navicon
+  .page-title
+    = yield(:page_title)
+.content-wrapper
+  == render 'form'
 
 = link_to 'Назад', deals_path

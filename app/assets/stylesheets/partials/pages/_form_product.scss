@@ -3,7 +3,10 @@
 	form {
 		margin-top: 35px;
 		margin-bottom: 80px;
-
+		&.form-in-modal {
+			margin-top: 0;
+			margin-bottom: 0;
+		}
 		input[type="file"] {
 			position: relative;
 			top: 7px;
@@ -11,8 +14,11 @@
 		}
 
 		.fake-select-wrap {
-			width: 250px;
+			width: 90%;
 			margin-bottom: 8px;
+		}
+		.form-control {
+			width: 90%;
 		}
 
 		.help {
@@ -108,5 +114,7 @@
 			}
 		}
 	}
-
+	.modal-footer {
+		text-align: left;
+	}
 }

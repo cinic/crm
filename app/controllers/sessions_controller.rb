@@ -12,9 +12,9 @@ class SessionsController < ApplicationController
       sign_in user if params[:remember_me]
       session_create user.id
       
-      redirect_back_or dashboard_url, notice: "Logged in successfully."
+      redirect_back_or dashboard_url, notice: "Удачный вход."
     else
-      flash.now.alert = "Неправильный email или пароль."
+      flash.now.alert = "Неправильный email или пароль. Возможно вы регистрировались на другой email?"
       render 'new'
     end
   end
@@ -23,6 +23,6 @@ class SessionsController < ApplicationController
     sign_out
     session_destroy
 
-    redirect_to dashboard_url, notice: "You have been logged out."
+    redirect_to dashboard_url, notice: "Вы вышли из системы."
   end
 end

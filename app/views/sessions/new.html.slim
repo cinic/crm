@@ -1,5 +1,5 @@
 - if !flash.alert.nil?
-  .alert
+  .alert.alert-warning
     = flash.alert
 = form_tag sessions_path do
   .fields
@@ -8,13 +8,14 @@
   .fields
     = label_tag :password
     = password_field_tag :password, "", class: "form-control", placeholder: "Ваш пароль"
-  .fields
-    .checkbox
-      = label_tag :remember_me do
-        = check_box_tag :remember_me
-        | Запомнить меня
-  
-  .actions
-      a.forgot href=new_password_reset_path Забыли пароль?
+  .row
+    .col-sm-6.col-md-6
+      .checkbox
+        = label_tag :remember_me do
+          = check_box_tag :remember_me
+          | Запомнить меня
+    .col-sm-6.col-md-6
+      .checkbox.pull-right
+        a.forgot href=new_password_reset_path Забыли пароль?
   .actions
     = submit_tag "Войти", class: "btn btn-primary btn-lg"

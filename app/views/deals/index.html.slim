@@ -1,40 +1,43 @@
 - content_for :title, "Сделки"
 - content_for :page_title, "Список сделок"
+- content_for :body_id, "datatables"
 
-.table-wrapper
-  table.table.table-hover
+.menubar.fixed
+  .sidebar-toggler.visible-xs
+    i.ion-navicon
+  .page-title
+    = yield(:page_title)
+  a.new-user.btn.btn-success.pull-right href=new_deal_path 
+    span Новая сделка
+.content-wrapper
+  table#orders-datatable
     thead
       tr
-        th.span2 ID
-        th.span3
-          span.line
-          |Объект
-        th.span2
-          span.line
-          |Наймодатель
-        th.span3
-          span.line
-          |Риелтор
-        th.span3
-          span.line
-          |Цена
-        th.span3
-          span.line
-          |Комиссия
-        th.span3
-          span.line
-          |Агент
-        th.span2
-          span.line
-          |Действия
-
+        th colspan="1" rowspan="1" tabindex="0" ID
+        th colspan="1" rowspan="1" tabindex="0" Объект
+        th colspan="1" rowspan="1" tabindex="0" Наймодатель
+        th colspan="1" rowspan="1" tabindex="0" Риелтор
+        th colspan="1" rowspan="1" tabindex="0" Цена
+        th colspan="1" rowspan="1" tabindex="0" Комиссия
+        th colspan="1" rowspan="1" tabindex="0" Агент
+        th colspan="1" rowspan="1" Действия
+    tfoot
+      tr
+        th colspan="1" rowspan="1"  ID
+        th colspan="1" rowspan="1"  Объект
+        th colspan="1" rowspan="1"  Наймодатель
+        th colspan="1" rowspan="1"  Риелтор
+        th colspan="1" rowspan="1"  Цена
+        th colspan="1" rowspan="1"  Комиссия
+        th colspan="1" rowspan="1"  Агент
+        th colspan="1" rowspan="1"  Действия
     tbody
       - @deals.each do |deal|
         tr
-          td = link_to deal.id, deal
-          td = deal.apartment.id
-          td = deal.landlord.id
-          td = deal.user.id
+          td = link_to "##{deal.id}", deal
+          td = link_to deal.apartment.address, deal.apartment
+          td = deal.landlord.name
+          td = deal.user.name
           td = deal.price
           td = deal.commission
           td = deal.agent
@@ -42,5 +45,3 @@
             ul.actions
               li = link_to 'Редактировать', edit_deal_path(deal)
               li = link_to 'Удалить', deal, data: {:confirm => 'Вы уверены?'}, :method => :delete
-
-= link_to 'Создать сделку', new_deal_path, class: 'btn-flat primary'

@@ -8,16 +8,22 @@
   .page-title
     | Дашбоард
   .period-select.hidden-xs
-    /form.input-daterange
-      .input-group.input-group-sm
-        span.input-group-addon
-          i.fa.fa-calendar-o
-        input.form-control.datepicker name="start" placeholder="02/27/2014" type="text"
-      p.pull-left to
-      .input-group.input-group-sm
-        span.input-group-addon
-          i.fa.fa-calendar-o
-        input.form-control.datepicker name="end" placeholder="02/27/2014" type="text"
-
-p
-  = link_to 'Позвонить по заявке владельца квартиры', landlord_wizard_without_lead_path, class: "btn btn-primary btn-lg"
+    = link_to 'Позвонить по заявке владельца квартиры', landlord_wizard_without_lead_path, class: "btn btn-primary"
+.content-wrapper
+  .metrics.clearfix
+    .metric
+      span.field Всего объектов
+      span.data = @apartments[:all]
+    .metric
+      span.field Новых объектов
+      span.data  = @apartments[:newest]
+    .metric
+      span.field Утраченых объектов
+      span.data  = @apartments[:lost]
+    .metric
+      span.field Сделок в этом месяце
+      span.data = @deals[:this_month]
+    .metric
+      span.field Всего сделок
+      span.data = @deals[:all]
+  

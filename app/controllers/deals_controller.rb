@@ -1,5 +1,6 @@
 class DealsController < ApplicationController
   before_action :set_deal, only: [:show, :edit, :update, :destroy]
+  before_action :set_deal_relations, only: [:new, :edit, :update, :create]
 
   # GET /deals
   # GET /deals.json
@@ -15,18 +16,10 @@ class DealsController < ApplicationController
   # GET /deals/new
   def new
     @deal = Deal.new
-    @landlords = Landlord.all
-    @tenants = Tenant.all
-    @realtors = User.realtors
-    @apartments = Apartment.all
   end
 
   # GET /deals/1/edit
   def edit
-    @landlords = Landlord.all
-    @tenants = Tenant.all
-    @realtors = User.realtors
-    @apartments = Apartment.all
   end
 
   # POST /deals
@@ -74,7 +67,12 @@ class DealsController < ApplicationController
     def set_deal
       @deal = Deal.find(params[:id])
     end
-
+    def set_deal_relations
+      @landlords = Landlord.all
+      @tenants = Tenant.all
+      @realtors = User.realtors
+      @apartments = Apartment.all
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def deal_params
       params.require(:deal).permit!

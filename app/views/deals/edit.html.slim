@@ -1,9 +1,13 @@
-- content_for :title, "Редактирование сделки #{@deal.id}"
-- content_for :page_title, "Редактирование сделки #{@deal.id}"
+- content_for :title, "Редактирование сделки ##{@deal.id}"
+- content_for :page_title, "Редактирование сделки ##{@deal.id}"
+- content_for :body_id, "form-product"
 
-== render 'form'
-
-= link_to 'Посмотреть', @deal
-'|
+.menubar
+  .sidebar-toggler.visible-xs
+    i.ion-navicon
+  .page-title
+    = yield(:page_title)
+.content-wrapper
+  == render 'form'
 = link_to 'Назад', deals_path
 

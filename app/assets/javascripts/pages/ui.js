@@ -1,8 +1,6 @@
 (function () {
 	var page_scripts = function () {
-		if (!$("#ui").length) return;
-
-		set_up_offline_plugin();
+		if (!$(".ui").length) return;
 
 		// Focus input when prompt modal is shown
 		$('#prompt-modal').on('shown.bs.modal', function (e) {
@@ -19,11 +17,67 @@
 	        });
 		})
 
-		// Show message on submit
-		$("#form-modal").submit(function () {
-			$(this).modal('hide');
-			Messenger().post("Your task was created succesfully.");
-			return false;
+		// Show message on submit Landlords
+		$( '.create-landlord-in-deal [type="submit"]').on( "click", function(e){
+			e.preventDefault();
+			var $form = $( "#form-modal .create-landlord-in-deal" ),
+					$elem = $( "#form-modal" );
+			
+			$.post( $form.attr("action") + ".json", $form.serializeArray())
+				.done(function(data) {
+					$( '#new_deal' ).find( '[name*="landlord_id"]' ).append( '<option selected="selected" value="' + data.id + '">' + data.name + '</option>').siblings( '.fake-select' ).text( data.name );
+					$elem.modal('hide');
+					Messenger().post("Наймодатель создан!");
+				})
+				.fail(function(data) {
+					if( data.responseJSON.name ) {
+						$form.find( '[name*="name"]' ).prop("placeholder", data.responseJSON.name[0]).parent().addClass( "has-error" );
+					} else {
+						$form.find( '[name*="name"]' ).parent().removeClass( "has-error" );
+					}
+					if( data.responseJSON.mobile) {
+						var $errorDiv = $form.find( '[name*="mobile"]' ).siblings( "label" ).children( "i" );
+						$form.find( '[name*="mobile"]' ).prop("placeholder", data.responseJSON.mobile[0]).parent().addClass( "has-error" );
+						if ( $errorDiv.length == 0 ) {
+							$form.find( '[name*="mobile"]' ).siblings( "label" ).append( "&nbsp;<i>" + data.responseJSON.mobile[0] + "</i>" );
+						} else {
+							$errorDiv.text( data.responseJSON.mobile[0] );
+						}
+					} else {
+						$form.find( '[name*="mobile"]' ).parent().removeClass( "has-error" );
+					}
+				});
+		});
+
+		$( '.create-tenant-in-deal [type="submit"]').on( "click", function(e){
+			e.preventDefault();
+			var $form = $( "#form-modal-tenant .create-tenant-in-deal" ),
+					$elem = $( "#form-modal-tenant" );
+			
+			$.post( $form.attr("action") + ".json", $form.serializeArray())
+				.done(function(data) {
+					$( '#new_deal' ).find( '[name*="tenant_id"]' ).append( '<option selected="selected" value="' + data.id + '">' + data.name + '</option>').siblings( '.fake-select' ).text( data.name );
+					$elem.modal('hide');
+					Messenger().post("Наниматель создан!");
+				})
+				.fail(function(data) {
+					if( data.responseJSON.name ) {
+						$form.find( '[name*="name"]' ).prop("placeholder", data.responseJSON.name[0]).parent().addClass( "has-error" );
+					} else {
+						$form.find( '[name*="name"]' ).parent().removeClass( "has-error" );
+					}
+					if( data.responseJSON.mobile) {
+						var $errorDiv = $form.find( '[name*="mobile"]' ).siblings( "label" ).children( "i" );
+						$form.find( '[name*="mobile"]' ).prop("placeholder", data.responseJSON.mobile[0]).parent().addClass( "has-error" );
+						if ( $errorDiv.length == 0 ) {
+							$form.find( '[name*="mobile"]' ).siblings( "label" ).append( "&nbsp;<i>" + data.responseJSON.mobile[0] + "</i>" );
+						} else {
+							$errorDiv.text( data.responseJSON.mobile[0] );
+						}
+					} else {
+						$form.find( '[name*="mobile"]' ).parent().removeClass( "has-error" );
+					}
+				});
 		});
 
 
@@ -35,15 +89,12 @@
 		// Form validation
 		$('#new-user-form').validate({
 			rules: {
-				"user[name]": {
+				"landlord[name]": {
 					required: true
 				},
-				"user[email]": {
+				"landlord[mobile]": {
 					required: true,
-					email: true
-				},
-				"user[notes]": {
-					required: true
+					//email: true
 				}
 			},
 			highlight: function (element) {
@@ -214,26 +265,4 @@
 	};
 
 	$(document).on("ready page:load", page_scripts);
-
-
-	var set_up_offline_plugin = function () {
-		// This is an internal script that allows you to test the Offline.js plugin and see how your pages respond to 
-		// different connectivity states without having to use brute-force methods to disable your actual connectivity.
-
-		// Only used for demonstration purposes, make sure to remove this in production.
-		var a, b;
-		if ("undefined" == typeof Offline || null === Offline) throw new Error("Offline simulate UI brought in without Offline.js");
-		console.info("The offline.simulate.ui.js module is a development-only resource. Make sure to remove offline.simulate.ui.js in production."), 
-		Offline.options.reconnect = {
-		    initialDelay: 10
-		}, 
-		a = function () {
-		    var a;
-		    return document.getElementById("offline-simulate-check").addEventListener("click", function () {
-				var a;
-		        return null == (a = Offline.options).checks && (a.checks = {}), Offline.options.checks.active = this.checked ? "down" : "up", Offline.check()
-			})
-		}, 
-		"interactive" === (b = document.readyState) || "complete" === b ? a() : document.addEventListener("DOMContentLoaded", a)
-	}
 })();
