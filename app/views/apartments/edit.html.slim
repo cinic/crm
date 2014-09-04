@@ -1,7 +1,15 @@
 - content_for :title, "Редактирование объекта #{@apartment.id}"
 - content_for :page_title, "Редактирование объекта #{@apartment.id}"
+- content_for :body_id, "form-product"
+- content_for :body_class, "ui"
 
-== render 'form'
+.menubar
+  .sidebar-toggler.visible-xs
+    i.ion-navicon
+  .page-title
+    = yield(:page_title)
+.content-wrapper
+  == render 'form'
 
 = link_to 'Посмотреть', @apartment
 '|

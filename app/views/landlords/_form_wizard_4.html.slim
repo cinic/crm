@@ -16,12 +16,3 @@
       | назначить себе
 
   .form-actions = a.submit 'Сохранить', class: 'btn btn-success'
-javascript:
-  $( function () {
-    $( '#set-apartment-for-self' ).on( 'click', function (e) {
-      e.preventDefault();
-      $( '#apartment_user_id option[value="#{current_user.id}"]' ).attr( "selected", "selected" ).siblings().removeAttr( "selected" );
-      $( '#apartment_user_id' ).val( "#{current_user.id}" );
-      $ ( '.fake-select' ).text( "#{current_user.name}" );
-    } );
-  });

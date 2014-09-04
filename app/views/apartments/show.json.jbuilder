@@ -1,1 +1,1 @@
-json.extract! @apartment, :id, :created_at, :updated_at
+json.extract! @apartment, :id, :address, :created_at, :updated_at

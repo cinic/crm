@@ -1,101 +1,262 @@
-= form_for @apartment, html: {multipart: true, id: "upload"} do |f|
+= form_for @apartment, html: {class: "standart-form animated fadeInRightStep", multipart: true, id: "fileupload"} do |f|
   - if @apartment.errors.any?
     = render "shared/error_messages", target: @apartment
-  .form-row
-    = f.label :landlord_id, 'Наймодатель'
-    = f.select(:landlord_id, @landlords.map { |landlord| [landlord.name, landlord.id] })
-  .form-row
-    = f.label :metro, "Метро"
-    = f.text_field :metro, class: 'form-input'
-  .form-row
+  .form-group
     = f.label :address, "Адрес"
-    = f.text_field :address, class: 'form-input'
-  .form-row
+    = f.text_field :address, placeholder: 'Город, Улица, Номер дома', class: 'form-control'
+  .form-group
     = f.label :rooms, "Количество комнат"
-    = f.text_field :rooms, class: 'form-input'
-  .form-row.form-inline
-    span.checkbox = f.check_box :adjacent_rooms, class: 'form-input'
-    = f.label :adjacent_rooms, "Комнаты смежные?"
-  .form-row.form-inline
-    span.checkbox = f.check_box :bathroom_with_toilet, class: 'form-input'
-    = f.label :bathroom_with_toilet, "Санузел совмещён?"
-  .form-row.form-inline
-    span.checkbox = f.check_box :only_room, class: 'form-input'
-    = f.label :only_room, "Только комната"
-  .form-row
-    = f.label :apartment_size, "Площадь квартиры"
-    = f.text_field :apartment_size, class: 'form-input'
-  .form-row
-    = f.label :rooms_size, "Площадь комнат"
-    = f.text_field :rooms_size, class: 'form-input'
-  .form-row
-    = f.label :kitchen_size, "Площадь кухни"
-    = f.text_field :kitchen_size, class: 'form-input'
-  .form-row.form-inline
-    span.checkbox = f.check_box :balcony, class: 'form-input'
+    = f.select(:rooms, ['1','2','3','4','5','6+'], { }, { class: 'form-control', "data-smart-select" => "" })
+  .form-group
+    = f.label :metro, "Ближайшее метро"
+    = f.text_field :metro, class: 'form-control'
+  .form-group.metro
+    .row.col-md-12
+      = f.label :time_to_metro, "До метро"
+    .row
+      .col-md-2
+        = f.text_field :time_to_metro, class: 'form-control'
+      .col-md-10
+        = f.select( :transport_to_metro, [['Пешком', 'walk'], ['На машине', 'car'], ['Наземным городским транспортом', 'urban_transport'], ['На маршрутке', 'taxi_bus'], ['Пригородным транспортом', 'suburban_transport']], { }, { class: 'form-control', "data-smart-select" => "" } )
+  .form-group
+    = f.label :made_from, "Тип дома"
+    = f.select(:made_from, ['Панель','Кирпич','Монолит'], { }, { class: 'form-control', "data-smart-select" => "" })
+  .form-group
+    .checkbox
+      = f.label :adjacent_rooms do
+        = f.check_box :adjacent_rooms
+        | Комнаты смежные?
+  .form-group
+    .checkbox
+      = f.label :bathroom_with_toilet do
+        = f.check_box :bathroom_with_toilet
+        | Санузел совмещён?
+  .form-group
+    .checkbox
+      = f.label :tile_in_toilet do
+        = f.check_box :tile_in_toilet
+        | Санузел в плитке?
+  .form-group
+    .checkbox
+      = f.label :dressing_room do
+        = f.check_box :dressing_room
+        | Гардеробная комната?
+  .form-group
+    = f.label :apartment_size, "Площадь квартиры, м.кв."
+    = f.text_field :apartment_size, class: 'form-control'
+  .form-group
+    = f.label :kitchen_size, "Площадь кухни, м.кв."
+    = f.text_field :kitchen_size, class: 'form-control'
+  .form-group
+    = f.label :rooms_size, "Площадь комнат, м.кв."
+    = f.text_field :rooms_size, placeholder: '20, 18, 6', class: 'form-control'
+  .form-group
+    = f.label :living_area_size, "Площадь жилая, м.кв."
+    = f.text_field :living_area_size, class: 'form-control'
+  .form-group
+    = f.label :repairing, "Состояние квартиры"
+    = f.select(:repairing, ['Обычный ремонт', 'Требует ремонта', 'Косметический ремонт', 'Евроремонт', 'Под евро'], { }, { class: 'form-control', "data-smart-select" => "" })
+  .form-group
     = f.label :balcony, "Есть ли балкон?"
-  .form-row.form-inline
-    span.checkbox = f.check_box :repairing, class: 'form-input'
-    = f.label :repairing, "Был ли ремонт?"
-  .form-row
-    = f.label :floor, "Этаж"
-    = f.text_field :floor, class: 'form-input'  
-  .form-row
-    = f.label :floors, "Всего этажей?"
-    = f.text_field :floors, class: 'form-input'
-  .form-row.form-inline
-    span.checkbox = f.check_box :kitchen_furnished, class: 'form-input'
-    = f.label :kitchen_furnished, "Кухня мебелирована?"
-  .form-row.form-inline
-    span.checkbox = f.check_box :phone, class: 'form-input'
-    = f.label :phone, "Телефон"
-  .form-row.form-inline
-    span.checkbox = f.check_box :tv, class: 'form-input'
-    = f.label :tv, "Телевизор"
-  .form-row.form-inline
-    span.checkbox = f.check_box :fridge, class: 'form-input'
-    = f.label :fridge, "Холодильник"
-  .form-row.form-inline
-    span.checkbox = f.check_box :washer, class: 'form-input'
-    = f.label :washer, "Стиралка"
-  .form-row.form-inline
-    span.checkbox = f.check_box :animals, class: 'form-input'
-    = f.label :animals, "Можно с животными?"
-  .form-row.form-inline
-    span.checkbox = f.check_box :kids, class: 'form-input'
-    = f.label :kids, "Можно с детьми?"
-  .form-row
-    = f.label :deposit, "Размер депозита"
-    = f.text_field :deposit, class: 'form-input'
-  .form-row.form-inline
-    span.checkbox = f.check_box :deposit_divide, class: 'form-input'
-    = f.label :deposit_divide, "Депозит разбивается?"
-  .form-row
-    = f.label :price, "Цена"
-    = f.text_field :price, class: 'form-input'
-  .form-row
-    = f.label :comment, "Комментарий"
-    = f.text_area :comment, class: 'form-input'
-  .form-field#photos.clearfix
-    = f.fields_for :assets do |asset|
-      - unless asset.object.new_record?
-        .item.pull-left
-          = image_tag asset.object.image.url(:thumb)
-          .actions
-            = asset.label '_destroy' do
-              = asset.check_box '_destroy'
-              | Удалить
-      /- if asset.object.new_record?
-        /= asset.label :image, "Фото"
-        /= asset.file_field :image
-  .form-field
-    = f.fields_for :assets do |asset|
-      - if asset.object.new_record?
-        #upload
-          #dropzone
-            .title Drop file to upload
-            .browse Browse
-            = f.file_field :image, "data-url" => "#{apartment_path(@apartment)}", :multiple => "", name: "apartment[assets_attributes[#{@apartment.asset_ids.count}][image]]"
-          ul.upload-list
+    = f.select(:balcony, ['Нет', 'Есть открытый', 'Есть застеклённый', 'Лоджия'], { }, { class: 'form-control', "data-smart-select" => "" })
+  .form-group
+    = f.label :floor, "Этаж квартиры?"
+    = f.text_field :floor, class: 'form-control'
+  .form-group
+    = f.label :floors, "Всего этажей в доме?"
+    = f.text_field :floors, class: 'form-control'
+  .form-group
+    .checkbox
+      = f.label :rent_before do
+        = f.check_box :rent_before
+        | Ранее сдавали квартиру?
+  
+  .form-group
+    .checkbox
+      = f.label :tv do
+        = f.check_box :tv
+        | Телевизор
+  .form-group
+    .checkbox
+      = f.label :washer do
+        = f.check_box :washer
+        | Стиральная машина
+  .form-group
+    .checkbox
+      = f.label :dishwasher do
+        = f.check_box :dishwasher
+        | Посудомоечная машина
+  .form-group
+    = f.label :stove, "Плита?"
+    = f.select(:stove, ['Газовая', 'Электрическая'], { }, { class: 'form-control', "data-smart-select" => "" })
+  .form-group
+    .checkbox
+      = f.label :fridge do
+        = f.check_box :fridge
+        | Холодильник
+  .form-group
+    .checkbox
+      = f.label :conditioner do
+        = f.check_box :conditioner
+        | Кондиционер
 
-  .actions = f.submit 'Сохранить', class: 'btn-flat success'
+  .form-group
+    = f.label :internet, "Интернет?"
+    = f.select(:internet, ['Нет', 'Проведен проводной, нужно заключить договор', 'Проведен проводной, работает', 'Вай фай есть, заключайте договор', 'Вай фай работает'], { }, { class: 'form-control', "data-smart-select" => "" })
+  .form-group
+    .checkbox
+      = f.label :phone do
+        = f.check_box :phone
+        | Линия МГТС / Городская?
+  .form-group
+    .checkbox
+      = f.label :water_meters do
+        = f.check_box :water_meters
+        | Счётчики воды?
+  .form-group
+    = f.label :registered_people, "Сколько людей зарегистрировано в квартире?"
+    = f.select(:registered_people, ['1', '2', '3', '4', '5', '6'], { }, { class: 'form-control', "data-smart-select" => "" })
+  .form-group
+    .checkbox
+      = f.label :registered_infants do
+        = f.check_box :registered_infants
+        | Несовершеннолетние зарегистрированы?
+
+  .form-group
+    = f.label :kitchen_furnished, "Мебель на кухне"
+    = f.select(:kitchen_furnished, ['Кухонный гарнитур', 'Кухонная наборная', 'Нет'], { }, { class: 'form-control', "data-smart-select" => "" })
+    
+  h3.row Мебель в комнатах
+  .form-group
+    .checkbox
+      = f.label :bed_2 do
+        = f.check_box :bed_2
+        | Кровать двухспальная
+  .form-group
+    .checkbox
+      = f.label :bed_1 do
+        = f.check_box :bed_1
+        | Кровать односпальная
+  .form-group
+    .checkbox
+      = f.label :bed_0 do
+        = f.check_box :bed_0
+        | Кровать детская
+  .form-group
+    .checkbox
+      = f.label :sliding_wardrobe do
+        = f.check_box :sliding_wardrobe
+        | Шкаф-купе
+  .form-group
+    .checkbox
+      = f.label :wardrobe do
+        = f.check_box :wardrobe
+        | Наборные шкафы
+  .form-group
+    .checkbox
+      = f.label :chest do
+        = f.check_box :chest
+        | Комод
+  .form-group
+    .checkbox
+      = f.label :sofa do
+        = f.check_box :sofa
+        | Диван
+  
+  /.form-group
+    = f.label :photo_need, "Прислать фотографии?"
+    = f.select(:photo_need, ['Нет', 'Отправить адрес в смс', 'Отправить тестовое письмо на почту'], { }, { class: 'form-control', "data-smart-select" => "" })
+  /.form-group
+    = f.label :photo_when, "Когда сможем сделать фото?"
+    = f.text_field :photo_when, class: 'form-control'
+
+  h3.row Какая инфраструктура есть поблизости?
+  .form-group
+    .checkbox
+      = f.label :near_supermarket do
+        = f.check_box :near_supermarket
+        | Крупные продуктовые магазины
+  .form-group
+    .checkbox
+      = f.label :near_park do
+        = f.check_box :near_park
+        | Парки
+  .form-group
+    .checkbox
+      = f.label :near_school do
+        = f.check_box :near_school
+        | Школа
+  .form-group
+    .checkbox
+      = f.label :near_hospital do
+        = f.check_box :near_hospital
+        | Поликлиника
+      
+  .form-group
+    .checkbox
+      = f.label :near_kindergarten do
+        = f.check_box :near_kindergarten
+        | Детский сад
+  .form-group
+    = f.label :price, "Стоимость аренды"
+    = f.text_field :price, class: 'form-control'
+  .form-group
+    = f.label :pre_pay, "Размер предоплаты, месяцев"
+    = f.select(:pre_pay, ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'], { }, { class: 'form-control', "data-smart-select" => "" })
+  .form-group
+    = f.label :deposit, "Размер депозита в %"
+    = f.number_field :deposit, value: "100", class: 'form-control', max: "100", min: "0"
+  .form-group
+    .checkbox
+      = f.label :deposit_divide do
+        = f.check_box :deposit_divide
+        | Депозит разбивается?
+
+  .form-group
+    = f.label :wishes, "Пожелания к нанимателям"
+    = f.text_area :wishes, class: 'form-control'
+  .form-group
+    .checkbox
+      = f.label :animals do
+        = f.check_box :animals
+        | Можно с животными?
+  .form-group
+    .checkbox
+      = f.label :kids
+        = f.check_box :kids
+        | Можно с детьми?
+  .form-group
+    = f.label :how_long_wait, "Как долго наймодатель готов ждать/выбирать клиентов?"
+    = f.select(:how_long_wait, ['Мне важно сдать быстро', 'Мне важно чтобы были хорошие люди и я готов их подождать неделю-другую'], { }, { class: 'form-control', "data-smart-select" => "" })
+  .form-group
+    = f.label :how_long_rent, "На какой срок вы планируете сдавать квартиру?"
+    = f.select(:how_long_rent, ['Длительный', 'До года', 'Несколько месяцев'], {}, { class: 'form-control', "data-smart-select" => "" })
+  .form-group
+    .checkbox
+      = f.label :experience_with_realtors do
+        = f.check_box :experience_with_realtors
+        | Опыт работы с риелторами
+  .form-group
+    .checkbox
+      = f.label :other_realtors do
+        = f.check_box :other_realtors
+        | Обращались ли вы по вопросу аренды этой квартиры к другим риелторам?
+  .form-group
+    = f.label :when_see, "Когда готовы показывать квартиру"
+    = f.text_area :when_see, class: 'form-control'
+  .form-group
+    = f.label :comment, "Комментарий"
+    = f.text_area :comment, class: 'form-control'
+  .form-group
+    = f.label :commission_agent, "Комиссия агенту в %"
+    = f.number_field :commission_agent, value: "100", class: 'form-control', max: "100", min: "0"
+  .form-group
+    = f.label :commission_client, "Комиссия клиенту в %"
+    = f.number_field :commission_client, value: "100", class: 'form-control', max: "100", min: "0"
+  .form-group
+    = f.label :user_id, "Назначить риелтора"
+    = f.select(:user_id, @realtors.map { |realtor| [realtor.name, realtor.id] }, { }, { class: 'form-control', "data-smart-select" => "" })
+  .form-group
+    | Или 
+    a#set-apartment-for-self href="#" назначить себе
+  .form-actions = f.submit 'Сохранить', class: 'btn btn-success'

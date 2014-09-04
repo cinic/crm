@@ -12,13 +12,14 @@
 			top: 7px;
 			height: 40px;
 		}
-
-		.fake-select-wrap {
-			width: 90%;
-			margin-bottom: 8px;
-		}
-		.form-control {
-			width: 90%;
+		&.edit-deal {
+			.fake-select-wrap {
+				width: 90%;
+				margin-bottom: 8px;
+			}
+			.form-control {
+				width: 90%;
+			}
 		}
 
 		.help {

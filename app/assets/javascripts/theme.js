@@ -25,6 +25,9 @@ var ready = function() {
 	// Mask metro information
 	Mask.metro();
 
+  // Назначить риелтором по объекту себя
+  SetApartmentForSelf.initialize();
+
 	// tooltips
 	$("[data-toggle='tooltip']").tooltip();
 
@@ -258,11 +261,11 @@ var Suggestions = {
 		$names.suggestions({
 	    serviceUrl: "https://dadata.ru/api/v2",
 	    token: "bc1bd7a03dd3a2e978da08cef9bdcc1bbc750fe4",
-	    type: "NAME",
+	    type: "NAME"//,
 	    /* Вызывается, когда пользователь выбирает одну из подсказок */
-	    onSelect: function(suggestion) {
-	        console.log(suggestion);
-	    }
+	    //onSelect: function(suggestion) {
+	    //    console.log(suggestion);
+	    //}
 	  });
 
 	},
@@ -277,10 +280,13 @@ var Suggestions = {
 	    serviceUrl: "https://dadata.ru/api/v2",
 	    token: "bc1bd7a03dd3a2e978da08cef9bdcc1bbc750fe4",
 	    type: "ADDRESS",
+	    constraints: {
+        checkLocation: false,
+      }//,
 	    /* Вызывается, когда пользователь выбирает одну из подсказок */
-	    onSelect: function(suggestion) {
-	        console.log(suggestion);
-	    }
+	    //onSelect: function(suggestion) {
+	        //console.log(suggestion);
+	    //}
 	  });
 	}
 };
@@ -305,3 +311,14 @@ var Mask = {
 		$( 'input[id*="time_to_metro"]' ).inputmask({ mask: "9[9] минут", greedy: false });
 	}
 };
+
+var SetApartmentForSelf = {
+  initialize: function () {
+    $( '#set-apartment-for-self' ).on( 'click', function (e) {
+      e.preventDefault();
+      $( '#apartment_user_id option[value="' + current_user.id + '"]' ).attr( "selected", "selected" ).siblings().removeAttr( "selected" );
+      $( '#apartment_user_id' ).val( current_user.id );
+      $( '.fake-select' ).text( current_user.name );
+    });
+  }
+}

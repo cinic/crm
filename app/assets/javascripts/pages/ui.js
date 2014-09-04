@@ -48,7 +48,7 @@
 					}
 				});
 		});
-
+		// Show message on submit tenant
 		$( '.create-tenant-in-deal [type="submit"]').on( "click", function(e){
 			e.preventDefault();
 			var $form = $( "#form-modal-tenant .create-tenant-in-deal" ),
@@ -76,6 +76,24 @@
 						}
 					} else {
 						$form.find( '[name*="mobile"]' ).parent().removeClass( "has-error" );
+					}
+				});
+		});
+		// Show message on submit apartment
+		$( '.create-apartment-in-deal [type="submit"]').on( "click", function(e){
+			e.preventDefault();
+			var $form = $( "#form-modal-apartment .create-apartment-in-deal" ),
+					$elem = $( "#form-modal-apartment" );
+			
+			$.post( $form.attr("action") + ".json", $form.serializeArray())
+				.done(function(data) {
+					$( '#new_deal' ).find( '[name*="apartment_id"]' ).append( '<option selected="selected" value="' + data.id + '">' + data.address + '</option>').siblings( '.fake-select' ).text( data.address );
+					$elem.modal('hide');
+					Messenger().post("Объект создан!");
+				})
+				.fail(function(data) {
+					if( data.responseJSON.address ) {
+						$form.find( '[name*="address"]' ).prop("placeholder", data.responseJSON.address[0]).parent().addClass( "has-error" );
 					}
 				});
 		});
