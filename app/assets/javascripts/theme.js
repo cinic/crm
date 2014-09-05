@@ -12,6 +12,7 @@ var ready = function() {
 
 	// build custom selects
 	UI.smart_selects();
+	UI.select2_selects();
 
 	// Suggestions names
 	Suggestions.names();
@@ -99,6 +100,11 @@ var UI = {
 			}).focusout(function () {
 				$fake_select.removeClass("focus");
 			});
+		});
+	},
+	select2_selects: function () {
+		$(".select2").select2({
+			//placeholder: 'Select tags or add new ones'	
 		});
 	}
 }

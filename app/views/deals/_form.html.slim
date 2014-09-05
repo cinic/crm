@@ -6,25 +6,25 @@
     .col-sm-10.col-md-8
       .has-feedback
         i.ion-information-circled.form-control-feedback data-toggle="tooltip" title="Возможность редактировать отключена"
-        = f.select(:apartment_id, @apartments.map { |apartment| [apartment.address, apartment.id] }, {}, { class: "form-control", disabled: @deal.new_record? ? false : true, "data-smart-select" => "" })
+        = f.select(:apartment_id, @apartments.map { |apartment| [apartment.address, apartment.id] }, {}, { class: "form-control select2", disabled: @deal.new_record? ? false : true })
         - if @deal.new_record?
           a#add-apartment-in-deal href="#" data-toggle="modal" data-target="#form-modal-apartment" Добавить объект
   .form-group
     = f.label :landlord_id, 'Наймодатель', class: "col-sm-2 col-md-2 control-label"
     .col-sm-10.col-md-8
-      = f.select(:landlord_id, @landlords.map { |landlord| [landlord.name, landlord.id] }, {include_blank: 'Выберите наймодателя'}, { class: "form-control", "data-smart-select" => "" })
+      = f.select(:landlord_id, @landlords.map { |landlord| [landlord.name, landlord.id] }, {include_blank: 'Выберите наймодателя'}, { class: "form-control select2" })
       - if @deal.new_record?
         a#add-landlord-in-deal href="#" data-toggle="modal" data-target="#form-modal" Добавить наймодателя
   .form-group
     = f.label :tenant_id, 'Наниматель', class: "col-sm-2 col-md-2 control-label"
     .col-sm-10.col-md-8
-      = f.select(:tenant_id, @tenants.map { |tenant| [tenant.name, tenant.id] }, {}, { class: "form-control", "data-smart-select" => "" })
+      = f.select(:tenant_id, @tenants.map { |tenant| [tenant.name, tenant.id] }, {}, { class: "form-control select2" })
       - if @deal.new_record?
         a#add-tenant-in-deal href="#" data-toggle="modal" data-target="#form-modal-tenant" Добавить нанимателя
   .form-group  
     = f.label :user_id, 'Риелтор', class: "col-sm-2 col-md-2 control-label"
     .col-sm-10.col-md-8
-      = f.select(:user_id, @realtors.map { |realtor| [realtor.name, realtor.id] }, {}, { class: "form-control", "data-smart-select" => "" })
+      = f.select(:user_id, @realtors.map { |realtor| [realtor.name, realtor.id] }, {}, { class: "select2 form-control" })
   .form-group  
     = f.label :price, 'Цена', class: "col-sm-2 col-md-2 control-label"
     .col-sm-10.col-md-8

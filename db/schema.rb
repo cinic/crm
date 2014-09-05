@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140903064441) do
+ActiveRecord::Schema.define(version: 20140905070213) do
 
   create_table "apartments", force: true do |t|
     t.string   "metro"
@@ -153,6 +153,19 @@ ActiveRecord::Schema.define(version: 20140903064441) do
   add_index "leads", ["mobile"], name: "index_leads_on_mobile", using: :btree
   add_index "leads", ["name"], name: "index_leads_on_name", using: :btree
   add_index "leads", ["user_id"], name: "index_leads_on_user_id", using: :btree
+
+  create_table "metros", force: true do |t|
+    t.string   "name"
+    t.decimal  "lng",        precision: 11, scale: 6
+    t.decimal  "lat",        precision: 8,  scale: 6
+    t.string   "color"
+    t.string   "line"
+    t.string   "city"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "metros", ["city"], name: "index_metros_on_city", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name",                   null: false
