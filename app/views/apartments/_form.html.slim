@@ -9,7 +9,7 @@
     = f.select(:rooms, ['1','2','3','4','5','6+'], { }, { class: 'form-control', "data-smart-select" => "" })
   .form-group
     = f.label :metro, "Ближайшее метро"
-    = f.collection_select :metro, Metro.moscow, :id, :name, {include_blank: "Выберите станцию"}, {class: 'form-control select2'}
+    = f.collection_select :metro, Metro.moscow, :name, :name, {include_blank: "Выберите станцию"}, {class: 'form-control select2'}
   .form-group.metro
     .row.col-md-12
       = f.label :time_to_metro, "До метро"
