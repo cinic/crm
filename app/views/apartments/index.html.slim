@@ -35,11 +35,16 @@
       - @apartments.each do |apartment|
         tr
           td
-            span.label.label-info = apartment.status if apartment.status == "new"
-            span.label.label-info = apartment.status if apartment.status == "confirmed"
-            span.label.label-warning = apartment.status if apartment.status == "advertised"
-            span.label.label-succes = apartment.status if apartment.status == "rented"
-            span.label.label-default = apartment.status if apartment.status == "lost"
+            -if apartment.status == "new"
+              span.label.label-info = apartment.status
+            - if apartment.status == "confirmed"
+              span.label.label-primary = apartment.status
+            - if apartment.status == "advertised"
+              span.label.label-warning = apartment.status
+            - if apartment.status == "rented"
+              span.label.label-success = apartment.status
+            -if apartment.status == "lost"
+              span.label.label-danger = apartment.status
             br
             = link_to 'Удалить', apartment, data: {:confirm => 'Вы уверены?'}, :method => :delete
           td = apartment.rooms
