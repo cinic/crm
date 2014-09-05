@@ -1,8 +1,42 @@
 - content_for :title, "Пользователь #{@user.id}"
 - content_for :page_title, "Пользователь #{@user.id}"
-p#notice = notice
+- content_for :body_id, "account"
 
-
-= link_to 'Редактировать', edit_user_path(@user)
-'|
-= link_to 'Назад', users_path
+#sidebar
+  .sidebar-toggler.visible-xs
+    i.ion-navicon
+  h3 Аккаунт
+  ul.menu
+    li
+      a href=profile_path
+        i.ion-ios7-person-outline
+        | Профиль
+    li
+      a href="#"
+        i.ion-ios7-location-outline
+        | Объекты в работе (скоро)
+    li
+      a href="#"
+        i.ion-ios7-email-outline
+        | Уведомления (скоро)
+    li
+      a href="#"
+        i.ion-ios7-help-outline
+        | Поддержка (скоро)
+#panel.profile
+  h3 Данные аккаунта
+  = form_for @user, url: profile_path, method: :patch do |f|
+    .form-group
+      = f.label :email
+      = f.email_field :email, class: 'form-control', placeholder: "Email"
+    .form-group
+      = f.label :password
+      = f.text_field :password, class: 'form-control', placeholder: "Пароль"
+    .form-group
+      = f.label :name
+      = f.text_field :name, class: 'form-control', placeholder: "ФИО пользователя"
+    .form-group
+      = f.label :mobile
+      = f.text_field :mobile, class: 'form-control', placeholder: "Мобильный для связи"
+    .form-group.action
+      = f.submit 'Сохранить', class: 'btn btn-success'

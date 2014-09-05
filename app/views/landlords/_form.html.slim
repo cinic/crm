@@ -1,11 +1,18 @@
-= form_for @landlord do |f|
+= form_for @landlord, html: { class: "form-horizontal edit-tenant", role: "form" } do |f|
   - if @landlord.errors.any?
     = render "shared/error_messages", target: @landlord
-  .form-row
-    = f.label :name, 'ФИО'
-    = f.text_field :name
+  .form-group  
+    = f.label :name, 'ФИО', class: "col-sm-2 col-md-2 control-label"
+    .col-sm-10.col-md-8
+      = f.text_field :name, class: "form-control"
+  .form-group  
+    = f.label :mobile, 'Мобильный', class: "col-sm-2 col-md-2 control-label"
+    .col-sm-10.col-md-8
+      = f.text_field :mobile, class: "form-control"
+  .form-group  
+    = f.label :alternate_phone, 'Альтернативный телефон', class: "col-sm-2 col-md-2 control-label"
+    .col-sm-10.col-md-8
+      = f.text_field :alternate_phone, class: "form-control"
 
-  .form-row
-    = f.label :mobile, 'Мобильный'
-    = f.text_field :mobile
-  .actions = f.submit 'Сохранить', class: "btn-flat success"
+  .form-group.form-actions
+    .col-sm-offset-2.col-sm-10.col-md-offset-2.col-md-10 = f.submit 'Сохранить', class: "btn btn-success"

@@ -1,0 +1,20 @@
+= form_for @user do |f|
+  - if @user.errors.any?
+    = render "shared/error_messages", target: @user
+  .form-row
+    = f.label :role, 'Тип пользователя'
+    = f.select(:role, USER_TYPES, {}, {class: "form-control select2"})
+  .form-group
+    = f.label :email
+    = f.email_field :email, class: 'form-control', placeholder: "Email"
+  .form-group
+    = f.label :password
+    = f.text_field :password, class: 'form-control', placeholder: "Пароль"
+  .form-group
+    = f.label :name
+    = f.text_field :name, class: 'form-control', placeholder: "ФИО пользователя"
+  .form-group
+    = f.label :mobile
+    = f.text_field :mobile, class: 'form-control', placeholder: "Мобильный для связи"
+  .form-group.action
+    = f.submit 'Сохранить', class: 'btn btn-success'

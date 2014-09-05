@@ -8,7 +8,7 @@ module Authentication
     validates :email,
       presence: true,
       format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i },
-      uniqueness: { case_sensitive: false, if: true }
+      uniqueness: { case_sensitive: false }
 
     # Пользователь может редактировать профиль без изменения пароля
     validates_presence_of :password, on: :create

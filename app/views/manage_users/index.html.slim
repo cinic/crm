@@ -1,0 +1,38 @@
+- content_for :title, "Пользователи"
+- content_for :page_title, "Список пользователей"
+- content_for :body_id, "users"
+
+.menubar.fixed
+  .sidebar-toggler.visible-xs
+    i.ion-navicon
+  .page-title = yield(:page_title)
+  a.new-user.btn.btn-primary.pull-right href=new_user_path 
+    span Создать пользователя
+.content-wrapper
+  .row.users-list
+    .col-md-12
+      .row.headers
+        .col-sm-5.header.hidden-xs
+          label
+            a href="#"  Имя
+        .col-sm-2.header.hidden-xs
+          label
+            a href="#"  Мобильный
+        .col-sm-2.header.hidden-xs
+          label
+            a href="#"  Email
+        .col-sm-3.header.hidden-xs
+          label.text-right
+            a href="#"  Зарегистрирован    
+      - @users.each do |user|
+        .row.user
+          .col-sm-5
+            a.name href=edit_user_path(user)  =user.name
+            br
+            br
+          .col-sm-2
+            .email =user.mobile
+          .col-sm-2
+            .total-spent = user.email
+          .col-sm-3
+            .created-at = user.created_at

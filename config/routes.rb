@@ -5,7 +5,8 @@ Crm::Application.routes.draw do
   delete 'sessions', to: 'sessions#destroy'
   resources :password_resets, only: [:new, :create, :edit, :update]
 
-  resources :users
+  resource :users, path: "profile", as: "profile", only: [:show, :edit, :update]
+  resources :manage_users, path: "users", as: "users", only: [:index, :edit, :update, :create, :new]
   get 'leads/:id/edit_realtor', to: 'leads#edit_realtor', as: 'edit_realtor_lead'
   get 'leads/:id/new_landlord_lead', to: 'leads#new_landlord_lead', as: 'new_landlord_lead'
   get 'leads/:id/new_apartment_lead', to: 'leads#new_apartment_lead', as: 'new_apartment_lead'

@@ -7,7 +7,7 @@
         i.fa.fa-chevron-down
     ul.menu
       li
-        a href=user_path(current_user) Свойства
+        a href=profile_path Свойства
       li
         a href=logout_path  Выход
   .menu-section
@@ -44,15 +44,9 @@
       h3 Admin
       ul
         li.option
-          a data-toggle="sidebar" href="#" 
+          a href=users_path
             i.ion-person
             span Пользователи
-            i.fa.fa-chevron-down
-          ul.submenu
-            li
-              a href=users_path  Список
-            li
-              a href=new_user_path  Создать
 
   .bottom-menu.hidden-sm
     ul

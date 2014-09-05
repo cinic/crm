@@ -1,0 +1,13 @@
+- content_for :title, "Редактирование пользователя #{@user.id}"
+- content_for :page_title, "Редактирование пользователя #{@user.id}"
+- content_for :body_id, "users"
+
+.menubar.fixed
+  .sidebar-toggler.visible-xs
+    i.ion-navicon
+  .page-title = yield(:page_title)
+  a.new-user.btn.btn-primary.pull-right href=users_path 
+    span К списку пользователей
+.content-wrapper
+  == render 'form'
+

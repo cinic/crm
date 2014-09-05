@@ -17,4 +17,11 @@ class Deal < ActiveRecord::Base
 
   scope :this_month, -> { where(created_at: Date.today.beginning_of_month..Date.today.end_of_month) }
 
+  def self.all_money
+    self.sum(:commission)
+  end
+  def self.this_month_money
+    self.this_month.sum(:commission)
+  end
+
 end

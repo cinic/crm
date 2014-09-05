@@ -21,9 +21,19 @@
       span.field Утраченых объектов
       span.data  = @apartments[:lost]
     .metric
+      span.field Объектов в рекламе
+      span.data = @apartments[:advertised]
+  .metrics.clearfix
+    .metric
       span.field Сделок в этом месяце
       span.data = @deals[:this_month]
     .metric
       span.field Всего сделок
       span.data = @deals[:all]
+    .metric
+      span.field Сделок с этом месяце
+      span.data = number_to_currency(@deals[:this_month_money], delimiter: ' ', precision: 0, format: '%n %u')
+    .metric
+      span.field Всего сделок
+      span.data = number_to_currency(@deals[:all_money], delimiter: ' ', precision: 0, format: '%n %u')
   

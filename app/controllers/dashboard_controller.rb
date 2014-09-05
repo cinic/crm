@@ -10,14 +10,17 @@ class DashboardController < ApplicationController
       @apartments = {
         newest: Apartment.newest.count,
         all: Apartment.all.count,
-        lost: Apartment.lost.count
+        lost: Apartment.lost.count,
+        advertised: Apartment.advertised.count
       }
     end
 
     def set_deals
       @deals = {
         this_month: Deal.this_month.count,
-        all: Deal.all.count
+        all: Deal.all.count,
+        all_money: Deal.all_money,
+        this_month_money: Deal.this_month_money
       }
     end
 end

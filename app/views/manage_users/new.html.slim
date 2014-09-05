@@ -1,0 +1,12 @@
+- content_for :title, "Новый пользователь"
+- content_for :page_title, "Новый пользователь"
+- content_for :body_id, "users"
+
+.menubar.fixed
+  .sidebar-toggler.visible-xs
+    i.ion-navicon
+  .page-title = yield(:page_title)
+  a.new-user.btn.btn-primary.pull-right href=users_path 
+    span К списку пользователей
+.content-wrapper
+  == render 'form'

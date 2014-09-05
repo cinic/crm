@@ -1,9 +1,13 @@
 - content_for :title, "Редактирование наймодателя"
 - content_for :page_title, "Редактирование наймодателя #{@landlord.id}"
+- content_for :body_id, "form-product"
 
-== render 'form'
-
-= link_to 'Подробнее', @landlord
-'|
-= link_to 'Назад', landlords_path
-
+.menubar
+  .sidebar-toggler.visible-xs
+    i.ion-navicon
+  .page-title
+    == yield(:page_title)
+  a.new-user.btn.btn-primary.pull-right href=landlords_path
+    span К списку наймодателей
+.content-wrapper
+  == render 'form'

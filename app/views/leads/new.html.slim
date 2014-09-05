@@ -1,6 +1,13 @@
 - content_for :title, "Новая заявка"
 - content_for :page_title, "Новая заявка"
+- content_for :body_id, "form-product"
 
-== render 'form'
-
-= link_to 'Назад', leads_path
+.menubar
+  .sidebar-toggler.visible-xs
+    i.ion-navicon
+  .page-title
+    == yield(:page_title)
+  a.new-user.btn.btn-primary.pull-right href=leads_path
+    span К списку заявок
+.content-wrapper
+  == render 'form'

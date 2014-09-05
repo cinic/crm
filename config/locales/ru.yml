@@ -16,6 +16,11 @@ ru:
           rented: "Сдан"
           advertised: "В рекламе"
           lost: "Утерян"
+      user:
+        name: "ФИО"
+        mobile: "Мобильный"
+        password: "Пароль"
+        email: "Email"
     errors:
       models:
         deal:

@@ -1,18 +1,19 @@
-= form_for @lead do |f|
+= form_for @lead, html: { class: "form-horizontal edit-tenant", role: "form" } do |f|
   - if @lead.errors.any?
     = render "shared/error_messages", target: @lead
-  .form-row
-    = f.label :name, 'ФИО'
-    = f.text_field :name
+  .form-group
+    = f.label :name, 'ФИО', class: "col-sm-2 col-md-2 control-label"
+    .col-sm-10.col-md-8 = f.text_field :name, class: "form-control"
 
-  .form-row
-    = f.label :mobile, 'Мобильный'
-    = f.text_field :mobile
-  .form-row
-    = f.label :metro, 'Метро'
-    = f.text_field :metro
-  .form-row
-    = f.label :address, 'Адрес'
-    = f.text_field :address
+  .form-group
+    = f.label :mobile, 'Мобильный', class: "col-sm-2 col-md-2 control-label"
+    .col-sm-10.col-md-8 = f.text_field :mobile, class: "form-control"
+  .form-group
+    = f.label :metro, 'Метро', class: "col-sm-2 col-md-2 control-label"
+    .col-sm-10.col-md-8 = f.text_field :metro, class: "form-control"
+  .form-group
+    = f.label :address, 'Адрес', class: "col-sm-2 col-md-2 control-label"
+    .col-sm-10.col-md-8 = f.text_field :address, class: "form-control"
 
-  .actions = f.submit 'Сохранить', class: "btn-flat success"
+  .form-group.form-actions
+    .col-sm-offset-2.col-sm-10.col-md-offset-2.col-md-10 = f.submit 'Сохранить', class: "btn btn-success"
