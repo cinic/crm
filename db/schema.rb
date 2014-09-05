@@ -156,11 +156,9 @@ ActiveRecord::Schema.define(version: 20140905070213) do
 
   create_table "metros", force: true do |t|
     t.string   "name"
-    t.decimal  "lng",        precision: 11, scale: 6
-    t.decimal  "lat",        precision: 8,  scale: 6
-    t.string   "color"
-    t.string   "line"
     t.string   "city"
+    t.integer  "id_on_cian"
+    t.integer  "id_on_avito"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
