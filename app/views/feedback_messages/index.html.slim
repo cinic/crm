@@ -1,0 +1,27 @@
+h1 Listing feedback_messages
+
+table
+  thead
+    tr
+      th User
+      th Message
+      th Status
+      th Ticket number
+      th
+      th
+      th
+
+  tbody
+    - @feedback_messages.each do |feedback_message|
+      tr
+        td = feedback_message.user
+        td = feedback_message.message
+        td = feedback_message.status
+        td = feedback_message.ticket_number
+        td = link_to 'Show', feedback_message
+        td = link_to 'Edit', edit_feedback_message_path(feedback_message)
+        td = link_to 'Destroy', feedback_message, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Feedback message', new_feedback_message_path

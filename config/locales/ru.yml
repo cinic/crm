@@ -21,6 +21,8 @@ ru:
         mobile: "Мобильный"
         password: "Пароль"
         email: "Email"
+      feedback_message:
+        message: "Сообщение"
     errors:
       models:
         deal:
@@ -39,3 +41,7 @@ ru:
               blank: "должен быть выбран"
             landlord_id:
               blank: "должен быть выбран"
+        feedback_message:
+          attributes:
+            message:
+              blank: "должно быть заполнено. Без него, мы не сможем улучшать систему."

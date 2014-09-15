@@ -1,6 +1,7 @@
 - content_for :title, "Дашбоард"
 - content_for :page_title, "Дашбоард"
 - content_for :body_id, "dashboard"
+- content_for :body_class, "ui"
 
 .menubar
   .sidebar-toggler.visible-xs
@@ -35,4 +36,3 @@
     .metric
       span.field Всего сделок
       span.data = number_to_currency(@deals[:all_money], delimiter: ' ', precision: 0, format: '%n %u')
-  

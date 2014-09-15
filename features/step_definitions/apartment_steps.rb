@@ -11,7 +11,7 @@ end
 end
 
 Если(/^пользователь отправляет валидную информацию об объекте$/) do
-  fill_in 'Метро', with: 'Домодедовская'
+  find('#apartment_metro').find(:xpath, 'option[1]').select_option
   fill_in 'Адрес', with: 'ул. Яблочкова, д. 37'
   click_button 'Сохранить'
 end
