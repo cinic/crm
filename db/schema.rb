@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140905070213) do
+ActiveRecord::Schema.define(version: 20140915124005) do
 
   create_table "apartments", force: true do |t|
     t.string   "metro"
@@ -136,6 +136,17 @@ ActiveRecord::Schema.define(version: 20140905070213) do
   add_index "deals", ["landlord_id"], name: "index_deals_on_landlord_id", using: :btree
   add_index "deals", ["tenant_id"], name: "index_deals_on_tenant_id", using: :btree
   add_index "deals", ["user_id"], name: "index_deals_on_user_id", using: :btree
+
+  create_table "feedback_messages", force: true do |t|
+    t.integer  "user_id"
+    t.text     "message"
+    t.string   "status"
+    t.string   "ticket_number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "feedback_messages", ["user_id"], name: "index_feedback_messages_on_user_id", using: :btree
 
   create_table "leads", force: true do |t|
     t.string   "name",                  null: false

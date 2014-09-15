@@ -51,8 +51,8 @@
   .bottom-menu.hidden-sm
     ul
       li
-        a href="#" 
-          i.ion-help
+        a#create-feedback-message data-toggle="modal" data-target="#form-modal-feedback-message" href="#{new_feedback_message_path}#new_feedback_message"
+          i.ion-chatbubble-working
       li
         a href="#" 
           i.ion-archive
@@ -66,7 +66,22 @@
       li
         a href=logout_path
           i.ion-log-out
-
+- content_for :bottom_content do
+  /! Form Modal
+  #form-modal-feedback-message.modal.fade tabindex="-1" role="dialog"
+    .modal-dialog
+      .modal-content
+        = form_for FeedbackMessage.new, html: {class: "create-feedback-message-in-dashboard form-in-modal", tabindex: "-1", role: "form"} do |l|
+          .modal-header
+            button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+              |&times;
+            h4 class="modal-title" id="myModalLabel" Форма обратной связи
+          .modal-body
+            .form-group
+              = l.label :message, "Сообщение", class: "control-label"
+              = l.text_area :message, class: "form-control"
+          .modal-footer
+            = l.button "Отправить сообщение", class: "btn btn-success"
 /sidebar#sidebar-nav
   ul#dashboard-menu
     = li_with_link_to_unles_current_with_class raw('<i class="fa fa-tachometer"></i><span>Дашбоард</span>'), "active", dashboard_path

@@ -1,4 +1,5 @@
-#ui {
+#ui,
+.ui {
 	&:not(.shepherd-active) { 
 		.main-sidebar,
 		.content-wrapper section > * {
@@ -62,10 +63,15 @@
 		}
 	}
 
-	#form-modal {
+	#form-modal,
+	.form-in-modal {
 		input.datepicker {
 			color: #555;
 			padding-left: 15px;
+		}
+		textarea,
+		textarea.form-control {
+			height: 120px;
 		}
 
 		.fa-calendar {

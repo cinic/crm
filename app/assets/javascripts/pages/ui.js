@@ -98,6 +98,23 @@
 				});
 		});
 
+		// Show message on submit feedback-message
+		$( '.create-feedback-message-in-dashboard [type="submit"]').on( "click", function(e){
+			e.preventDefault();
+			var $form = $( "#form-modal-feedback-message .create-feedback-message-in-dashboard" ),
+					$elem = $( "#form-modal-feedback-message" );
+			
+			$.post( $form.attr("action") + ".json", $form.serializeArray())
+				.done(function(data) {
+					$elem.modal('hide');
+					Messenger().post("Сообщение отправлено!");
+				})
+				.fail(function(data) {
+					if( data.responseJSON.message ) {
+						$form.find( '[name*="message"]' ).prop("placeholder", data.responseJSON.message[0]).parent().addClass( "has-error" );
+					}
+				});
+		});
 
 		// Focus first input when form modal is shown
 		$('#form-validation-modal').on('shown.bs.modal', function (e) {

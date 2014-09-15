@@ -1,0 +1,8 @@
+= form_for @feedback_message do |f|
+  - if @feedback_message.errors.any?
+    = render "shared/error_messages", target: @feedback_message
+
+  .field
+    = f.label :message, 'Сообщение'
+    = f.text_area :message
+  .actions = f.submit 'Отправить сообщение'

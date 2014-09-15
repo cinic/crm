@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong User:
+  = @feedback_message.user
+p
+  strong Message:
+  = @feedback_message.message
+p
+  strong Status:
+  = @feedback_message.status
+p
+  strong Ticket number:
+  = @feedback_message.ticket_number
+
+= link_to 'Edit', edit_feedback_message_path(@feedback_message)
+'|
+= link_to 'Back', feedback_messages_path
