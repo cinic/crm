@@ -1,17 +1,17 @@
 set :stage, :staging
 set :rvm_type, :user
-set :deploy_to, '/home/cinic/crm/staging'
+set :deploy_to, '/home/deployer/crm/staging'
 set :app_name, "crm"
-set :user, "cinic"
+set :user, "deployer"
 
 # Simple Role Syntax
 # ==================
 # Supports bulk-adding hosts to roles, the primary
 # server in each group is considered to be the first
 # unless any hosts have the primary property set.
-role :app, %w{37.139.8.84}
-role :web, %w{37.139.8.84}
-role :db,  %w{37.139.8.84}
+role :app, %w{95.85.53.122}
+role :web, %w{95.85.53.122}
+role :db,  %w{95.85.53.122}
 
 # Extended Server Syntax
 # ======================
@@ -19,7 +19,7 @@ role :db,  %w{37.139.8.84}
 # definition into the server list. The second argument
 # something that quacks like a hash can be used to set
 # extended properties on the server.
-server '37.139.8.84', user: 'cinic', roles: %w{web app db}, primary: :true
+server '95.85.53.122', user: 'deployer', roles: %w{web app db}, primary: :true
 
 # you can set custom ssh options
 # it's possible to pass any option but you need to keep in mind that net/ssh understand limited list of options
@@ -31,7 +31,7 @@ server '37.139.8.84', user: 'cinic', roles: %w{web app db}, primary: :true
 #    auth_methods: %w(password)
 #  }
 set :ssh_options, {
-   user: "cinic",
+   user: "deployer",
    keys: %w(~/.ssh/id_rsa),
    port: 2605,
    forward_agent: false,
