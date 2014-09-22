@@ -1,0 +1,13 @@
+- content_for :title, "Создание списание"
+- content_for :page_title, "Новое списание"
+- content_for :body_id, "form-product"
+
+.menubar
+  .sidebar-toggler.visible-xs
+    i.ion-navicon
+  .page-title
+    == yield(:page_title)
+  a.new-user.btn.btn-primary.pull-right href=money_credits_path
+    span К списку списаний
+.content-wrapper
+  == render 'form'

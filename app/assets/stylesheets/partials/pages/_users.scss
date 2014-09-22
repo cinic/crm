@@ -1,4 +1,5 @@
-#users {
+#users,
+.users {
 	#content {
 
 		.sidebar-toggler {
@@ -245,10 +246,18 @@
 				.user {
 					border-bottom: 1px solid #f0f0f0;
 					padding: 8px 0;
-
+					&.total {
+						padding: 16px 0 8px;
+						background: #fafafc;
+						border-bottom: none;
+						.labels {
+							text-align: right;
+						}
+					}
 					@media(max-width: $maxMedium) {
 						padding: 13px 0;
 					}
+
 
 					&:first-child {
 						border-top: 1px solid #e0e0e0;

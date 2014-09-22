@@ -45,3 +45,8 @@ ru:
           attributes:
             message:
               blank: "должно быть заполнено. Без него, мы не сможем улучшать систему."
+  time:
+    formats:
+      default: "%m.%d.%Y %H:%M"
+      short: "%H:%M"
+      notime: "%m.%d.%Y"

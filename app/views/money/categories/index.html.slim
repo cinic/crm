@@ -1,0 +1,21 @@
+h1 Listing money_categories
+
+table
+  thead
+    tr
+      th Description
+      th
+      th
+      th
+
+  tbody
+    - @money_categories.each do |money_category|
+      tr
+        td = money_category.description
+        td = link_to 'Show', money_category
+        td = link_to 'Edit', edit_money_category_path(money_category)
+        td = link_to 'Destroy', money_category, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Money category', new_money_category_path

@@ -58,7 +58,7 @@
 		// Datepicker
         $('.datepicker').datepicker({
         	autoclose: true,
-        	orientation: 'left bottom',
+        	format: 'yyyy.mm.dd'
         });
 
         // Minicolors colorpicker

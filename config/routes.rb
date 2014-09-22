@@ -1,4 +1,12 @@
 Crm::Application.routes.draw do
+  
+  namespace :money do
+    resources :debits
+    resources :credits
+    resources :statuses
+    resources :categories
+    root 'index#index'
+  end
   resources :feedback_messages
 
   get 'login', to: 'sessions#new', as: 'login'

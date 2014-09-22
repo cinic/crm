@@ -1,0 +1,2 @@
+module Money::DebitsHelper
+end

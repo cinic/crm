@@ -1,0 +1,21 @@
+h1 Listing money_statuses
+
+table
+  thead
+    tr
+      th Description
+      th
+      th
+      th
+
+  tbody
+    - @money_statuses.each do |money_status|
+      tr
+        td = money_status.description
+        td = link_to 'Show', money_status
+        td = link_to 'Edit', edit_money_status_path(money_status)
+        td = link_to 'Destroy', money_status, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Money status', new_money_status_path

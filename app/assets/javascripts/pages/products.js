@@ -34,7 +34,8 @@
 		// Datepicker
 	    $('.datepicker').datepicker({
 	    	autoclose: true
-	    	, orientation: 'right top'
+	    	, language: "ru"
+	    	//, orientation: 'right top'
 	    	// , endDate: new Date()
 	    });
 

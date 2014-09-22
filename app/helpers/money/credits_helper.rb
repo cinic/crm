@@ -1,0 +1,2 @@
+module Money::CreditsHelper
+end

@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140915124005) do
+ActiveRecord::Schema.define(version: 20140920132727) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "apartments", force: true do |t|
     t.string   "metro"
@@ -153,7 +156,7 @@ ActiveRecord::Schema.define(version: 20140915124005) do
     t.string   "mobile",                null: false
     t.string   "metro"
     t.string   "address"
-    t.integer  "status",      limit: 1
+    t.integer  "status",      limit: 2
     t.integer  "user_id"
     t.integer  "landlord_id"
     t.datetime "created_at"
@@ -175,6 +178,55 @@ ActiveRecord::Schema.define(version: 20140915124005) do
   end
 
   add_index "metros", ["city"], name: "index_metros_on_city", using: :btree
+
+  create_table "money", force: true do |t|
+    t.string   "contractor"
+    t.integer  "money_category_id"
+    t.decimal  "amount",            precision: 10, scale: 2
+    t.datetime "date"
+    t.integer  "money_status_id"
+    t.text     "description"
+    t.integer  "deal_id"
+    t.string   "type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "money", ["contractor"], name: "index_money_on_contractor", using: :btree
+  add_index "money", ["deal_id"], name: "index_money_on_deal_id", using: :btree
+  add_index "money", ["money_category_id"], name: "index_money_on_money_category_id", using: :btree
+  add_index "money", ["money_status_id"], name: "index_money_on_money_status_id", using: :btree
+
+  create_table "money_categories", force: true do |t|
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "money_operations", force: true do |t|
+    t.string   "contractor"
+    t.integer  "category_id"
+    t.integer  "status_id"
+    t.integer  "deal_id"
+    t.integer  "user_id"
+    t.decimal  "amount",      precision: 10, scale: 2
+    t.datetime "date"
+    t.text     "description"
+    t.string   "type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "money_operations", ["category_id"], name: "index_money_operations_on_category_id", using: :btree
+  add_index "money_operations", ["deal_id"], name: "index_money_operations_on_deal_id", using: :btree
+  add_index "money_operations", ["status_id"], name: "index_money_operations_on_status_id", using: :btree
+  add_index "money_operations", ["user_id"], name: "index_money_operations_on_user_id", using: :btree
+
+  create_table "money_statuses", force: true do |t|
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "name",                   null: false

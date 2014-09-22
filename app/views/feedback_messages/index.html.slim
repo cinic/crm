@@ -14,7 +14,7 @@ table
   tbody
     - @feedback_messages.each do |feedback_message|
       tr
-        td = feedback_message.user
+        td = feedback_message.user.name
         td = feedback_message.message
         td = feedback_message.status
         td = feedback_message.ticket_number

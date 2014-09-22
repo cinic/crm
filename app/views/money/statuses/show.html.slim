@@ -1,0 +1,9 @@
+p#notice = notice
+
+p
+  strong Description:
+  = @money_status.description
+
+= link_to 'Edit', edit_money_status_path(@money_status)
+'|
+= link_to 'Back', money_statuses_path

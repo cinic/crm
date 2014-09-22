@@ -1,0 +1,12 @@
+= form_for @money_category do |f|
+  - if @money_category.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@money_category.errors.count, "error")} prohibited this money_category from being saved:"
+      ul
+        - @money_category.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :description
+    = f.text_field :description
+  .actions = f.submit 'Save'

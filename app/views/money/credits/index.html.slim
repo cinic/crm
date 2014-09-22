@@ -1,0 +1,74 @@
+- content_for :title, "Деньги: списания"
+- content_for :page_title, "Деньги: списания"
+- content_for :body_id, "datatables"
+- content_for :body_class, "money users"
+.menubar.fixed
+  .sidebar-toggler.visible-xs
+    i.ion-navicon
+  .page-title
+    == yield(:page_title)
+  a.new-debit.btn.btn-primary.pull-right href=new_money_debit_path 
+    span Добавить поступление
+  a.new-credit.btn.btn-primary.pull-right href=new_money_credit_path 
+    span Добавить списание
+.content-wrapper
+  .row.page-controls
+    .col-md-12.filters
+      .links
+        label Фильтр:
+        a href=money_root_path Все
+        a href=money_debits_path Поступления
+        a class="active" href=money_credits_path Списания
+
+      /.show-options
+        .dropdown
+            a class="button" data-toggle="dropdown" href="#"
+              span
+                |Сортировать по
+                i class="fa fa-unsorted"
+            ul class="dropdown-menu" role="menu" aria-labelledby="dLabel"
+              li
+                a href="#" Контрагенту
+              li
+                a href="#" Категории
+              li
+                a href="#" Статусу
+              li
+                a href="#" Дате
+  .row.users-list
+    .col-md-12
+      .row.headers
+        .col-sm-3.header.select-users
+          label Контрагент        
+        .col-sm-4.header.hidden-xs
+          label Тип операции
+        .col-sm-2.header.hidden-xs
+          label Статус
+        .col-sm-2.header.hidden-xs
+          label Сумма, руб.
+        .col-sm-1.header.hidden-xs
+          label Дата
+      - @money_credits.each do |money|
+        .row.user
+          .col-sm-3
+            = money.contractor
+          .col-sm-4
+            p = money.category.description
+            - if money.description.nil?
+              p = money.description
+            - unless money.deal.nil?
+              p = money.deal.id
+          .col-sm-2
+            - if money.status.description.match('Запланировано')
+              span.label.label-warning = money.status.description
+            - if money.status.description.match('Закрыто')
+              span.label.label-success = money.status.description
+          .col-sm-2
+            = money.amount_direction + number_to_currency(money.amount, unit: "", separator: ",", delimiter: " ", format: "%n %u")
+          .col-sm-1
+            = l(money.date, format: :notime)
+      .row.user.total
+        .col-sm-9.labels
+          label Всего ушло
+        .col-sm-3.hidden-xs
+          label = "&nbsp;&nbsp;&nbsp;".html_safe + number_to_currency(total_credit, unit: "", separator: ",", delimiter: " ", format: "%n %u")

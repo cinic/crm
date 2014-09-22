@@ -4,6 +4,7 @@ SimpleCov.start do  # for example...
   add_filter '/spec/'
   add_filter '/features/'
   add_filter '/config/'
+  add_filter '/vendor/bundle/'
   add_group 'Controllers', 'app/controllers'
   add_group 'Models', 'app/models'
   add_group 'Helpers', 'app/helpers'
@@ -67,4 +68,6 @@ end
 # The :transaction strategy is faster, but might give you threading problems.
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
-
+# Factory Girl
+World(FactoryGirl::Syntax::Methods)
+DatabaseCleaner.clean_with(:truncation)
