@@ -59,12 +59,13 @@
             - unless money.deal.nil?
               p = money.deal.id
           .col-sm-2
-            - if money.status.description.match('Запланировано')
+            - if money.status.description.downcase.match('обязательство')
               span.label.label-warning = money.status.description
-            - if money.status.description.match('Закрыто')
+            - if money.status.description.downcase.match('соверш(е|ё)н')
               span.label.label-success = money.status.description
           .col-sm-2
-            = money.amount_direction + number_to_currency(money.amount, unit: "", separator: ",", delimiter: " ", format: "%n %u")
+            span style="#{(money.amount_direction == '-') ? 'color:red;' : 'color:black;'}"
+              = money.amount_direction + number_to_currency(money.amount, unit: "", separator: ",", delimiter: " ", format: "%n %u")
           .col-sm-1
             = l(money.date, format: :notime)
       .row.user.total

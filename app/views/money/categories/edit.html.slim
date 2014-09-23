@@ -1,8 +1,13 @@
-h1 Editing money_category
+- content_for :title, "Редактировать категорию"
+- content_for :page_title, "Редактировать категорию"
+- content_for :body_id, "form-product"
 
-== render 'form'
-
-= link_to 'Show', @money_category
-'|
-= link_to 'Back', money_categories_path
-
+.menubar
+  .sidebar-toggler.visible-xs
+    i.ion-navicon
+  .page-title
+    == yield(:page_title)
+  a.new-user.btn.btn-primary.pull-right href=money_categories_path
+    span К списку категорий
+.content-wrapper
+  == render 'form'

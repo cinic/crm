@@ -1,8 +1,8 @@
-= form_for @money_status do |f|
+= form_for @money_status, html: { class: "form-horizontal edit-status", role: "form" } do |f|
   - if @money_status.errors.any?
     = render "shared/error_messages", target: @money_status
-
-  .field
-    = f.label :description
-    = f.text_field :description
-  .actions = f.submit 'Сохранить'
+  .form-group
+    = f.label :description, 'Статус', class: 'col-sm-2 col-md-2 control-label'
+    .col-sm-10.col-md-8 = f.text_field :description, class: 'form-control'
+  .form-group.form-actions
+    .col-sm-offset-2.col-sm-10.col-md-offset-2.col-md-10 = f.submit 'Сохранить', class: 'btn btn-success'

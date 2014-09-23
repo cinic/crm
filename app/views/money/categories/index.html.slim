@@ -1,21 +1,26 @@
-h1 Listing money_categories
-
-table
-  thead
-    tr
-      th Description
-      th
-      th
-      th
-
-  tbody
-    - @money_categories.each do |money_category|
-      tr
-        td = money_category.description
-        td = link_to 'Show', money_category
-        td = link_to 'Edit', edit_money_category_path(money_category)
-        td = link_to 'Destroy', money_category, data: {:confirm => 'Are you sure?'}, :method => :delete
-
-br
-
-= link_to 'New Money category', new_money_category_path
+- content_for :title, "Деньги: категории"
+- content_for :page_title, "Деньги: категории"
+- content_for :body_id, "datatables"
+- content_for :body_class, "money users"
+.menubar.fixed
+  .sidebar-toggler.visible-xs
+    i.ion-navicon
+  .page-title
+    == yield(:page_title)
+  a.new-category.btn.btn-primary.pull-right href=new_money_category_path 
+    span Добавить категорию
+.content-wrapper
+  .row.users-list
+    .col-md-12
+      .row.headers
+        .col-sm-9.header.select-users
+          label Название
+        .col-sm-3.header.hidden-xs
+          label Действия
+      - @money_categories.each do |money_category|
+        .row.user
+          .col-sm-9
+            = money_category.description
+          .col-sm-3
+            p = link_to 'Редактировать', edit_money_category_path(money_category)
+            p = link_to 'Удалить', money_category, data: {:confirm => 'Are you sure?'}, :method => :delete

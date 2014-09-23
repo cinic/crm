@@ -19,7 +19,7 @@
       = f.select(:room, ['1','2','3','4','5','6+'], { }, { class: 'form-control', "data-smart-select" => "" })
   .form-group
     = f.label :price, "Максимальная цена", class: "col-sm-2 col-md-2 control-label"
-    .col-sm-10.col-md-8 = f.text_field :price, class: 'form-control', "data-inputmask" => "'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'"
+    .col-sm-10.col-md-8 = f.text_field :price, class: 'form-control'
   .form-group
     = f.label :comment, "Комментарий", class: "col-sm-2 col-md-2 control-label"
     .col-sm-10.col-md-8 = f.text_area :comment, class: 'form-control'

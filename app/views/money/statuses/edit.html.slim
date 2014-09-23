@@ -1,8 +1,13 @@
-h1 Editing money_status
+- content_for :title, "Редактировать статус"
+- content_for :page_title, "Редактировать статус"
+- content_for :body_id, "form-product"
 
-== render 'form'
-
-= link_to 'Show', @money_status
-'|
-= link_to 'Back', money_statuses_path
-
+.menubar
+  .sidebar-toggler.visible-xs
+    i.ion-navicon
+  .page-title
+    == yield(:page_title)
+  a.new-user.btn.btn-primary.pull-right href=money_statuses_path
+    span К списку статусов
+.content-wrapper
+  == render 'form'

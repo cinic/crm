@@ -7,7 +7,7 @@ class Money::Operation < ActiveRecord::Base
   validates_presence_of :contractor, :amount, :date, :status, :category, :type
 
   def amount_direction
-    self.type.downcase.match('debit') ? '+ ' : '- ' 
+    self.type.downcase.match('debit') ? '+' : '-' 
   end
 
 end

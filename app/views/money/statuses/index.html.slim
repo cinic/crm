@@ -1,21 +1,26 @@
-h1 Listing money_statuses
-
-table
-  thead
-    tr
-      th Description
-      th
-      th
-      th
-
-  tbody
-    - @money_statuses.each do |money_status|
-      tr
-        td = money_status.description
-        td = link_to 'Show', money_status
-        td = link_to 'Edit', edit_money_status_path(money_status)
-        td = link_to 'Destroy', money_status, data: {:confirm => 'Are you sure?'}, :method => :delete
-
-br
-
-= link_to 'New Money status', new_money_status_path
+- content_for :title, "Деньги: статусы"
+- content_for :page_title, "Деньги: статусы"
+- content_for :body_id, "datatables"
+- content_for :body_class, "money users"
+.menubar.fixed
+  .sidebar-toggler.visible-xs
+    i.ion-navicon
+  .page-title
+    == yield(:page_title)
+  a.new-category.btn.btn-primary.pull-right href=new_money_status_path 
+    span Добавить статус
+.content-wrapper
+  .row.users-list
+    .col-md-12
+      .row.headers
+        .col-sm-9.header.select-users
+          label Название
+        .col-sm-3.header.hidden-xs
+          label Действия
+      - @money_statuses.each do |money_status|
+        .row.user
+          .col-sm-9
+            = money_status.description
+          .col-sm-3
+            p = link_to 'Редактировать', edit_money_status_path(money_status)
+            p = link_to 'Удалить', money_status, data: {:confirm => 'Are you sure?'}, :method => :delete

@@ -38,10 +38,6 @@
         a href=deals_path 
           i.ion-compose
           span Сделки
-      li.option
-        a href=money_root_path 
-          i.ion-cash
-          span Деньги
 
   - if user_can_admin?
     .menu-section
@@ -51,6 +47,20 @@
           a href=users_path
             i.ion-person
             span Пользователи
+        li.option
+          a href=money_root_path 
+            i.ion-cash
+            span Деньги
+        li
+          a href="#" data-toggle="sidebar"
+            i.ion-gear-a
+            span Настройки
+            i.fa.fa-chevron-down
+          ul.submenu
+            li
+              a href=money_categories_path Деньги: категории
+            li
+              a href=money_statuses_path Деньги: статусы
 
   .bottom-menu.hidden-sm
     ul
