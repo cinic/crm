@@ -274,13 +274,13 @@ var Mask = {
 		$( 'input[id*="time_to_metro"]' ).inputmask({ mask: "9[9] минут", greedy: false });
 	},
 	money: function () {
-		var $money = $( 'input[id*="price"]' );
+		var $money = $( 'input[id*="price"], input[id*="amount"]' );
 
 		if ( !$money.length ) {
 			return;
 		}
 
-		$( 'input[id*="price"]' ).inputmask({ 
+		$money.inputmask({ 
 			groupSeparator: ' ',
 			autoGroup: true,
 			digits: 2,

@@ -59,6 +59,7 @@
             - unless money.deal.nil?
               p = money.deal.id
           .col-sm-2
+            /! #{money.status.description}
             - if money.status.description.downcase.match('обязательство')
               span.label.label-warning = money.status.description
             - if money.status.description.downcase.match('соверш(е|ё)н')

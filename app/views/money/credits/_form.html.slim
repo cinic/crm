@@ -9,10 +9,10 @@
     .col-sm-10.col-md-8 = f.text_field :amount, class: 'form-control'
   .form-group
     = f.label :category_id, 'Категория операции', class: 'col-sm-2 col-md-2 control-label'
-    .col-sm-10.col-md-8 = f.collection_select(:category_id, Money::Category.all, :id, :description, {}, {class: 'form-control select2'})
+    .col-sm-10.col-md-8 = f.collection_select(:category_id, Money::Category.all, :id, :description, {include_blank: true}, {class: 'form-control select2'})
   .form-group
     = f.label :status_id, 'Статус операции', class: 'col-sm-2 col-md-2 control-label'
-    .col-sm-10.col-md-8 = f.collection_select(:status_id, Money::Status.all, :id, :description, {}, {class: 'form-control select2'})
+    .col-sm-10.col-md-8 = f.collection_select(:status_id, Money::Status.all, :id, :description, {include_blank: true}, {class: 'form-control select2'})
   .form-group
     = f.label :description, 'Описание', class: 'col-sm-2 col-md-2 control-label'
     .col-sm-10.col-md-8 = f.text_area :description, class: 'form-control'
