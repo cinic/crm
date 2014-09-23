@@ -54,7 +54,7 @@
             = money.contractor
           .col-sm-4
             p = money.category.description
-            - if money.description.nil?
+            - unless money.description.nil?
               p = money.description
             - unless money.deal.nil?
               p = money.deal.id
