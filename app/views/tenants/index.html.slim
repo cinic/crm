@@ -13,13 +13,16 @@
   .row.users-list
     .col-md-12
       .row.headers
-        .col-sm-4.header.hidden-xs
+        .col-sm-3.header.hidden-xs
           label
             a href="#"  Имя
         .col-sm-3.header.hidden-xs
           label
+            a href="#" Пожелания
+        .col-sm-2.header.hidden-xs
+          label
             a href="#"  Мобильный
-        .col-sm-3.header.hidden-xs
+        .col-sm-2.header.hidden-xs
           label.text-right
             a href="#"  Зарегистрирован
         .col-sm-2.header.hidden-xs
@@ -27,13 +30,15 @@
             a href="#"  Действия
       - @tenants.each do |tenant|
         .row.user
-          .col-sm-4
+          .col-sm-3
             a.name href=tenant_path(tenant)  =tenant.name
           .col-sm-3
+            p = "Хочет #{tenant.room} комнатную до #{number_to_currency(tenant.price, unit: "", separator: ",", delimiter: " ", format: "%n %u")} руб."
+          .col-sm-2
             .email =tenant.mobile
-          .col-sm-3
+          .col-sm-2
             .created-at
-              = tenant.created_at
+              = l(tenant.created_at, format: :notime)
           .col-sm-2
               - if user_can_manage?
                 = link_to 'Редактировать', edit_tenant_path(tenant)

@@ -4,9 +4,6 @@
 
 var ready = function() {
 
-	// skins switcher
-	Skins.initialize();
-
 	// sidebar menus
 	Sidebar.initialize();
 
@@ -25,6 +22,9 @@ var ready = function() {
 
 	// Mask metro information
 	Mask.metro();
+
+	// Mask money information
+	Mask.money();
 
   // Назначить риелтором по объекту себя
   SetApartmentForSelf.initialize();
@@ -106,49 +106,6 @@ var UI = {
 		$(".select2").select2({
 			//placeholder: 'Select tags or add new ones'	
 		});
-	}
-}
-
-var Skins = {
-	initialize: function () {
-		var $toggler = $(".skin-switcher .toggler"),
-			$menu = $(".skin-switcher .menu"),
-			$sidebar = $(".main-sidebar");
-
-		if (!$toggler.length) {
-			return;
-		}
-
-		if ($.cookie('current_skin')) {
-			$sidebar.attr("id", $.cookie('current_skin'));
-
-			$menu.find("a").removeClass("active");
-			$menu.find("a[data-skin="+ $.cookie('current_skin') +"]").addClass("active");
-		}
-
-		$toggler.click(function (e) {
-			e.stopPropagation();
-			$menu.toggleClass("active");
-		});
-
-		$("body").click(function () {
-			$menu.removeClass("active");
-		});
-
-		$menu.click(function (e) {
-			e.stopPropagation();
-		});
-
-		$menu.find("a").click(function (e) {
-			e.preventDefault();
-			var skin_id = $(this).data("skin");
-			$menu.find("a").removeClass("active");
-			$(this).addClass("active");
-			$sidebar.attr("id", skin_id);
-
-			$.removeCookie('current_skin', { path: '/' });
-			$.cookie('current_skin', skin_id, { path: '/' });
-		})
 	}
 }
 
@@ -315,6 +272,27 @@ var Mask = {
 		}
 
 		$( 'input[id*="time_to_metro"]' ).inputmask({ mask: "9[9] минут", greedy: false });
+	},
+	money: function () {
+		var $money = $( 'input[id*="price"]' );
+
+		if ( !$money.length ) {
+			return;
+		}
+
+		$( 'input[id*="price"]' ).inputmask({ 
+			groupSeparator: ' ',
+			autoGroup: true,
+			digits: 2,
+			digitsOptional: false,
+			suffix: ' руб',
+			placeholder: '0',
+			alias: 'numeric',
+			rightAlign: false,
+			greedy: false, 
+			autoUnmask: true, 
+			removeMaskOnSubmit: true  
+		});
 	}
 };
 

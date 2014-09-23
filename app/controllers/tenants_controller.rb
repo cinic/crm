@@ -28,7 +28,7 @@ class TenantsController < ApplicationController
 
     respond_to do |format|
       if @tenant.save
-        format.html { redirect_to @tenant, notice: 'Tenant was successfully created.' }
+        format.html { redirect_to tenants_url, notice: 'Tenant was successfully created.' }
         format.json { render action: 'show', status: :created, location: @tenant }
       else
         format.html { render action: 'new' }
@@ -42,7 +42,7 @@ class TenantsController < ApplicationController
   def update
     respond_to do |format|
       if @tenant.update(tenant_params)
-        format.html { redirect_to @tenant, notice: 'Tenant was successfully updated.' }
+        format.html { redirect_to tenants_url, notice: 'Tenant was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -69,6 +69,6 @@ class TenantsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tenant_params
-      params.require(:tenant).permit(:name,:mobile,:passport)
+      params.require(:tenant).permit(:name,:mobile,:passport, :price, :room, :comment)
     end
 end
