@@ -59,11 +59,7 @@
             - unless money.deal.nil?
               p = money.deal.id
           .col-sm-2
-            /! #{money.status.description}
-            - if money.status.description.mb_chars.downcase.to_s.match('обязательство')
-              span.label.label-warning = money.status.description
-            - if money.status.description.mb_chars.downcase.to_s.match('соверш(е|ё)н')
-              span.label.label-success = money.status.description
+            = render 'shared/money_statuses', target: money.status.description
           .col-sm-2
             span style="#{(money.amount_direction == '-') ? 'color:red;' : 'color:black;'}"
               = money.amount_direction + number_to_currency(money.amount, unit: "", separator: ",", delimiter: " ", format: "%n %u")

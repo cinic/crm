@@ -1,0 +1,4 @@
+- if target.mb_chars.downcase.to_s.match('обязательство')
+  span.label.label-warning = target
+- if target.mb_chars.downcase.to_s.match('соверш(е|ё)н')
+  span.label.label-success = target
