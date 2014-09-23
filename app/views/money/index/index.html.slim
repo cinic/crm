@@ -60,9 +60,9 @@
               p = money.deal.id
           .col-sm-2
             /! #{money.status.description}
-            - if money.status.description.downcase.match('обязательство')
+            - if money.status.description.mb_chars.downcase.to_s.match('обязательство')
               span.label.label-warning = money.status.description
-            - if money.status.description.downcase.match('соверш(е|ё)н')
+            - if money.status.description.mb_chars.downcase.to_s.match('соверш(е|ё)н')
               span.label.label-success = money.status.description
           .col-sm-2
             span style="#{(money.amount_direction == '-') ? 'color:red;' : 'color:black;'}"
