@@ -33,21 +33,7 @@
         .col-sm-1.header.hidden-xs
           label Дата
       - @money_credits.each do |money|
-        .row.user
-          .col-sm-3
-            = money.contractor
-          .col-sm-4
-            p = money.category.description
-            - if money.description.nil?
-              p = money.description
-            - unless money.deal.nil?
-              p = money.deal.id
-          .col-sm-2
-            = render 'shared/money_statuses', target: money.status.description
-          .col-sm-2
-            = money.amount_direction + number_to_currency(money.amount, unit: "", separator: ",", delimiter: " ", format: "%n %u")
-          .col-sm-1
-            = l(money.date, format: :notime)
+        == render 'money/shared/operation_row', target: money
       .row.user.total
         .col-sm-9.labels
           label Всего ушло

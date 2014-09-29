@@ -10,4 +10,7 @@ class Money::Operation < ActiveRecord::Base
     self.type.downcase.match('debit') ? '+' : '-' 
   end
 
+  def self.total
+    calculate(:sum, :amount)
+  end
 end

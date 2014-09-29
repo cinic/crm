@@ -26,9 +26,17 @@ class DealsController < ApplicationController
   # POST /deals.json
   def create
     @deal = Deal.new(deal_params)
-
+    @money = Money::Debit.new(
+                              amount: @deal.commission,
+                              contractor: @deal.tenant.name,
+                              category_id: '5', 
+                              status_id: '2',
+                              date: Time.zone.now,
+                              description: 'Сдача в аренду объекта #' + @deal.apartment_id.to_s
+                              )
     respond_to do |format|
       if @deal.save
+        @money.save!
         format.html { redirect_to @deal, notice: 'Deal was successfully created.' }
         format.json { render action: 'show', status: :created, location: @deal }
       else

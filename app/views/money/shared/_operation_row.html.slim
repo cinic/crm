@@ -1,0 +1,17 @@
+- unless target.nil?
+  .row.user.editable-on-click data-operation-id="#{target.id}"
+    .col-sm-3
+      = target.contractor
+    .col-sm-4
+      p = target.category.description
+      - unless target.description.nil?
+        p = target.description
+      - unless target.deal.nil?
+        p = target.deal.id
+    .col-sm-2
+      = render 'money/shared/money_statuses', target: target.status.description
+    .col-sm-2
+      span style="#{(target.amount_direction == '-') ? 'color:red;' : 'color:black;'}"
+        = target.amount_direction + number_to_currency(target.amount, unit: "", separator: ",", delimiter: " ", format: "%n %u")
+    .col-sm-1
+      = l(target.date, format: :notime)

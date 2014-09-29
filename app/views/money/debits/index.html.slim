@@ -19,22 +19,6 @@
         a href=money_root_path Все
         a class="active" href=money_debits_path Поступления
         a href=money_credits_path Списания
-
-      /.show-options
-        .dropdown
-            a class="button" data-toggle="dropdown" href="#"
-              span
-                |Сортировать по
-                i class="fa fa-unsorted"
-            ul class="dropdown-menu" role="menu" aria-labelledby="dLabel"
-              li
-                a href="#" Контрагенту
-              li
-                a href="#" Категории
-              li
-                a href="#" Статусу
-              li
-                a href="#" Дате
   .row.users-list
     .col-md-12
       .row.headers
@@ -49,21 +33,7 @@
         .col-sm-1.header.hidden-xs
           label Дата
       - @money_debits.each do |money|
-        .row.user
-          .col-sm-3
-            = money.contractor
-          .col-sm-4
-            p = money.category.description
-            - if money.description.nil?
-              p = money.description
-            - unless money.deal.nil?
-              p = money.deal.id
-          .col-sm-2
-            = render 'shared/money_statuses', target: money.status.description
-          .col-sm-2
-            = money.amount_direction + number_to_currency(money.amount, unit: "", separator: ",", delimiter: " ", format: "%n %u")
-          .col-sm-1
-            = l(money.date, format: :notime)
+        == render 'money/shared/operation_row', target: money
       .row.user.total
         .col-sm-9.labels
           label Всего пришло
