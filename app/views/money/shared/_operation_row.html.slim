@@ -15,5 +15,3 @@
         = target.amount_direction + number_to_currency(target.amount, unit: "", separator: ",", delimiter: " ", format: "%n %u")
     .col-sm-1
       = l(target.date, format: :notime)
-      br
-      = link_to 'edit', money_path(target), remote: true

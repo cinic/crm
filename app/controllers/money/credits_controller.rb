@@ -50,6 +50,7 @@ class Money::CreditsController < ApplicationController
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
+        format.js   { render js: @money_credit.errors, status: :unprocessable_entity }
         format.json { render json: @money_credit.errors, status: :unprocessable_entity }
       end
     end

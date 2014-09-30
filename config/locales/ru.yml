@@ -47,6 +47,6 @@ ru:
               blank: "должно быть заполнено. Без него, мы не сможем улучшать систему."
   time:
     formats:
-      default: "%m.%d.%Y %H:%M"
+      default: "%d.%m.%Y %H:%M"
       short: "%H:%M"
-      notime: "%m.%d.%Y"
+      notime: "%d.%m.%Y"

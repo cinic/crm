@@ -1,7 +1,5 @@
-| $(document).on("page:change", function() {
-|   console.log('logged');
-| });
-
-|$("
+| $( '.editable-on-click[data-operation-id="
+= escape_javascript(@money_credit.id.to_s)
+| "]' ).html(  
 = escape_javascript(render @money_credit)
-| ").appendTo("body");
+| );

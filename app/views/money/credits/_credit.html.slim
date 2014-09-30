@@ -1,0 +1,17 @@
+.col-sm-3
+  = credit.contractor
+.col-sm-4
+  p = credit.category.description
+  - unless credit.description.nil?
+    p = credit.description
+  - unless credit.deal.nil?
+    p = credit.deal.id
+.col-sm-2
+  = render 'money/shared/money_statuses', target: credit.status.description
+.col-sm-2
+  span style="#{(credit.amount_direction == '-') ? 'color:red;' : 'color:black;'}"
+    = credit.amount_direction + number_to_currency(credit.amount, unit: "", separator: ",", delimiter: " ", format: "%n %u")
+.col-sm-1
+  = l(credit.date, format: :notime)
+  br
+  = link_to 'edit', money_path(credit, format: :js), remote: true

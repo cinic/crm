@@ -142,6 +142,7 @@
 							Messenger().post("Запись обновлена!");
 						})
 						.fail(function(data) {
+							console.log(data)
 							if( data.responseJSON.amount ) {
 								$form.find( '[name*="amount"]' ).prop("placeholder", data.responseJSON.amount[0]).parent().addClass( "has-error" );
 							} else {
