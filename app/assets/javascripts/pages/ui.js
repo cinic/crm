@@ -116,6 +116,63 @@
 				});
 		});
 
+		// Clickable elements in money section
+		$( '.editable-on-click' ).on( 'click', function(e){
+			var $elem = $(this),
+					url = '/money/' + $elem.data( 'operation-type' ) + 's/' + $elem.data( 'operation-id' ) + '/edit .edit-money',
+					modalHeader = '<div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title">Редактировать</h4></div>',
+					modalFooter = '<div class="modal-footer"></div>';
+			$( '#form-modal-edit-money .modal-content').load( url, function() {
+			  $( '#form-modal-edit-money .edit-money' )
+			  	.wrapInner( '<div class="modal-body"></div>' )
+			  	.prepend( modalHeader ).append( modalFooter )
+			  	.children( '.modal-body' )
+			  	.children( '.form-actions' )
+			  	.detach()
+			  	.appendTo( '#form-modal-edit-money .modal-footer' );
+			  // Show message on submit money operation
+				$( '#form-modal-edit-money [type="submit"]').on( "click", function(e){
+					e.preventDefault();
+					var $form = $( "#form-modal-edit-money .edit-money" ),
+							$elem = $( "#form-modal-edit-money" );
+					
+					$.post( $form.attr("action") + ".json", $form.serializeArray())
+						.done(function(data) {
+							$elem.modal('hide');
+							Messenger().post("Запись обновлена!");
+						})
+						.fail(function(data) {
+							if( data.responseJSON.amount ) {
+								$form.find( '[name*="amount"]' ).prop("placeholder", data.responseJSON.amount[0]).parent().addClass( "has-error" );
+							} else {
+								$form.find( '[name*="amount"]' ).parent().removeClass( 'has-error' );
+							}
+							if( data.responseJSON.contractor ) {
+								$form.find( '[name*="contractor"]' ).prop("placeholder", data.responseJSON.contractor[0]).parent().addClass( "has-error" );
+							} else {
+								$form.find( '[name*="contractor"]' ).parent().removeClass( 'has-error' );
+							}
+							if( data.responseJSON.category ) {
+								$form.find( '[name*="category"]' ).prop("placeholder", data.responseJSON.category[0]).parent().addClass( "has-error" );
+							} else {
+								$form.find( '[name*="category"]' ).parent().removeClass( 'has-error' );
+							}
+							if( data.responseJSON.status ) {
+								$form.find( '[name*="status"]' ).prop("placeholder", data.responseJSON.status[0]).parent().addClass( "has-error" );
+							} else {
+								$form.find( '[name*="status"]' ).parent().removeClass( 'has-error' );
+							}
+							if( data.responseJSON.date ) {
+								$form.find( '[name*="date"]' ).prop("placeholder", data.responseJSON.date[0]).parent().addClass( "has-error" );
+							} else {
+								$form.find( '[name*="date"]' ).parent().removeClass( 'has-error' );
+							}
+						});
+				});
+			});
+		});
+		
+
 		// Focus first input when form modal is shown
 		$('#form-validation-modal').on('shown.bs.modal', function (e) {
 			$("#form-validation-modal").find("input:text:eq(0)").focus();

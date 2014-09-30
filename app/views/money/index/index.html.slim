@@ -1,7 +1,7 @@
 - content_for :title, "Деньги"
 - content_for :page_title, "Деньги"
 - content_for :body_id, "datatables"
-- content_for :body_class, "money users"
+- content_for :body_class, "money users ui"
 .menubar.fixed
   .sidebar-toggler.visible-xs
     i.ion-navicon
@@ -47,3 +47,8 @@
           label = "&nbsp;&nbsp;&nbsp;".html_safe + number_to_currency(total_credit, unit: "", separator: ",", delimiter: " ", format: "%n %u")
           br
           label = "&nbsp;&nbsp;&nbsp;".html_safe + number_to_currency(total_amount, unit: "", separator: ",", delimiter: " ", format: "%n %u")
+
+- content_for :bottom_content do
+  /! Form Modal
+  == render 'money/shared/modal_form'
+  

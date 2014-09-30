@@ -1,4 +1,4 @@
-= form_for @money_debit, html: { class: "form-horizontal edit-tenant", role: "form" } do |f|
+= form_for @money_debit, html: { class: "form-horizontal edit-money", role: "form" } do |f|
   - if @money_debit.errors.any?
     = render "shared/error_messages", target: @money_debit
   .form-group

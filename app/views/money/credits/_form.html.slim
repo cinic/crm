@@ -1,4 +1,4 @@
-= form_for @money_credit, html: { class: "form-horizontal edit-tenant", role: "form" } do |f|
+= form_for @money_credit, html: { class: "form-horizontal edit-money", role: "form" }, remote: true do |f|
   - if @money_credit.errors.any?
     = render "shared/error_messages", target: @money_credit
   .form-group

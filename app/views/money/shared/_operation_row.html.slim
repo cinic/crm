@@ -1,5 +1,5 @@
 - unless target.nil?
-  .row.user.editable-on-click data-operation-id="#{target.id}"
+  .row.user.editable-on-click data-operation-id="#{target.id}" data-operation-type="#{target.type.split("::").last.downcase}" data-toggle="modal" data-target="#form-modal-edit-money"
     .col-sm-3
       = target.contractor
     .col-sm-4
@@ -15,3 +15,5 @@
         = target.amount_direction + number_to_currency(target.amount, unit: "", separator: ",", delimiter: " ", format: "%n %u")
     .col-sm-1
       = l(target.date, format: :notime)
+      br
+      = link_to 'edit', money_path(target), remote: true

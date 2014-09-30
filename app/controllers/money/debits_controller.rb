@@ -43,6 +43,7 @@ class Money::DebitsController < ApplicationController
     respond_to do |format|
       if @money_debit.update(money_debit_params)
         format.html { redirect_to money_root_url, notice: 'Debit was successfully updated.' }
+        format.js   {}
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

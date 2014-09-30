@@ -254,6 +254,12 @@
 							text-align: right;
 						}
 					}
+					&.editable-on-click {
+						&:hover {
+							cursor: pointer;
+							background-color: #F7F9FD;
+						}
+					}
 					@media(max-width: $maxMedium) {
 						padding: 13px 0;
 					}

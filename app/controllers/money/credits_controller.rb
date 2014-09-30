@@ -10,6 +10,9 @@ class Money::CreditsController < ApplicationController
   # GET /money/credits/1
   # GET /money/credits/1.json
   def show
+    respond_to do |format|
+      format.js {}
+    end
   end
 
   # GET /money/credits/new
@@ -43,6 +46,7 @@ class Money::CreditsController < ApplicationController
     respond_to do |format|
       if @money_credit.update(money_credit_params)
         format.html { redirect_to money_root_url, notice: 'Credit was successfully updated.' }
+        format.js   {}
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

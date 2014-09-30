@@ -6,6 +6,13 @@ module Money::IndexHelper
     end
   end
 
+  def money_path(money, format=:html)
+    case money.type.to_s.downcase
+      when "money::credit" then money_credit_path(money, format)
+      when "money::debit" then money_debit_path(money, format)
+    end
+  end
+
   def total_amount
     Money::Debit.total - Money::Credit.total
   end
