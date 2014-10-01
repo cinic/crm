@@ -1,28 +1,20 @@
 class FeedbackMessagesController < ApplicationController
   before_action :set_feedback_message, only: [:show, :edit, :update, :destroy]
 
-  # GET /feedback_messages
-  # GET /feedback_messages.json
   def index
     @feedback_messages = FeedbackMessage.all
   end
 
-  # GET /feedback_messages/1
-  # GET /feedback_messages/1.json
   def show
   end
 
-  # GET /feedback_messages/new
   def new
     @feedback_message = FeedbackMessage.new
   end
 
-  # GET /feedback_messages/1/edit
   def edit
   end
 
-  # POST /feedback_messages
-  # POST /feedback_messages.json
   def create
     @feedback_message = FeedbackMessage.new(feedback_message_params)
     @feedback_message.user_id = current_user.id
@@ -40,8 +32,6 @@ class FeedbackMessagesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /feedback_messages/1
-  # PATCH/PUT /feedback_messages/1.json
   def update
     respond_to do |format|
       if @feedback_message.update(feedback_message_params)
@@ -54,8 +44,6 @@ class FeedbackMessagesController < ApplicationController
     end
   end
 
-  # DELETE /feedback_messages/1
-  # DELETE /feedback_messages/1.json
   def destroy
     @feedback_message.destroy
     respond_to do |format|
@@ -65,12 +53,10 @@ class FeedbackMessagesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_feedback_message
       @feedback_message = FeedbackMessage.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def feedback_message_params
       params.require(:feedback_message).permit(:user_id, :message, :status, :ticket_number)
     end

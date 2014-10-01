@@ -1,23 +1,17 @@
 class LandlordsController < ApplicationController
   before_action :set_landlord, only: [:show, :edit, :update, :destroy, :new_landlord_wizard, :wizard_step_2, :wizard_step_3, :wizard_step_4, :save_wizard_step_1, :save_wizard_step_2, :save_wizard_step_3, :save_wizard_step_4]
 
-  # GET /landlords
-  # GET /landlords.json
   def index
     @landlords = Landlord.all
   end
 
-  # GET /landlords/1
-  # GET /landlords/1.json
   def show
   end
 
-  # GET /landlords/new
   def new
     @landlord = Landlord.new
   end
 
-  # GET /landlords/1/edit
   def edit
   end
 
@@ -40,8 +34,6 @@ class LandlordsController < ApplicationController
     @realtors = User.all
   end
 
-  # POST /landlords
-  # POST /landlords.json
   def create
     @landlord = Landlord.new(landlord_params)
 
@@ -56,8 +48,6 @@ class LandlordsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /landlords/1
-  # PATCH/PUT /landlords/1.json
   def update
     respond_to do |format|
       if @landlord.update(landlord_params)
@@ -82,6 +72,7 @@ class LandlordsController < ApplicationController
       end
     end
   end
+
   def save_wizard_step_1
     respond_to do |format|
       if @landlord.update(landlord_params)
@@ -93,6 +84,7 @@ class LandlordsController < ApplicationController
       end
     end
   end
+
   def save_wizard_step_2
     @apartment = @landlord.apartments.new(apartment_params)
     respond_to do |format|
@@ -105,6 +97,7 @@ class LandlordsController < ApplicationController
       end
     end
   end
+
   def save_wizard_step_3
     respond_to do |format|
       if @landlord.apartments.last.update(apartment_params)
@@ -116,6 +109,7 @@ class LandlordsController < ApplicationController
       end
     end
   end
+
   def save_wizard_step_4
     respond_to do |format|
       if @landlord.apartments.last.update(apartment_params)
@@ -128,8 +122,6 @@ class LandlordsController < ApplicationController
     end
   end
 
-  # DELETE /landlords/1
-  # DELETE /landlords/1.json
   def destroy
     @landlord.destroy
     respond_to do |format|
@@ -138,8 +130,6 @@ class LandlordsController < ApplicationController
     end
   end
 
-  # DELETE /landlords/1
-  # DELETE /landlords/1.json
   def multiple_destroy
     Landlord.destroy_all(landlord_ids_params)
     respond_to do |format|
@@ -149,18 +139,18 @@ class LandlordsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_landlord
       @landlord = Landlord.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def landlord_params
       params.require(:landlord).permit!
     end
+
     def landlord_ids_params
       params.require(:landlord).permit(id: [])
     end
+    
     def apartment_params
       params.require(:apartment).permit!
     end

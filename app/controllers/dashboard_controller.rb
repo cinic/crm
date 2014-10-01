@@ -4,8 +4,6 @@ class DashboardController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    # Задаём переменные в виде хэшэй на будущее
     def set_apartments
       @apartments = {
         newest: Apartment.newest.count,

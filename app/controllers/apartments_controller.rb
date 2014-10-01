@@ -3,29 +3,21 @@ class ApartmentsController < ApplicationController
   before_action :set_landlords, only: [:new, :edit, :update, :create]
   before_action :set_realtors, only: [:new, :edit, :update, :create]
 
-  # GET /apartments
-  # GET /apartments.json
   def index
     @apartments = Apartment.all
   end
 
-  # GET /apartments/1
-  # GET /apartments/1.json
   def show
   end
 
-  # GET /apartments/new
   def new
     @apartment = Apartment.new
     @apartment.assets.build
   end
 
-  # GET /apartments/1/edit
   def edit
   end
 
-  # POST /apartments
-  # POST /apartments.json
   def create
     @apartment = Apartment.new(apartment_params)
 
@@ -40,8 +32,6 @@ class ApartmentsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /apartments/1
-  # PATCH/PUT /apartments/1.json
   def update
 
     respond_to do |format|
@@ -55,8 +45,6 @@ class ApartmentsController < ApplicationController
     end
   end
 
-  # DELETE /apartments/1
-  # DELETE /apartments/1.json
   def destroy
     @apartment.destroy
     respond_to do |format|
@@ -66,7 +54,6 @@ class ApartmentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_apartment
       @apartment = Apartment.find(params[:id])
       @apartment.assets.build if %w[edit show].include?(action_name)
@@ -80,9 +67,7 @@ class ApartmentsController < ApplicationController
       @realtors = User.all
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def apartment_params
       params.require(:apartment).permit!
     end
-
 end

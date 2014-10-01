@@ -2,30 +2,23 @@ class DealsController < ApplicationController
   before_action :set_deal, only: [:show, :edit, :update, :destroy]
   before_action :set_deal_relations, only: [:new, :edit, :update, :create]
 
-  # GET /deals
-  # GET /deals.json
   def index
     @deals = Deal.all
   end
 
-  # GET /deals/1
-  # GET /deals/1.json
   def show
   end
 
-  # GET /deals/new
   def new
     @deal = Deal.new
   end
 
-  # GET /deals/1/edit
   def edit
   end
 
-  # POST /deals
-  # POST /deals.json
   def create
     @deal = Deal.new(deal_params)
+    # change to DJ
     @money = Money::Debit.new(
                               amount: @deal.commission,
                               contractor: @deal.tenant.name,
@@ -46,8 +39,6 @@ class DealsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /deals/1
-  # PATCH/PUT /deals/1.json
   def update
     respond_to do |format|
       if @deal.update(deal_params)
@@ -60,8 +51,6 @@ class DealsController < ApplicationController
     end
   end
 
-  # DELETE /deals/1
-  # DELETE /deals/1.json
   def destroy
     @deal.destroy
     respond_to do |format|
@@ -71,17 +60,17 @@ class DealsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_deal
       @deal = Deal.find(params[:id])
     end
+    
     def set_deal_relations
       @landlords = Landlord.all
       @tenants = Tenant.all
       @realtors = User.realtors
       @apartments = Apartment.all
     end
-    # Never trust parameters from the scary internet, only allow the white list through.
+
     def deal_params
       params.require(:deal).permit!
     end

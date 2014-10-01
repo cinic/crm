@@ -1,28 +1,20 @@
 class Money::CategoriesController < ApplicationController
   before_action :set_money_category, only: [:show, :edit, :update, :destroy]
 
-  # GET /money_categories
-  # GET /money_categories.json
   def index
     @money_categories = Money::Category.all
   end
 
-  # GET /money_categories/1
-  # GET /money_categories/1.json
   def show
   end
 
-  # GET /money_categories/new
   def new
     @money_category = Money::Category.new
   end
 
-  # GET /money_categories/1/edit
   def edit
   end
 
-  # POST /money_categories
-  # POST /money_categories.json
   def create
     @money_category = Money::Category.new(money_category_params)
 
@@ -37,8 +29,6 @@ class Money::CategoriesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /money_categories/1
-  # PATCH/PUT /money_categories/1.json
   def update
     respond_to do |format|
       if @money_category.update(money_category_params)
@@ -51,8 +41,6 @@ class Money::CategoriesController < ApplicationController
     end
   end
 
-  # DELETE /money_categories/1
-  # DELETE /money_categories/1.json
   def destroy
     @money_category.destroy
     respond_to do |format|
@@ -62,12 +50,10 @@ class Money::CategoriesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_money_category
       @money_category = Money::Category.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def money_category_params
       params.require(:money_category).permit(:description)
     end
